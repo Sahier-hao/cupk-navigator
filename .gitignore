@@ -1,0 +1,9 @@
+# Internal notes
+TEAM_GUIDE.md
+项目进度交接.md
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
