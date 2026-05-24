@@ -116,6 +116,44 @@
     margin: 26px 0 8px;
 }
 
+.filter-group {
+    display: grid;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.filter-label {
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.scenario-filter-group {
+    margin-top: 18px;
+    padding: 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, 0.46);
+}
+
+.scenario-tabs {
+    margin: 0;
+}
+
+.scenario-tabs .filter-tab {
+    background: rgba(255, 255, 255, 0.64);
+}
+
+.scenario-tabs .filter-tab.active {
+    background: var(--dark);
+    color: var(--on-dark);
+    border-color: var(--dark);
+}
+
+.compact-filter-group {
+    margin-bottom: 22px;
+}
+
 .resource-library-card {
     justify-content: space-between;
     gap: 10px;
@@ -191,8 +229,50 @@
     color: var(--muted);
 }
 
+.scenario-row,
+.access-row {
+    margin-top: 2px;
+}
+
+.scenario-tag {
+    border: 1px solid rgba(204, 120, 92, 0.18);
+    background: rgba(204, 120, 92, 0.12);
+    color: var(--coral-dark);
+}
+
+.access-tag {
+    border: 1px solid rgba(31, 41, 51, 0.08);
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--ink);
+}
+
+.access-tag.public {
+    background: rgba(78, 159, 122, 0.14);
+    color: #2f7557;
+}
+
+.access-tag.campus {
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--blue-dark);
+}
+
+.access-tag.login {
+    background: rgba(212, 160, 23, 0.15);
+    color: #8a6410;
+}
+
+.access-tag.install {
+    background: rgba(204, 120, 92, 0.15);
+    color: var(--coral-dark);
+}
+
+.access-tag.network {
+    background: rgba(31, 41, 51, 0.1);
+    color: var(--ink);
+}
+
 .format-tabs {
-    margin-top: -12px;
+    margin-top: 0;
 }
 
 .cupk-quick-panel {
@@ -270,6 +350,46 @@
     gap: 10px;
 }
 
+.cupk-date-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    align-items: stretch;
+}
+
+.cupk-date-card {
+    min-height: 210px;
+    display: grid;
+    align-content: start;
+    gap: 8px;
+}
+
+.cupk-date-card strong {
+    color: var(--ink);
+    font-size: 18px;
+}
+
+.cupk-date-card time {
+    color: var(--coral-dark);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.cupk-date-card p {
+    margin-bottom: 4px;
+}
+
+.cupk-date-card a {
+    align-self: end;
+    color: var(--blue-dark);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.cupk-date-card a:hover {
+    color: var(--ink);
+}
+
 .cupk-section {
     margin-top: 42px;
     scroll-margin-top: 90px;
@@ -298,6 +418,46 @@
 
 .cupk-card h3 {
     margin-top: 10px;
+}
+
+.cupk-topic-grid {
+    align-items: stretch;
+}
+
+.cupk-topic-card {
+    min-height: 260px;
+    display: grid;
+    align-content: start;
+    gap: 10px;
+}
+
+.cupk-topic-card h3 {
+    margin: 0;
+}
+
+.cupk-topic-card p {
+    margin-bottom: 4px;
+}
+
+.topic-link-list {
+    display: grid;
+    gap: 8px;
+    margin-top: 4px;
+}
+
+.topic-link-list a {
+    padding: 9px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.52);
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.topic-link-list a:hover {
+    border-color: rgba(204, 120, 92, 0.34);
+    background: rgba(255, 255, 255, 0.78);
 }
 
 .cupk-mini-card {
@@ -359,9 +519,14 @@
     #resourceList.grid.cols-3 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .cupk-date-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 560px) {
+    .cupk-date-grid,
     #resourceList.grid.cols-3 {
         grid-template-columns: 1fr;
     }
