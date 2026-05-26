@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx playwright *)",
+      "Bash(curl -s http://localhost:8000/index.html)",
+      "Bash(curl -s http://localhost:8000/javascript/common.js)",
+      "Bash(curl -s http://localhost:8000/css/common.css)",
+      "Bash(where chrome *)",
+      "Bash(where chromium *)",
+      "Bash(dir \"%USERPROFILE%\\\\.cache\\\\ms-playwright\")",
+      "Bash(dir \"%LOCALAPPDATA%\\\\ms-playwright\")",
+      "Bash(cmd.exe /c \"dir /s /b \\\\\"C:\\\\Program Files\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\\\\\" 2>nul & dir /s /b \\\\\"C:\\\\Program Files \\(x86\\)\\\\Google\\\\Chrome\\\\Application\\\\chrome.exe\\\\\" 2>nul\")",
+      "Read(//c/Program Files \\(x86\\)/Microsoft/Edge/Application/**)",
+      "Read(//c/Program Files/Microsoft/Edge/Application/**)",
+      "Read(//c/Program Files/Qoom Chrome//**)",
+      "Read(//c/Program Files/Qoom Chrome/**)",
+      "Bash(cd d:/code/webProject/campus-study-nav && rm -f verify-dark-mode.js screenshot-*.png && rm -rf node_modules package.json package-lock.json)"
+    ],
+    "additionalDirectories": [
+      "D:\\code\\webProject\\campus-study-nav"
+    ]
+  }
+}

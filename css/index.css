@@ -2,6 +2,124 @@
     padding: 38px 0 52px;
 }
 
+/* ========== 首页轮播图 ========== */
+.hero-slider {
+    position: relative;
+    margin-top: 28px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    height: 280px;
+}
+
+.slider-track {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slider-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.slider-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.slide-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px 40px;
+    color: #faf8f3;
+}
+
+.slide-emoji {
+    font-size: 48px;
+    margin-bottom: 14px;
+    line-height: 1;
+}
+
+.slide-bg h2 {
+    color: #faf8f3;
+    font-family: Georgia, "Times New Roman", SimSun, serif;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: 500;
+    margin: 0 0 10px;
+    max-width: 600px;
+}
+
+.slide-bg p {
+    color: rgba(250, 248, 243, 0.78);
+    font-size: 16px;
+    margin: 0;
+    max-width: 500px;
+}
+
+/* 轮播箭头按钮 */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 42px;
+    height: 42px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background 0.18s ease;
+    backdrop-filter: blur(6px);
+}
+
+.slider-arrow:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.slider-prev {
+    left: 16px;
+}
+
+.slider-next {
+    right: 16px;
+}
+
+/* 轮播圆点指示器 */
+.slider-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.slider-dot {
+    width: 10px;
+    height: 10px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: background 0.18s ease, transform 0.18s ease;
+}
+
+.slider-dot.active {
+    background: white;
+    transform: scale(1.2);
+}
+
 .workspace-main,
 .today-panel,
 .assistant-preview {
@@ -398,6 +516,26 @@
 }
 
 @media (max-width: 620px) {
+    .hero-slider {
+        height: 220px;
+    }
+
+    .slide-emoji {
+        font-size: 34px;
+    }
+
+    .slide-bg {
+        padding: 20px 24px;
+    }
+
+    .slide-bg h2 {
+        font-size: 19px;
+    }
+
+    .slide-bg p {
+        font-size: 14px;
+    }
+
     .scenario-board,
     .resource-strip,
     .command-bar,

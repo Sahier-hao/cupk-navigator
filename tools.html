@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学习工具箱 - 石光驿站</title>
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/pages.css">
+</head>
+<body>
+    <!-- 顶部固定导航栏 -->
+    <header class="site-header">
+        <div class="nav-wrap">
+            <a class="brand" href="index.html"><img class="brand-mark" src="images/中国石油大学矢量标.jpg" alt="中国石油大学" />石光驿站</a>
+            <button class="nav-toggle" aria-label="打开导航">☰</button>
+            <button class="theme-toggle" type="button" aria-label="切换到暗色模式" title="切换暗色模式">☾</button>
+            <nav class="site-nav">
+                <a class="nav-link" href="index.html">首页</a>
+                <div class="nav-item">
+                    <button class="dropdown-trigger" type="button">校园导航 ▾</button>
+                    <div class="dropdown">
+                        <a href="cupk.html">CUPK校园入口</a>
+                        <a href="campus.html">校园生活指南</a>
+                        <a href="media.html">视听记录</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <button class="dropdown-trigger" type="button">学习资源 ▾</button>
+                    <div class="dropdown">
+                        <a href="websites.html">资源库</a>
+                        <a class="active" href="tools.html">学习工具箱</a>
+                    </div>
+                </div>
+                <a class="nav-link" href="team.html">小组介绍</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="section tight">
+        <div class="container">
+            <span class="eyebrow">学习工具箱</span>
+            <h1 class="page-title">绩点计算器与实用学习工具。</h1>
+            <p class="lead">加权平均绩点计算器帮你随时了解自己的学业成绩，输入各科成绩和学分即可自动计算。下方还有精选学习工具推荐。</p>
+
+            <!-- 绩点计算器区域 -->
+            <section class="tools-section">
+                <div class="section-heading-row">
+                    <div>
+                        <span class="tag coral">绩点计算器</span>
+                        <h2 class="section-title">加权平均绩点计算</h2>
+                    </div>
+                </div>
+                <p class="tools-section-lead">添加课程后选择百分制成绩或直接输入绩点，系统会自动计算加权平均绩点。支持动态添加和删除课程行。</p>
+
+                <!-- 绩点计算器表单 -->
+                <div class="gpa-calculator">
+                    <div class="gpa-input-area" id="gpaCourseList">
+                        <!-- 课程行由 JS 动态生成 -->
+                    </div>
+
+                    <div class="gpa-actions">
+                        <button class="button secondary" id="addCourseBtn" type="button">+ 添加课程</button>
+                        <button class="button primary" id="calcGpaBtn" type="button">计算绩点</button>
+                        <button class="button secondary" id="resetGpaBtn" type="button">清空重置</button>
+                    </div>
+
+                    <!-- 计算结果展示区 -->
+                    <div class="gpa-result" id="gpaResult" style="display:none;">
+                        <div class="gpa-result-grid">
+                            <div class="gpa-result-item">
+                                <span class="gpa-result-label">加权平均绩点</span>
+                                <strong class="gpa-result-value" id="gpaValue">--</strong>
+                            </div>
+                            <div class="gpa-result-item">
+                                <span class="gpa-result-label">总学分</span>
+                                <strong class="gpa-result-value" id="totalCredits">--</strong>
+                            </div>
+                            <div class="gpa-result-item">
+                                <span class="gpa-result-label">课程门数</span>
+                                <strong class="gpa-result-value" id="courseCount">--</strong>
+                            </div>
+                        </div>
+                        <p class="gpa-result-note" id="gpaNote"></p>
+                    </div>
+                </div>
+
+                <!-- 绩点对照表 -->
+                <details class="gpa-reference">
+                    <summary>绩点换算参考表</summary>
+                    <div class="gpa-table-wrap">
+                        <table class="gpa-table">
+                            <thead><tr><th>百分制成绩</th><th>对应绩点</th><th>等级</th></tr></thead>
+                            <tbody>
+                                <tr><td>95 - 100</td><td>4.0</td><td>A</td></tr>
+                                <tr><td>85 - 94</td><td>3.7</td><td>A-</td></tr>
+                                <tr><td>75 - 84</td><td>3.0</td><td>B</td></tr>
+                                <tr><td>65 - 74</td><td>2.3</td><td>C</td></tr>
+                                <tr><td>60 - 64</td><td>1.7</td><td>D</td></tr>
+                                <tr><td>60 以下</td><td>0</td><td>F</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </section>
+
+            <!-- 推荐工具区域：引用 data.js 中的数据 -->
+            <section class="tools-section">
+                <div class="section-heading-row">
+                    <div>
+                        <span class="tag blue">推荐工具</span>
+                        <h2 class="section-title">精选学习工具</h2>
+                    </div>
+                </div>
+                <p class="tools-section-lead">以下工具来自资源库中分类为"学习工具"的精选推荐，更多工具请访问资源库。</p>
+                <div class="grid cols-3" id="toolResourceList"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div><h3>石光驿站</h3><p>绩点计算器仅作参考，正式绩点以教务系统为准。换算标准参考常见4.0制算法。</p></div>
+            <div><h4>校园导航</h4><a href="cupk.html">CUPK校园入口</a><a href="campus.html">校园生活指南</a><a href="media.html">视听记录</a></div>
+            <div><h4>学习资源</h4><a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a></div>
+            <div><h4>项目</h4><a href="team.html">小组介绍</a><a href="index.html">返回首页</a></div>
+        </div>
+    </footer>
+    <button class="back-top" aria-label="返回顶部">↑</button>
+    <script src="javascript/data.js"></script>
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <script src="javascript/tools.js"></script>
+</body>
+</html>
