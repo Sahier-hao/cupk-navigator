@@ -29,6 +29,34 @@
     box-sizing: border-box;
 }
 
+/* 焦点指示：键盘用户能看见当前焦点 */
+:focus-visible {
+    outline: 2px solid var(--coral);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* 仅在需要暗色/亮色切换的元素上做颜色过渡 */
+a, button, input, select, textarea, .card, .nav-link, .tag, .button,
+.quick-entry-card, .category-card, .featured-card, .resource-card,
+.mini-resource, .campus-image-card, .campus-icon-text-item, .campus-transport-card,
+.media-gallery-card, .filter-tab, .tab, .scenario-button, .topic-link-list a,
+.cupk-sidebar a, .cupk-mini-card, .quick-card, .stat-item, .panel,
+.search-bar, .search-results, .favorite-btn, .music-player,
+.site-header, .code-block, .panel-dark, .notice, .empty-state,
+.resource-chip, .mini-bubble {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* 尊重用户减少动画偏好 */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: 0s !important;
+        animation-duration: 0s !important;
+        scroll-behavior: auto !important;
+    }
+}
+
 html {
     scroll-behavior: smooth;
 }
@@ -52,6 +80,45 @@ img,
 video {
     max-width: 100%;
     display: block;
+}
+
+/* 滚动入场动画：元素进入视口时淡入上移（transition 由 * 选择器统一提供） */
+.fade-up {
+    opacity: 0;
+    transform: translateY(28px);
+}
+
+.fade-up-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 为网格子元素添加依次延迟，产生波浪效果 */
+@media (prefers-reduced-motion: no-preference) {
+    .grid.cols-2 > .fade-up:nth-child(2),
+    .grid.cols-3 > .fade-up:nth-child(2),
+    .grid.cols-4 > .fade-up:nth-child(2),
+    .campus-card-grid > .fade-up:nth-child(2),
+    .media-gallery-grid > .fade-up:nth-child(2) { transition-delay: 0.08s; }
+
+    .grid.cols-2 > .fade-up:nth-child(3),
+    .grid.cols-3 > .fade-up:nth-child(3),
+    .grid.cols-4 > .fade-up:nth-child(3),
+    .campus-card-grid > .fade-up:nth-child(3),
+    .media-gallery-grid > .fade-up:nth-child(3) { transition-delay: 0.16s; }
+
+    .grid.cols-3 > .fade-up:nth-child(4),
+    .grid.cols-4 > .fade-up:nth-child(4),
+    .campus-card-grid > .fade-up:nth-child(4),
+    .media-gallery-grid > .fade-up:nth-child(4) { transition-delay: 0.24s; }
+}
+
+/* 尊重用户减少动画偏好：取消入场动画，保留颜色过渡 */
+@media (prefers-reduced-motion: reduce) {
+    .fade-up {
+        opacity: 1;
+        transform: none;
+    }
 }
 
 .site-header {
@@ -109,57 +176,22 @@ video {
     gap: 4px;
 }
 
-.nav-item {
-    position: relative;
-}
-
-.nav-link,
-.dropdown-trigger {
+.nav-link {
     border: 0;
     background: transparent;
     color: var(--ink);
     font: inherit;
     font-size: 14px;
     font-weight: 600;
-    padding: 10px 12px;
+    padding: 10px 14px;
     border-radius: var(--radius-md);
     cursor: pointer;
+    white-space: nowrap;
 }
 
 .nav-link:hover,
-.dropdown-trigger:hover,
 .nav-link.active {
     background: var(--surface);
-}
-
-.dropdown {
-    position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    min-width: 190px;
-    padding: 8px;
-    background: var(--canvas);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-soft);
-    display: none;
-}
-
-.dropdown.open {
-    display: grid;
-    gap: 4px;
-}
-
-.dropdown a {
-    padding: 9px 10px;
-    border-radius: var(--radius-md);
-    color: var(--body);
-    font-size: 14px;
-}
-
-.dropdown a:hover {
-    background: var(--surface);
-    color: var(--ink);
 }
 
 .container {
@@ -211,8 +243,9 @@ p {
     font-family: Georgia, "Times New Roman", SimSun, serif;
     font-size: clamp(40px, 6vw, 70px);
     font-weight: 500;
-    line-height: 1.04;
+    line-height: 1.15;
     letter-spacing: 0;
+    text-wrap: balance;
 }
 
 .page-title {
@@ -597,16 +630,9 @@ textarea:focus {
         display: flex;
     }
 
-    .nav-link,
-    .dropdown-trigger {
+    .nav-link {
         width: 100%;
         text-align: left;
-    }
-
-    .dropdown {
-        position: static;
-        box-shadow: none;
-        margin: 4px 0 8px;
     }
 
     .hero-grid,
@@ -640,6 +666,21 @@ textarea:focus {
 .theme-toggle:hover {
     background: var(--surface);
     border-color: var(--coral);
+}
+
+.nav-clock {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 14px;
+    color: var(--ink);
+    opacity: 0.75;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--canvas);
+    white-space: nowrap;
+    -webkit-user-select: none;
+    user-select: none;
+    letter-spacing: 0.02em;
 }
 
 [data-theme="dark"] {
@@ -695,14 +736,8 @@ textarea:focus {
 }
 
 [data-theme="dark"] .nav-link:hover,
-[data-theme="dark"] .dropdown-trigger:hover,
 [data-theme="dark"] .nav-link.active {
     background: var(--surface-strong);
-}
-
-[data-theme="dark"] .dropdown {
-    background: var(--surface);
-    border-color: var(--line);
 }
 
 [data-theme="dark"] input,
@@ -838,6 +873,178 @@ textarea:focus {
 
 [data-theme="dark"] .mini-bubble {
     background: #111;
+}
+
+/* ================================================================
+   跨页面音乐播放器 —— 右下角浮动小组件
+   ================================================================ */
+.music-player {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: 50px;
+    box-shadow: 0 4px 24px rgba(31, 41, 51, 0.1);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    padding: 6px;
+    transition: border-radius 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+/* 折叠态：正圆形，只露按钮 */
+.music-player-collapsed {
+    border-radius: 50%;
+    box-shadow: 0 2px 12px rgba(31, 41, 51, 0.08);
+}
+
+.music-player-collapsed .mp-body {
+    max-width: 0;
+    opacity: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* 展开按钮（折叠态下就是唯一的圆形按钮） */
+.mp-toggle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 0;
+    background: var(--coral);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.mp-toggle:hover {
+    background: var(--coral-dark);
+    transform: scale(1.05);
+}
+
+/* 展开区：曲目标题 + 按钮 + 进度 */
+.mp-body {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 4px;
+    max-width: 320px;
+    opacity: 1;
+    transition: max-width 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
+}
+
+.mp-track {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+    white-space: nowrap;
+    padding: 0 4px 0 8px;
+    max-width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mp-actions {
+    display: flex;
+    gap: 1px;
+    flex-shrink: 0;
+}
+
+.mp-btn {
+    width: 28px;
+    height: 28px;
+    border: 0;
+    background: transparent;
+    color: var(--ink);
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s ease;
+}
+
+.mp-btn:hover {
+    background: var(--surface);
+}
+
+.mp-progress {
+    width: 64px;
+    height: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    background: var(--line);
+    border-radius: 2px;
+    cursor: pointer;
+    outline: none;
+    flex-shrink: 0;
+}
+
+.mp-progress::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--coral);
+    cursor: pointer;
+    border: 0;
+}
+
+.mp-time {
+    font-size: 10px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    min-width: 56px;
+    text-align: right;
+}
+
+/* 暗色模式 */
+[data-theme="dark"] .music-player {
+    background: rgba(37, 35, 32, 0.92);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .music-player-collapsed {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .mp-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* 移动端：更小巧 */
+@media (max-width: 620px) {
+    .music-player {
+        bottom: 14px;
+        left: 14px;
+    }
+
+    .mp-body {
+        gap: 4px;
+    }
+
+    .mp-track {
+        max-width: 60px;
+    }
+
+    .mp-progress,
+    .mp-time {
+        display: none;
+    }
 }
 
 @media (max-width: 620px) {

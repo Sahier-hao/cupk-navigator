@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="石光驿站登录页——中石克校园一站式资源导航的用户登录入口。"
+    />
+    <title>登录 - 石光驿站</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <style>
+      .login-page {
+        min-height: calc(100vh - 72px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+
+      .login-card {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 780px;
+        width: 100%;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-xl);
+        background: var(--canvas);
+        box-shadow: var(--shadow-soft);
+        overflow: hidden;
+      }
+
+      .login-decoration {
+        background: linear-gradient(
+          135deg,
+          #1a1a2e 0%,
+          #16213e 50%,
+          #0f3460 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 32px;
+        color: var(--on-dark);
+        text-align: center;
+      }
+
+      .login-decoration .brand-mark-large {
+        width: 64px;
+        height: 64px;
+        border-radius: var(--radius-lg);
+        margin-bottom: 20px;
+      }
+
+      .login-decoration h2 {
+        font-size: 22px;
+        font-weight: 700;
+        margin: 0 0 8px;
+        color: var(--on-dark);
+      }
+
+      .login-decoration p {
+        font-size: 14px;
+        color: rgba(250, 248, 243, 0.65);
+        line-height: 1.6;
+        margin: 0;
+      }
+
+      .login-form-area {
+        padding: 48px 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .login-form-area .form-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 6px;
+      }
+
+      .login-form-area .form-subtitle {
+        font-size: 13px;
+        color: var(--muted);
+        margin: 0 0 28px;
+      }
+
+      .captcha-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        align-items: end;
+      }
+
+      .captcha-question {
+        display: flex;
+        align-items: center;
+        height: 44px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: var(--surface);
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+
+      .login-options {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 6px 0 20px;
+      }
+
+      .login-options input[type="checkbox"] {
+        width: auto;
+        accent-color: var(--coral);
+        cursor: pointer;
+      }
+
+      .login-options label {
+        font-size: 13px;
+        font-weight: 400;
+        color: var(--muted);
+        cursor: pointer;
+      }
+
+      .login-hint {
+        font-size: 12px;
+        color: var(--muted);
+        margin: 0 0 18px;
+        padding: 8px 12px;
+        background: var(--surface);
+        border-radius: var(--radius-sm);
+      }
+
+      .login-error {
+        display: none;
+        font-size: 13px;
+        color: var(--coral-dark);
+        margin-bottom: 14px;
+        padding: 8px 12px;
+        background: rgba(204, 120, 92, 0.1);
+        border-radius: var(--radius-sm);
+        border-left: 3px solid var(--coral);
+      }
+
+      .login-error.show {
+        display: block;
+        animation: shake 0.35s ease;
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        20% {
+          transform: translateX(-5px);
+        }
+        40% {
+          transform: translateX(5px);
+        }
+        60% {
+          transform: translateX(-4px);
+        }
+        80% {
+          transform: translateX(3px);
+        }
+      }
+
+      .login-form-area .button {
+        width: 100%;
+        min-height: 46px;
+        font-size: 15px;
+      }
+
+      /* 暗色模式适配 */
+      [data-theme="dark"] .login-decoration {
+        background: linear-gradient(
+          135deg,
+          #0d0d18 0%,
+          #0a1224 50%,
+          #071830 100%
+        );
+      }
+
+      @media (max-width: 620px) {
+        .login-card {
+          grid-template-columns: 1fr;
+        }
+        .login-decoration {
+          display: none;
+        }
+        .login-form-area {
+          padding: 36px 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img
+            class="brand-mark"
+            src="images/中国石油大学矢量标.jpg"
+            alt="中国石油大学"
+          />石光驿站</a
+        >
+        <button class="nav-toggle" type="button" aria-label="打开导航">
+          ☰
+        </button>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="切换到暗色模式"
+          title="切换暗色模式"
+        >
+          ☾
+        </button>
+        <nav class="site-nav">
+          <a class="nav-link" href="index.html">首页</a>
+          <a class="nav-link" href="cupk.html">常用网站</a>
+          <a class="nav-link" href="campus.html">校园生活</a>
+          <a class="nav-link" href="websites.html">学习资源库</a>
+          <a class="nav-link" href="tools.html">学习工具箱</a>
+          <a class="nav-link" href="media.html">石大光影</a>
+          <a class="nav-link" href="team.html">小组介绍</a>
+          <a class="nav-link active" href="login.html">登录</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="login-page">
+      <div class="login-card">
+        <div class="login-decoration">
+          <img
+            class="brand-mark-large"
+            src="images/中国石油大学矢量标.jpg"
+            alt="中国石油大学"
+          />
+          <h2>石光驿站</h2>
+          <p>中石克校园一站式资源导航<br />登录后体验更多功能</p>
+        </div>
+
+        <div class="login-form-area">
+          <p class="form-title">欢迎回来</p>
+          <p class="form-subtitle">请输入账号密码登录</p>
+
+          <div class="login-error" id="loginError" role="alert"></div>
+
+          <form id="loginForm" novalidate>
+            <div class="form-field">
+              <label for="username">用户名</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="请输入用户名"
+                autocomplete="username"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="password">密码</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="请输入密码"
+                autocomplete="current-password"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="captcha">验证码</label>
+              <div class="captcha-row">
+                <input
+                  type="text"
+                  id="captcha"
+                  placeholder="请输入计算结果"
+                  maxlength="3"
+                  autocomplete="off"
+                  required
+                />
+                <span class="captcha-question" id="captchaQuestion"></span>
+              </div>
+            </div>
+            <div class="login-options">
+              <input type="checkbox" id="remember" />
+              <label for="remember">记住我（7天内免登录）</label>
+            </div>
+            <p class="login-hint">演示账号：admin / admin</p>
+            <button class="button primary" type="submit">登录</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>石光驿站</h3>
+          <p>面向中石克学生的校园入口、学习资源、工具和网站导航。</p>
+        </div>
+        <div>
+          <h4>资源</h4>
+          <a href="websites.html">学习资源库</a
+          ><a href="cupk.html">CUPK 校园入口</a>
+        </div>
+        <div>
+          <h4>分类</h4>
+          <a href="websites.html">课程平台</a
+          ><a href="websites.html">论文检索</a
+          ><a href="websites.html">编程文档</a>
+        </div>
+        <div>
+          <h4>项目</h4>
+          <a href="team.html">小组介绍</a>
+        </div>
+      </div>
+    </footer>
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <script src="javascript/data.js"></script>
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <script>
+      (function () {
+        var captchaAnswer = 0;
+
+        function generateCaptcha() {
+          var op = Math.random() > 0.5 ? "+" : "-";
+          var a, b;
+          if (op === "+") {
+            a = Math.floor(Math.random() * 15) + 1;
+            b = Math.floor(Math.random() * 10) + 1;
+            captchaAnswer = a + b;
+          } else {
+            a = Math.floor(Math.random() * 15) + 5;
+            b = Math.floor(Math.random() * (a - 1)) + 1;
+            captchaAnswer = a - b;
+          }
+          document.getElementById("captchaQuestion").textContent =
+            a + " " + op + " " + b + " = ?";
+        }
+
+        function showError(msg) {
+          var errorEl = document.getElementById("loginError");
+          errorEl.textContent = msg;
+          errorEl.classList.remove("show");
+          void errorEl.offsetWidth;
+          errorEl.classList.add("show");
+        }
+
+        function hideError() {
+          document.getElementById("loginError").classList.remove("show");
+        }
+
+        document
+          .getElementById("loginForm")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            hideError();
+
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value;
+            var captcha = document.getElementById("captcha").value.trim();
+
+            if (!username) {
+              showError("请输入用户名");
+              document.getElementById("username").focus();
+              return;
+            }
+            if (!password) {
+              showError("请输入密码");
+              document.getElementById("password").focus();
+              return;
+            }
+            if (!captcha) {
+              showError("请输入验证码计算结果");
+              document.getElementById("captcha").focus();
+              return;
+            }
+
+            if (parseInt(captcha, 10) !== captchaAnswer) {
+              showError("验证码错误，请重新计算");
+              document.getElementById("captcha").value = "";
+              document.getElementById("captcha").focus();
+              generateCaptcha();
+              return;
+            }
+
+            if (username !== "admin" || password !== "admin") {
+              showError("用户名或密码错误");
+              document.getElementById("captcha").value = "";
+              generateCaptcha();
+              return;
+            }
+
+            if (document.getElementById("remember").checked) {
+              try {
+                localStorage.setItem("shiguang_logged_in", "true");
+                localStorage.setItem(
+                  "shiguang_login_expires",
+                  String(Date.now() + 7 * 24 * 3600 * 1000),
+                );
+              } catch (e) {}
+            }
+
+            window.location.href = "index.html";
+          });
+
+        generateCaptcha();
+      })();
+    </script>
+  </body>
+</html>

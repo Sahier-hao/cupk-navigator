@@ -1,46 +1,180 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="石光驿站项目团队介绍——分工明确的小组协作，每个成员负责的页面和成果清晰记录。"
+    />
     <title>小组介绍 - 石光驿站</title>
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/pages.css">
-</head>
-<body>
-    <header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><img class="brand-mark" src="images/中国石油大学矢量标.jpg" alt="中国石油大学" />石光驿站</a><button class="nav-toggle" aria-label="打开导航">☰</button><button class="theme-toggle" type="button" aria-label="切换到暗色模式" title="切换暗色模式">☾</button><nav class="site-nav"><a class="nav-link" href="index.html">首页</a><div class="nav-item"><button class="dropdown-trigger">校园导航 ▾</button><div class="dropdown"><a href="cupk.html">CUPK校园入口</a><a href="campus.html">校园生活指南</a><a href="media.html">视听记录</a></div></div><div class="nav-item"><button class="dropdown-trigger">学习资源 ▾</button><div class="dropdown"><a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a></div></div><a class="nav-link active" href="team.html">小组介绍</a></nav></div></header>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img
+            class="brand-mark"
+            src="images/中国石油大学矢量标.jpg"
+            alt="中国石油大学"
+          />石光驿站</a
+        >
+        <button class="nav-toggle" type="button" aria-label="打开导航">
+          ☰
+        </button>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="切换到暗色模式"
+          title="切换暗色模式"
+        >
+          ☾
+        </button>
+        <nav class="site-nav">
+          <a class="nav-link" href="index.html">首页</a>
+          <a class="nav-link" href="cupk.html">常用网站</a>
+          <a class="nav-link" href="campus.html">校园生活</a>
+          <a class="nav-link" href="websites.html">学习资源库</a>
+          <a class="nav-link" href="tools.html">学习工具箱</a>
+          <a class="nav-link" href="media.html">石大光影</a>
+          <a class="nav-link active" href="team.html">小组介绍</a>
+          <a class="nav-link" href="login.html">登录</a>
+        </nav>
+      </div>
+    </header>
+
     <main>
-        <section class="section tight">
-            <div class="container">
-                <span class="eyebrow">小组介绍</span>
-                <h1 class="page-title">清楚记录每个人负责的页面和成果。</h1>
-                <p class="lead">下面内容可按团队实际情况替换为真实姓名、学号和分工。</p>
-                <div class="grid cols-3">
-                    <article class="card"><div class="team-avatar">组长</div><h3>组长</h3><p>负责首页（含轮播图）、整体视觉风格、文档整合和进度协调。</p><span class="tag">index.html</span><span class="tag">index.css</span><span class="tag">index.js</span></article>
-                    <article class="card"><div class="team-avatar">A</div><h3>成员 A</h3><p>负责学习资源库的数据整理（97个资源）、三层筛选、本地图标和资源渲染。</p><span class="tag">websites.html</span><span class="tag">data.js</span><span class="tag">resources.js</span></article>
-                    <article class="card"><div class="team-avatar">B</div><h3>成员 B</h3><p>负责 CUPK 校园入口全部内容，以及新建的校园生活指南页面（图文混排）。</p><span class="tag">cupk.html</span><span class="tag">campus.html</span><span class="tag">cupk.js</span></article>
-                    <article class="card"><div class="team-avatar">C</div><h3>成员 C</h3><p>负责视听记录页面（HTML5视频+音频）、公共样式系统、暗色模式和响应式布局。</p><span class="tag">media.html</span><span class="tag">common.css</span><span class="tag">pages.css</span></article>
-                    <article class="card"><div class="team-avatar">D</div><h3>成员 D</h3><p>负责学习工具箱（绩点计算器）、收藏系统、下拉菜单、返回顶部和最终测试。</p><span class="tag">tools.html</span><span class="tag">tools.js</span><span class="tag">common.js</span><span class="tag">storage.js</span></article>
-                    <article class="card"><div class="team-avatar">测</div><h3>测试记录</h3><p>全站链接有效性、图片和图标路径、多浏览器兼容性、移动端响应式检查。</p><span class="tag coral">测试</span></article>
-                </div>
+      <!-- 🔴 可选头像图片：每位成员可放头像照片
+           放在 images/team/ 目录下，如 images/team/member-leader.jpg
+           建议尺寸：128×128px 正方形 -->
+
+      <!-- 团队成员 -->
+      <section class="section tight">
+        <div class="container">
+          <span class="eyebrow">小组介绍</span>
+          <h1 class="page-title">清楚记录每个人负责的页面和成果。</h1>
+          <p class="lead">
+            下面内容可按团队实际情况替换为真实姓名、学号和分工。
+          </p>
+          <div class="grid cols-3">
+            <article class="card">
+              <div class="team-avatar">组长</div>
+              <h3>组长</h3>
+              <p>负责首页（含轮播图）、整体视觉风格、文档整合和进度协调。</p>
+              <span class="tag">index.html</span>
+              <span class="tag">index.css</span>
+              <span class="tag">index.js</span>
+            </article>
+            <article class="card">
+              <div class="team-avatar">A</div>
+              <h3>成员 A</h3>
+              <p>
+                负责学习资源库的数据整理（97个资源）、三层筛选、本地图标和资源渲染。
+              </p>
+              <span class="tag">websites.html</span>
+              <span class="tag">data.js</span>
+              <span class="tag">resources.js</span>
+            </article>
+            <article class="card">
+              <div class="team-avatar">B</div>
+              <h3>成员 B</h3>
+              <p>
+                负责 CUPK 校园入口全部内容，以及校园生活指南页面（图文混排）。
+              </p>
+              <span class="tag">cupk.html</span>
+              <span class="tag">campus.html</span>
+              <span class="tag">cupk.js</span>
+            </article>
+            <article class="card">
+              <div class="team-avatar">C</div>
+              <h3>成员 C</h3>
+              <p>
+                负责石大光影页面（HTML5视频+音频）、公共样式系统、暗色模式和响应式布局。
+              </p>
+              <span class="tag">media.html</span>
+              <span class="tag">common.css</span>
+              <span class="tag">pages.css</span>
+            </article>
+            <article class="card">
+              <div class="team-avatar">D</div>
+              <h3>成员 D</h3>
+              <p>
+                负责学习工具箱（绩点计算器）、收藏系统、导航下拉菜单、返回顶部和最终测试。
+              </p>
+              <span class="tag">tools.html</span>
+              <span class="tag">tools.js</span>
+              <span class="tag">common.js</span>
+              <span class="tag">storage.js</span>
+            </article>
+            <article class="card">
+              <div class="team-avatar">测</div>
+              <h3>测试记录</h3>
+              <p>
+                全站链接有效性、图片和图标路径、多浏览器兼容性、移动端响应式检查。
+              </p>
+              <span class="tag coral">测试</span>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 项目时间线 -->
+      <section class="section tight">
+        <div class="container panel-dark">
+          <h2>项目时间线</h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <strong>阶段一</strong>
+              <span>确定"石光驿站"主题、规划7个页面结构和暖色视觉风格。</span>
             </div>
-        </section>
-        <section class="section tight">
-            <div class="container panel-dark">
-                <h2>项目时间线</h2>
-                <div class="timeline">
-                    <div class="timeline-item"><strong>阶段一</strong><span>确定"石光驿站"主题、规划7个页面结构和暖色视觉风格。</span></div>
-                    <div class="timeline-item"><strong>阶段二</strong><span>完成首页、CUPK入口、资源库3个核心页面，含导航栏和基础CSS。</span></div>
-                    <div class="timeline-item"><strong>阶段三</strong><span>新建校园生活指南、视听记录、学习工具箱3个页面，补齐图文混排和音视频。</span></div>
-                    <div class="timeline-item"><strong>阶段四</strong><span>首页轮播图、JS下拉菜单、绩点计算器、暗色模式、响应式适配和全站测试。</span></div>
-                </div>
+            <div class="timeline-item">
+              <strong>阶段二</strong>
+              <span
+                >完成首页、CUPK入口、资源库3个核心页面，含导航栏和基础CSS。</span
+              >
             </div>
-        </section>
+            <div class="timeline-item">
+              <strong>阶段三</strong>
+              <span
+                >新建校园生活指南、石大光影、学习工具箱3个页面，补齐图文混排和音视频。</span
+              >
+            </div>
+            <div class="timeline-item">
+              <strong>阶段四</strong>
+              <span
+                >首页轮播图、绩点计算器、暗色模式、响应式适配和全站测试。</span
+              >
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
-    <footer class="site-footer"><div class="container footer-grid"><div><h3>石光驿站</h3><p>分工明确，方便后续维护。</p></div><div><h4>资源</h4><a href="websites.html">学习资源库</a><a href="cupk.html">CUPK 入口</a></div><div><h4>项目</h4><a href="team.html">小组介绍</a></div><div><h4>返回</h4><a href="index.html">首页</a></div></div></footer>
-    <button class="back-top" aria-label="返回顶部">↑</button>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>石光驿站</h3>
+          <p>分工明确，方便后续维护。</p>
+        </div>
+        <div>
+          <h4>资源</h4>
+          <a href="websites.html">学习资源库</a
+          ><a href="cupk.html">CUPK 入口</a>
+        </div>
+        <div>
+          <h4>项目</h4>
+          <a href="team.html">小组介绍</a>
+        </div>
+        <div>
+          <h4>返回</h4>
+          <a href="index.html">首页</a>
+        </div>
+      </div>
+    </footer>
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
-</body>
+  </body>
 </html>
-

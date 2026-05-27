@@ -1,147 +1,223 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>视听记录 - 石光驿站</title>
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/pages.css">
-</head>
-<body>
-    <!-- 顶部固定导航栏 -->
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="中石克克拉玛依校区校园风光视频、校区地标一览和学习背景音，用视听感受校园。"
+    />
+    <title>石大光影 - 石光驿站</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
     <header class="site-header">
-        <div class="nav-wrap">
-            <a class="brand" href="index.html"><img class="brand-mark" src="images/中国石油大学矢量标.jpg" alt="中国石油大学" />石光驿站</a>
-            <button class="nav-toggle" aria-label="打开导航">☰</button>
-            <button class="theme-toggle" type="button" aria-label="切换到暗色模式" title="切换暗色模式">☾</button>
-            <nav class="site-nav">
-                <a class="nav-link" href="index.html">首页</a>
-                <div class="nav-item">
-                    <button class="dropdown-trigger" type="button">校园导航 ▾</button>
-                    <div class="dropdown">
-                        <a href="cupk.html">CUPK校园入口</a>
-                        <a href="campus.html">校园生活指南</a>
-                        <a class="active" href="media.html">视听记录</a>
-                    </div>
-                </div>
-                <div class="nav-item">
-                    <button class="dropdown-trigger" type="button">学习资源 ▾</button>
-                    <div class="dropdown">
-                        <a href="websites.html">资源库</a>
-                        <a href="tools.html">学习工具箱</a>
-                    </div>
-                </div>
-                <a class="nav-link" href="team.html">小组介绍</a>
-            </nav>
-        </div>
+      <div class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img
+            class="brand-mark"
+            src="images/中国石油大学矢量标.jpg"
+            alt="中国石油大学"
+          />石光驿站</a
+        >
+        <button class="nav-toggle" type="button" aria-label="打开导航">
+          ☰
+        </button>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="切换到暗色模式"
+          title="切换暗色模式"
+        >
+          ☾
+        </button>
+        <nav class="site-nav">
+          <a class="nav-link" href="index.html">首页</a>
+          <a class="nav-link" href="cupk.html">常用网站</a>
+          <a class="nav-link" href="campus.html">校园生活</a>
+          <a class="nav-link" href="websites.html">学习资源库</a>
+          <a class="nav-link" href="tools.html">学习工具箱</a>
+          <a class="nav-link active" href="media.html">石大光影</a>
+          <a class="nav-link" href="team.html">小组介绍</a>
+          <a class="nav-link" href="login.html">登录</a>
+        </nav>
+      </div>
     </header>
 
     <main class="section tight">
-        <div class="container">
-            <span class="eyebrow">视听记录</span>
-            <h1 class="page-title">校区风光与学习背景音，用视听感受校园。</h1>
-            <p class="lead">这里收录了中石克克拉玛依校区的校园风光视频、校区介绍短片和学习时可用的背景音。视频和音频使用 HTML5 原生播放器。</p>
+      <div class="container">
+        <span class="eyebrow">石大光影</span>
+        <h1 class="page-title">校区风光与学习背景音，用视听感受校园。</h1>
+        <p class="lead">
+          收录中石克校园风光视频和学习背景音，使用 HTML5 原生播放器。
+        </p>
 
-            <!-- 视频区域 -->
-            <section class="media-section">
-                <div class="section-heading-row">
-                    <div>
-                        <span class="tag coral">视频</span>
-                        <h2 class="section-title">校区风光视频</h2>
-                    </div>
-                </div>
-                <p class="lead media-section-lead">以下视频展示了中石克克拉玛依校区的校园风貌，包括红山湖、教学楼群、图书馆和运动场等标志性建筑与景观。</p>
+        <!-- ========== 视频区域 ========== -->
+        <!-- ✅ 视频：校区2024招生宣传片 -->
+        <section class="media-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="tag coral">视频</span>
+              <h2 class="section-title">校区风光视频</h2>
+            </div>
+          </div>
+          <p class="lead media-section-lead">
+            展示中石克克拉玛依校区的校园风貌——红山湖、教学楼群、图书馆和运动场等标志性景观。
+          </p>
 
-                <!-- HTML5视频播放器：使用video标签实现视听技术考核要求 -->
-                <div class="media-player-wrapper">
-                    <video class="media-video" controls poster="images/icons/smartedu.png" preload="metadata">
-                        <source src="video/campus-intro.mp4" type="video/mp4">
-                        您的浏览器不支持 HTML5 视频播放，请升级浏览器或点击下方链接查看。
-                    </video>
-                </div>
-                <p class="media-caption">视频：中石克克拉玛依校区校园风光延时摄影 | 拍摄来源：B站UP主</p>
+          <!-- 🔴 需要海报图片：images/media/poster-campus.jpg
+               推荐内容：校区代表性景观截图，尺寸建议 1280×720px -->
+          <div class="media-player-wrapper">
+            <video
+              class="media-video"
+              controls
+              poster="images/media/poster-campus.jpg"
+              preload="metadata"
+            >
+              <source
+                src="video/我们在红山湖畔等你!中国石油大学(北京)克拉玛依校区2024招生宣传片重磅发布.1597962570.mp4"
+                type="video/mp4"
+              />
+              您的浏览器不支持 HTML5 视频播放，请升级浏览器。
+            </video>
+          </div>
+          <p class="media-caption">视频：中石克克拉玛依校区校园风光延时摄影</p>
 
-                <!-- B站视频备选方案 -->
-                <div class="media-bilibili">
-                    <h3>B站校区相关视频</h3>
-                    <p>如果本地视频无法播放，可点击下方链接跳转B站观看校区相关视频：</p>
-                    <div class="bilibili-links">
-                        <a class="button secondary" href="https://search.bilibili.com/all?keyword=中国石油大学克拉玛依校区" target="_blank" rel="noopener noreferrer">在B站搜索校区视频</a>
-                        <a class="button secondary" href="https://search.bilibili.com/all?keyword=CUPK校园" target="_blank" rel="noopener noreferrer">搜索CUPK校园</a>
-                    </div>
-                </div>
-            </section>
+          <div class="media-bilibili">
+            <h3>B站校区相关视频</h3>
+            <p>如果本地视频无法播放，可在B站搜索校区相关视频：</p>
+            <div class="bilibili-links">
+              <a
+                class="button secondary"
+                href="https://search.bilibili.com/all?keyword=中国石油大学克拉玛依校区"
+                target="_blank"
+                rel="noopener noreferrer"
+                >在B站搜索校区视频</a
+              >
+              <a
+                class="button secondary"
+                href="https://search.bilibili.com/all?keyword=CUPK校园"
+                target="_blank"
+                rel="noopener noreferrer"
+                >搜索CUPK校园</a
+              >
+            </div>
+          </div>
+        </section>
 
-            <!-- 音频区域 -->
-            <section class="media-section">
-                <div class="section-heading-row">
-                    <div>
-                        <span class="tag blue">音频</span>
-                        <h2 class="section-title">专注学习背景音</h2>
-                    </div>
-                </div>
-                <p class="lead media-section-lead">以下音频为学习时可播放的专注背景音，帮助在自习和写作业时保持专注。使用 HTML5 audio 标签实现。</p>
+        <!-- ========== 音频区域 ========== -->
+        <!-- 🔴 需要音频文件：music/focus-beat.mp3
+             推荐内容：专注白噪音/轻音乐/Lo-fi，时长1-3分钟
+             建议格式：MP3，128kbps以上 -->
+        <section class="media-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="tag blue">音频</span>
+              <h2 class="section-title">专注学习背景音</h2>
+            </div>
+          </div>
+          <p class="lead media-section-lead">
+            学习时可播放的专注背景音，帮助在自习和写作业时保持专注。使用 HTML5
+            audio 标签实现。
+          </p>
 
-                <!-- HTML5音频播放器：使用audio标签实现视听技术考核要求 -->
-                <div class="audio-player-card">
-                    <div class="audio-icon-block">🎵</div>
-                    <div class="audio-player-info">
-                        <h3>专注白噪音</h3>
-                        <p>柔和的自然背景音，适合自习、写作业和期末复习时播放。建议搭配番茄钟使用。</p>
-                        <audio class="media-audio" controls preload="metadata">
-                            <source src="music/focus-beat.mp3" type="audio/mpeg">
-                            您的浏览器不支持 HTML5 音频播放。
-                        </audio>
-                    </div>
-                </div>
-            </section>
+          <div class="audio-player-card">
+            <div class="audio-icon-block">🎵</div>
+            <div class="audio-player-info">
+              <h3>专注白噪音</h3>
+              <p>
+                柔和的自然背景音，适合自习、写作业和期末复习时播放。建议搭配番茄钟使用。
+              </p>
+              <!-- 🔴 需要音频文件：music/focus-beat.mp3 -->
+              <audio class="media-audio" controls preload="metadata">
+                <source src="music/focus-beat.mp3" type="audio/mpeg" />
+                您的浏览器不支持 HTML5 音频播放。
+              </audio>
+            </div>
+          </div>
+        </section>
 
-            <!-- 校区影集（图片展示，配合图文混排） -->
-            <section class="media-section">
-                <div class="section-heading-row">
-                    <div>
-                        <span class="tag">影集</span>
-                        <h2 class="section-title">校区地标一览</h2>
-                    </div>
-                </div>
-                <p class="lead media-section-lead">克拉玛依校区的几个标志性地点，帮助新生快速熟悉校园环境。</p>
-                <div class="media-gallery-grid">
-                    <article class="card media-gallery-card">
-                        <div class="gallery-placeholder">🌊</div>
-                        <h3>红山湖</h3>
-                        <p>校区标志性景观湖，环湖步道适合散步、晨跑和拍照。湖中有观赏鱼和荷花。</p>
-                    </article>
-                    <article class="card media-gallery-card">
-                        <div class="gallery-placeholder">📚</div>
-                        <h3>图书馆</h3>
-                        <p>现代化图书馆，藏书丰富，是自习和查资料的首选地点。设有研讨间和咖啡角。</p>
-                    </article>
-                    <article class="card media-gallery-card">
-                        <div class="gallery-placeholder">🏛️</div>
-                        <h3>主教学楼群</h3>
-                        <p>大部分课程在主教学楼进行，教室配备多媒体设备。课间换教室注意楼层分布。</p>
-                    </article>
-                    <article class="card media-gallery-card">
-                        <div class="gallery-placeholder">🏟</div>
-                        <h3>体育馆与运动场</h3>
-                        <p>含室内体育馆、田径场、篮球场和游泳馆，体育课和日常锻炼的好去处。</p>
-                    </article>
-                </div>
-            </section>
-        </div>
+        <!-- ========== 校区影集 ========== -->
+        <!-- 🔴 需要图片文件（各1张，共4张），放在 images/media/ 目录下：
+             - images/media/landmark-hongshanhu.jpg（红山湖）
+             - images/media/landmark-library.jpg（图书馆）
+             - images/media/landmark-teaching.jpg（主教学楼群）
+             - images/media/landmark-stadium.jpg（体育馆与运动场）
+             建议尺寸：800×500px -->
+        <section class="media-section">
+          <div class="section-heading-row">
+            <div>
+              <span class="tag">影集</span>
+              <h2 class="section-title">校区地标一览</h2>
+            </div>
+          </div>
+          <p class="lead media-section-lead">
+            克拉玛依校区的几个标志性地点，帮助新生快速熟悉校园环境。
+          </p>
+          <div class="media-gallery-grid">
+            <article class="card media-gallery-card">
+              <div class="gallery-placeholder">🌊</div>
+              <h3>红山湖</h3>
+              <p>
+                校区标志性景观湖，环湖步道适合散步、晨跑和拍照。湖中有观赏鱼和荷花。
+              </p>
+            </article>
+            <article class="card media-gallery-card">
+              <div class="gallery-placeholder">📚</div>
+              <h3>图书馆</h3>
+              <p>
+                现代化图书馆，藏书丰富，是自习和查资料的首选地点。设有研讨间和咖啡角。
+              </p>
+            </article>
+            <article class="card media-gallery-card">
+              <div class="gallery-placeholder">🏛️</div>
+              <h3>主教学楼群</h3>
+              <p>
+                大部分课程在主教学楼进行，教室配备多媒体设备。课间换教室注意楼层分布。
+              </p>
+            </article>
+            <article class="card media-gallery-card">
+              <div class="gallery-placeholder">🏟</div>
+              <h3>体育馆与运动场</h3>
+              <p>
+                含室内体育馆、田径场、篮球场和游泳馆，体育课和日常锻炼的好去处。
+              </p>
+            </article>
+          </div>
+        </section>
+      </div>
     </main>
 
-    <!-- 页脚 -->
+    <!-- 🔴 跨页面音乐播放器需要音频文件，放在 music/ 目录下：
+         - music/track1.wav（晨光轻音）
+         - music/track2.wav（午后时光）
+         - music/track3.wav（夜空静谧）
+         建议格式：WAV或MP3，每首30秒-2分钟即可 -->
+
     <footer class="site-footer">
-        <div class="container footer-grid">
-            <div><h3>石光驿站</h3><p>视频与音频内容仅用于课程作业展示。校区视频来源为B站公开内容。</p></div>
-            <div><h4>校园导航</h4><a href="cupk.html">CUPK校园入口</a><a href="campus.html">校园生活指南</a><a href="media.html">视听记录</a></div>
-            <div><h4>学习资源</h4><a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a></div>
-            <div><h4>项目</h4><a href="team.html">小组介绍</a><a href="index.html">返回首页</a></div>
+      <div class="container footer-grid">
+        <div>
+          <h3>石光驿站</h3>
+          <p>视频与音频内容仅用于课程作业展示。</p>
         </div>
+        <div>
+          <h4>校园导航</h4>
+          <a href="cupk.html">常用网站</a><a href="campus.html">校园生活指南</a
+          ><a href="media.html">石大光影</a>
+        </div>
+        <div>
+          <h4>学习资源</h4>
+          <a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a>
+        </div>
+        <div>
+          <h4>项目</h4>
+          <a href="team.html">小组介绍</a><a href="index.html">返回首页</a>
+        </div>
+      </div>
     </footer>
-    <button class="back-top" aria-label="返回顶部">↑</button>
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
-</body>
+  </body>
 </html>

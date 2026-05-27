@@ -1,78 +1,204 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>资源库 - 石光驿站</title>
-    <link rel="stylesheet" href="css/common.css">
-    <link rel="stylesheet" href="css/pages.css">
-</head>
-<body>
-    <header class="site-header"><div class="nav-wrap"><a class="brand" href="index.html"><img class="brand-mark" src="images/中国石油大学矢量标.jpg" alt="中国石油大学" />石光驿站</a><button class="nav-toggle" aria-label="打开导航">☰</button><button class="theme-toggle" type="button" aria-label="切换到暗色模式" title="切换暗色模式">☾</button><nav class="site-nav"><a class="nav-link" href="index.html">首页</a><div class="nav-item"><button class="dropdown-trigger">校园导航 ▾</button><div class="dropdown"><a href="cupk.html">CUPK校园入口</a><a href="campus.html">校园生活指南</a><a href="media.html">视听记录</a></div></div><div class="nav-item"><button class="dropdown-trigger">学习资源 ▾</button><div class="dropdown"><a class="active" href="websites.html">资源库</a><a href="tools.html">学习工具箱</a></div></div><a class="nav-link" href="team.html">小组介绍</a></nav></div></header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="石光驿站学习资源库——97个精选学习网站和工具，涵盖在线课程、论文检索、编程文档、AI工具、素材设计，按学习场景智能筛选。"
+    />
+    <title>学习资源库 - 石光驿站</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav-wrap">
+        <a class="brand" href="index.html"
+          ><img
+            class="brand-mark"
+            src="images/中国石油大学矢量标.jpg"
+            alt="中国石油大学"
+          />石光驿站</a
+        >
+        <button class="nav-toggle" type="button" aria-label="打开导航">
+          ☰
+        </button>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="切换到暗色模式"
+          title="切换暗色模式"
+        >
+          ☾
+        </button>
+        <nav class="site-nav">
+          <a class="nav-link" href="index.html">首页</a>
+          <a class="nav-link" href="cupk.html">常用网站</a>
+          <a class="nav-link" href="campus.html">校园生活</a>
+          <a class="nav-link active" href="websites.html">学习资源库</a>
+          <a class="nav-link" href="tools.html">学习工具箱</a>
+          <a class="nav-link" href="media.html">石大光影</a>
+          <a class="nav-link" href="team.html">小组介绍</a>
+          <a class="nav-link" href="login.html">登录</a>
+        </nav>
+      </div>
+    </header>
+
     <main class="section tight">
-        <div class="container">
-            <span class="eyebrow">资源 / 工具 / 网站分享</span>
-            <h1 class="page-title">把学习常用的网站、软件和工具放到一个资源库。</h1>
-            <p class="lead">这里不是学习计划页，而是资源分享页。网站、App、电脑软件、视频链接和博主推荐都可以放进来，但每个资源都要说明适合什么学习场景。</p>
+      <div class="container">
+        <span class="eyebrow">学习资源库</span>
+        <h1 class="page-title">精选学习资源，按场景帮你找。</h1>
+        <p class="lead">
+          网站、App、电脑软件、视频链接和博主推荐都在这里，每个资源都标注了适用场景和访问方式。
+        </p>
 
-            <div class="library-toolbar">
-                <input id="resourceSearch" type="search" placeholder="搜索资源：期末复习、写课程论文、Web 大作业、校园网/VPN、Kimi">
-                <span id="resourceCount" class="tag coral">加载中</span>
-            </div>
-
-            <div class="filter-group scenario-filter-group">
-                <div class="filter-label">使用场景</div>
-                <div class="filter-tabs scenario-tabs" aria-label="使用场景筛选">
-                    <button class="filter-tab active" data-scenario-filter="all">全部场景</button>
-                    <button class="filter-tab" data-scenario-filter="course">课程预习</button>
-                    <button class="filter-tab" data-scenario-filter="final">期末复习</button>
-                    <button class="filter-tab" data-scenario-filter="paper">写课程论文</button>
-                    <button class="filter-tab" data-scenario-filter="web">Web 大作业</button>
-                    <button class="filter-tab" data-scenario-filter="english">英语四六级</button>
-                    <button class="filter-tab" data-scenario-filter="exam">考试考证</button>
-                    <button class="filter-tab" data-scenario-filter="career">实习就业</button>
-                    <button class="filter-tab" data-scenario-filter="team">小组协作</button>
-                    <button class="filter-tab" data-scenario-filter="ai">AI 辅助</button>
-                </div>
-            </div>
-
-            <div class="filter-group">
-                <div class="filter-label">资源类型</div>
-                <div class="filter-tabs" aria-label="资源类型筛选">
-                    <button class="filter-tab active" data-resource-filter="all">全部资源</button>
-                    <button class="filter-tab" data-resource-filter="course">在线课程</button>
-                    <button class="filter-tab" data-resource-filter="search">资料检索</button>
-                    <button class="filter-tab" data-resource-filter="code">编程学习</button>
-                    <button class="filter-tab" data-resource-filter="tool">学习工具</button>
-                    <button class="filter-tab" data-resource-filter="ai">AI 工具</button>
-                    <button class="filter-tab" data-resource-filter="design">素材设计</button>
-                    <button class="filter-tab" data-resource-filter="english">英语学习</button>
-                    <button class="filter-tab" data-resource-filter="exam">考试考证</button>
-                    <button class="filter-tab" data-resource-filter="creator">博主推荐</button>
-                </div>
-            </div>
-
-            <div class="filter-group compact-filter-group">
-                <div class="filter-label">资源形式</div>
-                <div class="filter-tabs format-tabs" aria-label="资源形式筛选">
-                    <button class="filter-tab active" data-format-filter="all">全部形式</button>
-                    <button class="filter-tab" data-format-filter="website">网站</button>
-                    <button class="filter-tab" data-format-filter="app">App</button>
-                    <button class="filter-tab" data-format-filter="software">电脑软件</button>
-                    <button class="filter-tab" data-format-filter="video">视频链接</button>
-                    <button class="filter-tab" data-format-filter="creator">博主/账号</button>
-                </div>
-            </div>
-
-            <div class="grid cols-3" id="resourceList"></div>
+        <!-- 搜索 -->
+        <div class="library-toolbar">
+          <input
+            id="resourceSearch"
+            type="search"
+            placeholder="搜索：期末复习、写课程论文、Web大作业、Kimi…"
+            aria-label="搜索资源"
+          />
+          <span id="resourceCount" class="tag coral">加载中</span>
         </div>
+
+        <!-- 使用场景筛选 -->
+        <div class="filter-group scenario-filter-group">
+          <div class="filter-label">使用场景</div>
+          <div class="filter-tabs scenario-tabs" aria-label="使用场景筛选">
+            <button class="filter-tab active" data-scenario-filter="all">
+              全部场景
+            </button>
+            <button class="filter-tab" data-scenario-filter="course">
+              课程预习
+            </button>
+            <button class="filter-tab" data-scenario-filter="final">
+              期末复习
+            </button>
+            <button class="filter-tab" data-scenario-filter="paper">
+              写课程论文
+            </button>
+            <button class="filter-tab" data-scenario-filter="web">
+              Web 大作业
+            </button>
+            <button class="filter-tab" data-scenario-filter="english">
+              英语四六级
+            </button>
+            <button class="filter-tab" data-scenario-filter="exam">
+              考试考证
+            </button>
+            <button class="filter-tab" data-scenario-filter="career">
+              实习就业
+            </button>
+            <button class="filter-tab" data-scenario-filter="team">
+              小组协作
+            </button>
+            <button class="filter-tab" data-scenario-filter="ai">
+              AI 辅助
+            </button>
+          </div>
+        </div>
+
+        <!-- 资源类型筛选 -->
+        <div class="filter-group">
+          <div class="filter-label">资源类型</div>
+          <div class="filter-tabs" aria-label="资源类型筛选">
+            <button class="filter-tab active" data-resource-filter="all">
+              全部资源
+            </button>
+            <button class="filter-tab" data-resource-filter="course">
+              在线课程
+            </button>
+            <button class="filter-tab" data-resource-filter="search">
+              资料检索
+            </button>
+            <button class="filter-tab" data-resource-filter="code">
+              编程学习
+            </button>
+            <button class="filter-tab" data-resource-filter="tool">
+              学习工具
+            </button>
+            <button class="filter-tab" data-resource-filter="ai">
+              AI 工具
+            </button>
+            <button class="filter-tab" data-resource-filter="design">
+              素材设计
+            </button>
+            <button class="filter-tab" data-resource-filter="english">
+              英语学习
+            </button>
+            <button class="filter-tab" data-resource-filter="exam">
+              考试考证
+            </button>
+            <button class="filter-tab" data-resource-filter="creator">
+              博主推荐
+            </button>
+          </div>
+        </div>
+
+        <!-- 资源形式筛选 -->
+        <div class="filter-group compact-filter-group">
+          <div class="filter-label">资源形式</div>
+          <div class="filter-tabs format-tabs" aria-label="资源形式筛选">
+            <button class="filter-tab active" data-format-filter="all">
+              全部形式
+            </button>
+            <button class="filter-tab" data-format-filter="website">
+              网站
+            </button>
+            <button class="filter-tab" data-format-filter="app">App</button>
+            <button class="filter-tab" data-format-filter="software">
+              电脑软件
+            </button>
+            <button class="filter-tab" data-format-filter="video">
+              视频链接
+            </button>
+            <button class="filter-tab" data-format-filter="creator">
+              博主/账号
+            </button>
+          </div>
+        </div>
+
+        <!-- 资源卡片列表（JS动态渲染） -->
+        <div class="grid cols-3" id="resourceList"></div>
+
+        <!-- 🔴 资源图标位置说明：
+             每个资源需要一张图标图片，放在 images/icons/{资源id}.png
+             例如：images/icons/smartedu.png, images/icons/cnki.png 等
+             图标尺寸建议：64×64px PNG
+             资源ID对应 data.js 中每个资源的 id 字段
+             缺失图标时会自动回退为资源标题首字 -->
+      </div>
     </main>
-    <footer class="site-footer"><div class="container footer-grid"><div><h3>石光驿站</h3><p>资源入口来自公开官方网站，使用时请遵守对应网站规则。</p></div><div><h4>资源</h4><a href="websites.html">学习资源库</a><a href="cupk.html">CUPK 入口</a></div><div><h4>分类</h4><a href="websites.html">课程平台</a><a href="websites.html">论文检索</a></div><div><h4>项目</h4><a href="team.html">小组介绍</a></div></div></footer>
-    <button class="back-top" aria-label="返回顶部">↑</button>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>石光驿站</h3>
+          <p>资源入口来自公开官方网站，使用时请遵守对应网站规则。</p>
+        </div>
+        <div>
+          <h4>资源</h4>
+          <a href="websites.html">学习资源库</a
+          ><a href="cupk.html">CUPK 入口</a>
+        </div>
+        <div>
+          <h4>分类</h4>
+          <a href="websites.html">课程平台</a
+          ><a href="websites.html">论文检索</a>
+        </div>
+        <div>
+          <h4>项目</h4>
+          <a href="team.html">小组介绍</a>
+        </div>
+      </div>
+    </footer>
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
     <script src="javascript/data.js"></script>
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
     <script src="javascript/resources.js"></script>
-</body>
+  </body>
 </html>
-
