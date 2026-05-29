@@ -31,12 +31,15 @@ document.addEventListener("DOMContentLoaded", function () {
       result.innerHTML = '<strong>没有找到完全匹配的资源</strong><p>换"CUPK、教务、知网、论文、编程、AI"等关键词试试，或进入资源库查看全部分类。</p><a class="button secondary" href="websites.html">查看资源库</a>';
       return;
     }
-    result.innerHTML = matched.slice(0, 4).map(function (item) {
+    var maxShow = 4;
+    var hasMore = matched.length > maxShow;
+    result.innerHTML = matched.slice(0, maxShow).map(function (item) {
       return '<div class="search-result-row">' +
         '<div><span class="tag coral">' + item.type + '</span><strong>' + item.title + '</strong><p>' + item.description + '</p></div>' +
         '<div class="result-actions"><button class="button secondary" data-favorite="' + item.id + '">收藏</button><a class="button primary" href="' + item.url + '">进入</a></div>' +
         '</div>';
-    }).join("");
+    }).join("") +
+    (hasMore ? '<div class="search-more"><a class="button secondary" href="websites.html">查看全部 ' + matched.length + ' 个匹配资源 →</a></div>' : '');
     bindFavoriteButtons();
   }
 
@@ -66,9 +69,12 @@ document.addEventListener("DOMContentLoaded", function () {
       favoritesPanel.innerHTML = '<p class="empty-copy">还没有收藏。搜索资源后点击"收藏"，常用入口会出现在这里。</p>';
       return;
     }
-    favoritesPanel.innerHTML = favorites.slice(0, 4).map(function (item) {
+    var showCount = 4;
+    var hasMore = favorites.length > showCount;
+    favoritesPanel.innerHTML = favorites.slice(0, showCount).map(function (item) {
       return '<a class="mini-resource" href="' + item.url + '"><span>' + item.type + '</span><strong>' + item.title + '</strong></a>';
-    }).join("");
+    }).join("") +
+    (hasMore ? '<a class="mini-resource" href="websites.html" style="text-align:center;color:var(--coral-dark);font-weight:600">查看全部 ' + favorites.length + ' 个收藏 →</a>' : '');
   }
 
   function renderRecent() {

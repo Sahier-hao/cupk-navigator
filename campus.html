@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
     <meta name="description" content="中石克克拉玛依校区校园生活指南——食堂三餐C5湖畔餐厅、宿舍洗澡电费门禁、校园卡办理、洗衣饮水打印快递、体育馆阳光长跑、交通出行。" />
     <title>校园生活指南 - 石光驿站</title>
     <link rel="stylesheet" href="css/common.css" />
@@ -29,9 +32,16 @@
 
     <main class="section tight">
       <div class="container">
+        <nav class="breadcrumb" aria-label="面包屑导航"><a href="index.html">首页</a><span class="breadcrumb-sep">/</span><span>校园生活指南</span></nav>
         <span class="eyebrow">校园生活指南</span>
         <h1 class="page-title">从军都山下到红山湖畔，衣食住行一站搞定。</h1>
         <p class="lead">以下内容由石大热心学长学姐整理，覆盖食堂、宿舍、校园卡、生活设施、运动健康、交通出行及费用参考。万能墙微信：Cupk5201314</p>
+
+        <!-- 搜索 -->
+        <div class="cupk-search-panel">
+          <input id="campusSearch" type="search" placeholder="搜索：洗衣机、电费、食堂、快递、校园卡…" aria-label="搜索校园生活指南" />
+          <span id="campusSearchSummary" class="tag coral">全部内容</span>
+        </div>
 
         <div class="cupk-layout">
           <aside class="cupk-sidebar" aria-label="页面目录">
@@ -45,6 +55,7 @@
             <a href="#transport">交通出行</a>
             <a href="#cost">费用参考</a>
             <a href="#discipline">纪律·奖惩</a>
+            <a href="#online-services">校内线上服务</a>
             <a href="#apps">常用APP</a>
           </aside>
 
@@ -280,6 +291,64 @@
               </div>
             </section>
 
+            <!-- ====== 校内线上服务 ====== -->
+            <section class="cupk-section" id="online-services">
+              <div class="section-heading-row">
+                <div><span class="tag blue">常用网站</span><h2 class="section-title">校内线上服务</h2></div>
+              </div>
+              <p class="cupk-section-lead">以下链接均为校区官方服务入口，建议加入浏览器收藏夹。部分系统需在校园网或通过VPN访问。</p>
+              <div class="grid cols-4 cupk-mini-grid">
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
+                  <strong>校区官网</strong><span>通知公告、院系导航、校园新闻</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://cas.cupk.edu.cn/cas/login" target="_blank" rel="noopener noreferrer">
+                  <strong>统一身份认证</strong><span>融合门户入口，一站式登录</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://eams.cupk.edu.cn/student/home" target="_blank" rel="noopener noreferrer">
+                  <strong>新教务系统</strong><span>选课、查成绩、培养方案</span>
+                </a>
+                <a class="card cupk-mini-card" href="http://jw.cupk.edu.cn/jsxsd/" target="_blank" rel="noopener noreferrer">
+                  <strong>旧教务系统</strong><span>备用入口，部分功能需旧版</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://res.cupk.edu.cn/#/ic/home" target="_blank" rel="noopener noreferrer">
+                  <strong>图书馆座位预约</strong><span>自习座位/研讨间在线预约</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/" target="_blank" rel="noopener noreferrer">
+                  <strong>校区图书馆</strong><span>馆藏检索、数据库、借阅服务</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/jxyx/tzgg/" target="_blank" rel="noopener noreferrer">
+                  <strong>教务部通知公告</strong><span>选课/考试/补考重修安排</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://career.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
+                  <strong>就业指导中心</strong><span>招聘信息、宣讲会、职业规划</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/cxcy/" target="_blank" rel="noopener noreferrer">
+                  <strong>创新创业学院</strong><span>大创项目、竞赛目录、创新学分</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/vpn-kxq/" target="_blank" rel="noopener noreferrer">
+                  <strong>校区VPN</strong><span>校外访问校内资源的必备工具</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/gqt/" target="_blank" rel="noopener noreferrer">
+                  <strong>共青团（到梦空间）</strong><span>第二课堂、社团活动、志愿服务</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://yx.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
+                  <strong>迎新网</strong><span>新生报到指南和入学信息</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/syxy/xsgz/tzgg/" target="_blank" rel="noopener noreferrer">
+                  <strong>石油学院通知</strong><span>石油学院学生工作通知公告</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/smxy/xsgz/kjcx/" target="_blank" rel="noopener noreferrer">
+                  <strong>工商马院比赛通知</strong><span>商科/管理类竞赛和科创信息</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://mailh.qiye.163.com/" target="_blank" rel="noopener noreferrer">
+                  <strong>校区邮箱（网易）</strong><span>@cupk.edu.cn 学校邮箱登录</span>
+                </a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/" target="_blank" rel="noopener noreferrer">
+                  <strong>科技与信息部</strong><span>校园网络、信息化服务指南</span>
+                </a>
+              </div>
+            </section>
+
             <!-- ====== APP ====== -->
             <section class="cupk-section" id="apps">
               <div class="section-heading-row">
@@ -317,5 +386,39 @@
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
+    <script>
+      /* 校园生活指南搜索 */
+      (function () {
+        var input = document.querySelector("#campusSearch");
+        var summary = document.querySelector("#campusSearchSummary");
+        if (!input) return;
+        var cards = document.querySelectorAll(".cupk-card, .cupk-mini-card");
+        var sections = document.querySelectorAll(".cupk-section");
+
+        function normalize(text) {
+          return (text || "").toLowerCase().trim();
+        }
+
+        input.addEventListener("input", function () {
+          var keyword = normalize(input.value);
+          var visibleCount = 0;
+
+          cards.forEach(function (card) {
+            var matched = !keyword || normalize(card.innerText).indexOf(keyword) >= 0;
+            card.classList.toggle("is-hidden", !matched);
+            if (matched) visibleCount++;
+          });
+
+          sections.forEach(function (section) {
+            var visible = section.querySelectorAll(".cupk-card:not(.is-hidden), .cupk-mini-card:not(.is-hidden)");
+            section.classList.toggle("is-hidden", keyword && visible.length === 0);
+          });
+
+          if (summary) {
+            summary.textContent = keyword ? "找到 " + visibleCount + " 项" : "全部内容";
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

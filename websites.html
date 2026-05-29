@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
     <meta
       name="description"
       content="石光驿站学习资源库——97个精选学习网站和工具，涵盖在线课程、论文检索、编程文档、AI工具、素材设计，按学习场景智能筛选。"
@@ -47,6 +50,7 @@
 
     <main class="section tight">
       <div class="container">
+        <nav class="breadcrumb" aria-label="面包屑导航"><a href="index.html">首页</a><span class="breadcrumb-sep">/</span><span>学习资源库</span></nav>
         <span class="eyebrow">学习资源库</span>
         <h1 class="page-title">精选学习资源，按场景帮你找。</h1>
         <p class="lead">
@@ -61,6 +65,9 @@
             placeholder="搜索：期末复习、写课程论文、Web大作业、Kimi…"
             aria-label="搜索资源"
           />
+          <button type="button" class="button secondary" id="resetFiltersBtn" title="重置所有筛选条件">
+            <svg class="svg-icon" width="16" height="16" aria-hidden="true"><use href="images/icons.svg#icon-rotate-ccw"/></svg> 重置
+          </button>
           <span id="resourceCount" class="tag coral">加载中</span>
         </div>
 
@@ -180,18 +187,16 @@
           <p>资源入口来自公开官方网站，使用时请遵守对应网站规则。</p>
         </div>
         <div>
-          <h4>资源</h4>
-          <a href="websites.html">学习资源库</a
-          ><a href="cupk.html">CUPK 入口</a>
+          <h4>校园导航</h4>
+          <a href="cupk.html">常用网站</a><a href="campus.html">校园生活指南</a><a href="media.html">石大光影</a>
         </div>
         <div>
-          <h4>分类</h4>
-          <a href="websites.html">课程平台</a
-          ><a href="websites.html">论文检索</a>
+          <h4>学习资源</h4>
+          <a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a>
         </div>
         <div>
           <h4>项目</h4>
-          <a href="team.html">小组介绍</a>
+          <a href="team.html">小组介绍</a><a href="index.html">返回首页</a>
         </div>
       </div>
     </footer>

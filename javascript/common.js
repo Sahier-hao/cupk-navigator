@@ -9,6 +9,18 @@ document.addEventListener("DOMContentLoaded", function () {
     var nav = document.querySelector(".site-nav");
     var backTop = document.querySelector(".back-top");
 
+    /* ---- SVG 图标辅助函数 ---- */
+    function svgIcon(id, size) {
+        size = size || 20;
+        return '<svg class="svg-icon" width="' + size + '" height="' + size + '" aria-hidden="true">' +
+            '<use href="images/icons.svg#' + id + '"/>' +
+            '</svg>';
+    }
+
+    /* ---- 替换 emoji 按钮为 SVG 图标 ---- */
+    if (toggle) { toggle.innerHTML = svgIcon('icon-menu', 22) + '<span class="sr-only">打开导航</span>'; }
+    if (backTop) { backTop.innerHTML = svgIcon('icon-arrow-up', 18); }
+
     /* ---- 导航栏实时时钟 ---- */
     var clockEl = document.createElement("time");
     clockEl.className = "nav-clock";
@@ -62,11 +74,21 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }, { threshold: 0.12, rootMargin: "0px 0px -30px 0px" });
 
+        // JS 动态分配动画延迟（替代硬编码 CSS nth-child）
         document.querySelectorAll(".fade-up").forEach(function (el) {
+            var parent = el.parentNode;
+            if (parent) {
+                var siblings = Array.prototype.filter.call(parent.children, function (c) {
+                    return c.classList.contains("fade-up");
+                });
+                var idx = siblings.indexOf(el);
+                if (idx > 0 && idx <= 20) {
+                    el.style.transitionDelay = (idx * 0.05) + "s";
+                }
+            }
             fadeObserver.observe(el);
         });
     } else {
-        // 不支持 IntersectionObserver 的旧浏览器直接显示
         document.querySelectorAll(".fade-up").forEach(function (el) {
             el.classList.add("fade-up-visible");
         });
@@ -104,7 +126,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.documentElement.removeAttribute("data-theme");
             }
             if (toggle) {
-                toggle.textContent = theme === "dark" ? "☀" : "☾";
+                toggle.innerHTML = theme === "dark" ? svgIcon('icon-sun', 18) : svgIcon('icon-moon', 18);
                 toggle.setAttribute("aria-label", theme === "dark" ? "切换到亮色模式" : "切换到暗色模式");
             }
             try {
@@ -192,15 +214,16 @@ document.addEventListener("DOMContentLoaded", function () {
         playerBar.className = "music-player music-player-collapsed";
         playerBar.setAttribute("aria-label", "背景音乐播放器");
         playerBar.innerHTML =
-            '<button class="mp-toggle" title="展开播放器" aria-label="展开播放器">🎵</button>' +
+            '<button class="mp-toggle" title="展开播放器" aria-label="展开播放器">' + svgIcon('icon-music', 18) + '</button>' +
             '<div class="mp-body">' +
             '  <span class="mp-track">Call of Silence</span>' +
             '  <div class="mp-actions">' +
-            '    <button class="mp-btn mp-prev" title="上一首" aria-label="上一首">⏮</button>' +
-            '    <button class="mp-btn mp-play" title="播放" aria-label="播放">▶</button>' +
-            '    <button class="mp-btn mp-next" title="下一首" aria-label="下一首">⏭</button>' +
+            '    <button class="mp-btn mp-prev" title="上一首" aria-label="上一首">' + svgIcon('icon-skip-back', 14) + '</button>' +
+            '    <button class="mp-btn mp-play" title="播放" aria-label="播放">' + svgIcon('icon-play', 13) + '</button>' +
+            '    <button class="mp-btn mp-next" title="下一首" aria-label="下一首">' + svgIcon('icon-skip-forward', 14) + '</button>' +
             '  </div>' +
             '  <input class="mp-progress" type="range" min="0" max="100" step="0.1" value="0" title="进度" aria-label="播放进度" />' +
+            '  <input class="mp-volume" type="range" min="0" max="100" step="1" value="30" title="音量" aria-label="音量" />' +
             '  <span class="mp-time">00:00</span>' +
             '</div>';
 
@@ -213,6 +236,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var mpPrevBtn = playerBar.querySelector(".mp-prev");
         var mpNextBtn = playerBar.querySelector(".mp-next");
         var mpProgress = playerBar.querySelector(".mp-progress");
+        var mpVolume  = playerBar.querySelector(".mp-volume");
         var mpTime = playerBar.querySelector(".mp-time");
 
         /* -- 辅助：格式化时间 -- */
@@ -230,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
             audio.src = encodeURI(track.file);
             audio.load();
             mpTrack.textContent = track.title;
-            mpToggle.textContent = "🎵";
+            mpToggle.innerHTML = svgIcon('icon-music', 18);
             saveState({ trackIndex: state.trackIndex, currentTime: 0 });
         }
 
@@ -243,22 +267,22 @@ document.addEventListener("DOMContentLoaded", function () {
             }
             audio.play().then(function () {
                 state.isPlaying = true;
-                mpPlayBtn.textContent = "⏸";
+                mpPlayBtn.innerHTML = svgIcon('icon-pause', 13);
                 mpPlayBtn.title = "暂停";
                 mpPlayBtn.setAttribute("aria-label", "暂停");
-                mpToggle.textContent = "⏸";
+                mpToggle.innerHTML = svgIcon('icon-music', 18);
                 saveState({ isPlaying: true });
             }).catch(function () {
                 // 浏览器拦截自动播放：首次点击页面任意位置后恢复
-                mpToggle.textContent = "🎵";
+                mpToggle.innerHTML = svgIcon('icon-music', 18);
                 mpToggle.title = "点击页面任意位置开始播放";
                 var resumeOnce = function () {
                     audio.play().then(function () {
                         state.isPlaying = true;
-                        mpPlayBtn.textContent = "⏸";
+                        mpPlayBtn.innerHTML = svgIcon('icon-pause', 13);
                         mpPlayBtn.title = "暂停";
                         mpPlayBtn.setAttribute("aria-label", "暂停");
-                        mpToggle.textContent = "⏸";
+                        mpToggle.innerHTML = svgIcon('icon-music', 18);
                         saveState({ isPlaying: true });
                     }).catch(function () {});
                     document.removeEventListener("click", resumeOnce);
@@ -271,10 +295,10 @@ document.addEventListener("DOMContentLoaded", function () {
         function pause() {
             audio.pause();
             state.isPlaying = false;
-            mpPlayBtn.textContent = "▶";
+            mpPlayBtn.innerHTML = svgIcon('icon-play', 13);
             mpPlayBtn.title = "播放";
             mpPlayBtn.setAttribute("aria-label", "播放");
-            mpToggle.textContent = "🎵";
+            mpToggle.innerHTML = svgIcon('icon-music', 18);
             saveState({ isPlaying: false, currentTime: audio.currentTime || 0 });
         }
 
@@ -324,6 +348,16 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        // 音量滑块
+        if (mpVolume) {
+            mpVolume.value = state.volume * 100;
+            mpVolume.addEventListener("input", function () {
+                var vol = parseFloat(mpVolume.value) / 100;
+                audio.volume = vol;
+                saveState({ volume: vol });
+            });
+        }
+
         // 折叠/展开
         playerBar.classList.add("music-player-collapsed");
         mpToggle.addEventListener("click", function () {
@@ -357,7 +391,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 播放错误时跳到下一首
         audio.addEventListener("error", function () {
-            mpToggle.textContent = "⚠";
+            mpToggle.innerHTML = svgIcon('icon-music', 18);
             mpTrack.textContent = "加载失败…";
             setTimeout(function () {
                 loadTrack(state.trackIndex + 1);

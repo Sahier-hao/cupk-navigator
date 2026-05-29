@@ -320,6 +320,25 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // 重置筛选按钮
+    var resetBtn = document.querySelector("#resetFiltersBtn");
+    if (resetBtn) {
+        resetBtn.addEventListener("click", function () {
+            if (searchInput) searchInput.value = "";
+            scenarioTabs.forEach(function (item) { item.classList.remove("active"); });
+            tabs.forEach(function (item) { item.classList.remove("active"); });
+            formatTabs.forEach(function (item) { item.classList.remove("active"); });
+            var allScenario = document.querySelector("[data-scenario-filter].active") || document.querySelector("[data-scenario-filter]");
+            var allType = document.querySelector("[data-resource-filter].active") || document.querySelector("[data-resource-filter]");
+            var allFormat = document.querySelector("[data-format-filter].active") || document.querySelector("[data-format-filter]");
+            // 激活"全部"按钮
+            document.querySelector("[data-scenario-filter='all']").classList.add("active");
+            document.querySelector("[data-resource-filter='all']").classList.add("active");
+            document.querySelector("[data-format-filter='all']").classList.add("active");
+            render("all");
+        });
+    }
+
     // 初始渲染全部资源
     render("all");
 });

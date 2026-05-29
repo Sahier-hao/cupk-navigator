@@ -3,6 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
     <meta
       name="description"
       content="石光驿站登录页——中石克校园一站式资源导航的用户登录入口。"
@@ -31,12 +34,7 @@
       }
 
       .login-decoration {
-        background: linear-gradient(
-          135deg,
-          #1a1a2e 0%,
-          #16213e 50%,
-          #0f3460 100%
-        );
+        background: var(--gradient-dark);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -44,6 +42,20 @@
         padding: 48px 32px;
         color: var(--on-dark);
         text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .login-decoration::before {
+        content: '';
+        position: absolute;
+        top: -30%;
+        right: -20%;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(212, 133, 106, 0.12), transparent 70%);
+        pointer-events: none;
       }
 
       .login-decoration .brand-mark-large {
@@ -55,9 +67,10 @@
 
       .login-decoration h2 {
         font-size: 22px;
-        font-weight: 700;
+        font-weight: 600;
         margin: 0 0 8px;
         color: var(--on-dark);
+        font-family: var(--font-display);
       }
 
       .login-decoration p {
@@ -76,9 +89,10 @@
 
       .login-form-area .form-title {
         font-size: 20px;
-        font-weight: 700;
+        font-weight: 600;
         color: var(--ink);
         margin: 0 0 6px;
+        font-family: var(--font-display);
       }
 
       .login-form-area .form-subtitle {
@@ -180,12 +194,11 @@
 
       /* 暗色模式适配 */
       [data-theme="dark"] .login-decoration {
-        background: linear-gradient(
-          135deg,
-          #0d0d18 0%,
-          #0a1224 50%,
-          #071830 100%
-        );
+        background: #111;
+      }
+
+      [data-theme="dark"] .login-decoration::before {
+        background: radial-gradient(circle, rgba(232, 160, 128, 0.08), transparent 70%);
       }
 
       @media (max-width: 620px) {
@@ -306,25 +319,21 @@
           <p>面向中石克学生的校园入口、学习资源、工具和网站导航。</p>
         </div>
         <div>
-          <h4>资源</h4>
-          <a href="websites.html">学习资源库</a
-          ><a href="cupk.html">CUPK 校园入口</a>
+          <h4>校园导航</h4>
+          <a href="cupk.html">常用网站</a><a href="campus.html">校园生活指南</a><a href="media.html">石大光影</a>
         </div>
         <div>
-          <h4>分类</h4>
-          <a href="websites.html">课程平台</a
-          ><a href="websites.html">论文检索</a
-          ><a href="websites.html">编程文档</a>
+          <h4>学习资源</h4>
+          <a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a>
         </div>
         <div>
           <h4>项目</h4>
-          <a href="team.html">小组介绍</a>
+          <a href="team.html">小组介绍</a><a href="index.html">返回首页</a>
         </div>
       </div>
     </footer>
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
 
-    <script src="javascript/data.js"></script>
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
     <script>

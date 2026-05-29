@@ -1,8 +1,11 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
     <meta
       name="description"
       content="中石克（CUPK）常用网站和服务入口一站式导航——校区官网、教务系统、图书馆、学院专题、校园服务。"
@@ -45,13 +48,17 @@
 
     <main class="section tight">
       <div class="container">
+        <nav class="breadcrumb" aria-label="面包屑导航"><a href="index.html">首页</a><span class="breadcrumb-sep">/</span><span>常用网站</span></nav>
         <span class="eyebrow">CUPK 校园入口</span>
         <h1 class="page-title">中石克常用网站和服务入口。</h1>
         <p class="lead">
           集中整理校区相关的官网、教务、图书馆、学生事务和校园服务入口，日常查通知、找资料、办事务更方便。
         </p>
 
-        <!-- 搜索 + 目录 -->
+        <div class="notice" style="margin-bottom:24px">
+          <strong>近期提醒：</strong>四六级笔试 6月13日（四级上午/六级下午）· 短学期及暑假 7月9日—8月30日 · 考试周 6月下旬—7月上旬 · 具体以<a href="https://www.cupk.edu.cn/jwb/jxyx/xl/" target="_blank" rel="noopener noreferrer">校历</a>和教务通知为准。
+        </div>
+
         <div class="cupk-search-panel">
           <input
             id="cupkSearch"
@@ -64,392 +71,84 @@
 
         <div class="cupk-layout">
           <aside class="cupk-sidebar" aria-label="页面目录">
-            <strong>目录</strong>
-            <a href="#cupk-common">常用入口</a>
-            <a href="#cupk-systems">核心系统</a>
-            <a href="#cupk-dates">重要时间</a>
-            <a href="#cupk-study">教学教务</a>
+            <strong>常用网站导航</strong>
+            <a href="#cupk-core">高频入口</a>
+            <a href="#cupk-study">教务与学习</a>
             <a href="#cupk-library">图书馆与数据库</a>
-            <a href="#cupk-student">学生与校园服务</a>
-            <a href="#cupk-feedback">问题反馈</a>
+            <a href="#cupk-college">学院与部门</a>
+            <a href="#cupk-service">校园服务</a>
           </aside>
 
           <div class="cupk-content">
-            <!-- 常用入口 -->
-            <section class="cupk-section" id="cupk-common">
-              <div class="section-heading-row">
-                <div>
-                  <span class="tag coral">常用入口</span>
-                  <h2 class="section-title">最常用的几个</h2>
-                </div>
-              </div>
-              <p class="cupk-section-lead">
-                官网查通知，门户进系统，图书馆找文献，校历看教学周和考试周。
-              </p>
-              <div class="grid cols-3 cupk-grid">
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag coral">官网</span>
-                  <h3>校区官网</h3>
-                  <p>查看校区新闻、通知公告、机构设置和校园概况。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://portal.cupk.edu.cn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag blue">门户</span>
-                  <h3>融合门户</h3>
-                  <p>校内统一入口，进入个人系统和校园办事服务。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/library/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag">图书馆</span>
-                  <h3>图书馆主页</h3>
-                  <p>馆藏查询、数据库、读者服务和图书馆通知。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/jwb/jxyx/xl/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag coral">校历</span>
-                  <h3>校历查询</h3>
-                  <p>查看学期安排、教学周、考试周和假期时间。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/xyw/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag">网络</span>
-                  <h3>校园网服务</h3>
-                  <p>网络连接、报修和使用说明。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/vpn-kxq/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag">VPN</span>
-                  <h3>克校区 VPN</h3>
-                  <p>校外访问校内资源时使用的 VPN 服务说明。</p>
-                </a>
-              </div>
-            </section>
 
-            <!-- 核心系统 —— 教务/邮件/认证/学习通 -->
-            <section class="cupk-section" id="cupk-systems">
+            <!-- ====== 1. 高频入口 ====== -->
+            <section class="cupk-section" id="cupk-core">
               <div class="section-heading-row">
                 <div>
-                  <span class="tag coral">核心</span>
-                  <h2 class="section-title">学生常用核心系统</h2>
+                  <span class="tag coral">高频</span>
+                  <h2 class="section-title">每天都要用的核心入口</h2>
                 </div>
               </div>
-              <p class="cupk-section-lead">选课查成绩、校园邮箱、上网认证和学习通入口，日常使用频率最高。</p>
               <div class="grid cols-3 cupk-grid">
-                <a class="card resource-card cupk-card" href="https://jw.cupk.edu.cn/jsxsd/" target="_blank" rel="noopener noreferrer">
-                  <span class="tag coral">选课查成绩</span>
-                  <h3>教务管理系统</h3>
-                  <p>学生选课、查成绩、课表查看的核心操作系统，与教务部网站不同，这是实际操作系统。</p>
+                <a class="card resource-card cupk-card" href="https://eams.cupk.edu.cn/student/home" target="_blank" rel="noopener noreferrer">
+                  <span class="tag coral">选课·查成绩</span>
+                  <h3>新教务系统</h3>
+                  <p>选课、查成绩、课表查看的核心系统，日常使用频率最高。</p>
                 </a>
-                <a class="card resource-card cupk-card" href="https://mail.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
-                  <span class="tag blue">邮箱</span>
-                  <h3>校园邮件系统</h3>
-                  <p>学生邮箱：学号@st.cupk.edu.cn；教职工邮箱：工号@cupk.edu.cn。</p>
+                <a class="card resource-card cupk-card" href="http://jw.cupk.edu.cn/jsxsd/" target="_blank" rel="noopener noreferrer">
+                  <span class="tag">备用入口</span>
+                  <h3>旧教务管理系统</h3>
+                  <p>部分历史功能和数据需通过旧版入口访问，建议两个都收藏。</p>
                 </a>
                 <a class="card resource-card cupk-card" href="https://cas.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
                   <span class="tag">认证</span>
                   <h3>统一身份认证 (CAS)</h3>
                   <p>融合门户及各子系统的单点登录核心，支持邮件找回密码。</p>
                 </a>
+                <a class="card resource-card cupk-card" href="https://portal.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
+                  <span class="tag blue">门户</span>
+                  <h3>融合门户</h3>
+                  <p>智慧校园统一入口，集成所有业务系统，一站式办事服务。</p>
+                </a>
+                <a class="card resource-card cupk-card" href="https://mail.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
+                  <span class="tag blue">邮箱</span>
+                  <h3>校园邮件系统</h3>
+                  <p>学生邮箱：学号@st.cupk.edu.cn；教职工：工号@cupk.edu.cn。</p>
+                </a>
                 <a class="card resource-card cupk-card" href="https://xyw.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
                   <span class="tag">上网</span>
                   <h3>校园网认证</h3>
                   <p>连接 CUP-WLAN / CUPK-WLAN 后的上网认证页面，校内也可通过 10.0.1.1 访问。</p>
                 </a>
-                <a class="card resource-card cupk-card" href="https://portal.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
-                  <span class="tag blue">门户</span>
-                  <h3>融合门户</h3>
-                  <p>智慧校园统一入口，集成所有业务系统，需统一身份认证登录。</p>
-                </a>
-                <a class="card resource-card cupk-card" href="https://cup.fy.chaoxing.com/portal" target="_blank" rel="noopener noreferrer">
-                  <span class="tag">学习通</span>
-                  <h3>超星学习通 CUPK 入口</h3>
-                  <p>《劳动教育》《党史》等必修课程在线学习及考试平台。</p>
-                </a>
               </div>
             </section>
 
-            <!-- 重要时间 -->
-            <section class="cupk-section" id="cupk-dates">
-              <div class="section-heading-row">
-                <div>
-                  <span class="tag blue">重要时间</span>
-                  <h2 class="section-title">近期重要日期</h2>
-                </div>
-                <a
-                  class="button secondary"
-                  href="https://www.cupk.edu.cn/jwb/jxyx/xl/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >查看校历</a
-                >
-              </div>
-              <p class="cupk-section-lead">
-                面向 2026 年春季学期，具体以学校及考试官网最终通知为准。
-              </p>
-              <div class="cupk-date-grid">
-                <article class="card cupk-card cupk-date-card">
-                  <span class="tag coral">进行中</span>
-                  <strong>四六级口试</strong>
-                  <time datetime="2026-05-23">5月23日 - 5月24日</time>
-                  <p>2026年上半年CET-SET口试，注意准考证、场次和证件要求。</p>
-                  <a
-                    href="https://cet.neea.edu.cn/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >进入四六级官网</a
-                  >
-                </article>
-                <article class="card cupk-card cupk-date-card">
-                  <span class="tag blue">考试</span>
-                  <strong>四六级笔试</strong>
-                  <time datetime="2026-06-13">6月13日</time>
-                  <p>四级上午、六级下午，具体考场以准考证为准。</p>
-                  <a
-                    href="https://cet.neea.edu.cn/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >报名与准考证</a
-                  >
-                </article>
-                <article class="card cupk-card cupk-date-card">
-                  <span class="tag">学期</span>
-                  <strong>短学期与暑假</strong>
-                  <time datetime="2026-07-09">7月9日 - 8月30日</time>
-                  <p>校历标注本科生短学期及暑假时间。</p>
-                  <a
-                    href="https://www.cupk.edu.cn/jwb/c/2025-06-22/528974.shtml"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >查看校历详情</a
-                  >
-                </article>
-                <article class="card cupk-card cupk-date-card">
-                  <span class="tag coral">教学</span>
-                  <strong>考试周与课程考核</strong>
-                  <time>6月下旬 - 7月上旬</time>
-                  <p>期末考试、论文和结课作业以教务系统通知为准。</p>
-                  <a
-                    href="https://www.cupk.edu.cn/jwb/jxyx/tzgg/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >教学运行通知</a
-                  >
-                </article>
-                <article class="card cupk-card cupk-date-card">
-                  <span class="tag blue">毕业</span>
-                  <strong>毕业设计节点</strong>
-                  <time>按学院通知推进</time>
-                  <p>开题、中期、查重、答辩等节点以教务部和学院通知为准。</p>
-                  <a
-                    href="https://www.cupk.edu.cn/jwb/sjjx/bysj/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >毕业设计入口</a
-                  >
-                </article>
-                <article class="card cupk-card cupk-date-card">
-                  <span class="tag">选课</span>
-                  <strong>选课与补退选</strong>
-                  <time>关注教务系统通知</time>
-                  <p>选课、补退选和课表调整通过教务系统及教学运行通知发布。</p>
-                  <a
-                    href="https://eams.cupk.edu.cn/student/home/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    >进入教务系统</a
-                  >
-                </article>
-              </div>
-            </section>
-
-            <!-- 教学教务 -->
+            <!-- ====== 2. 教务与学习 ====== -->
             <section class="cupk-section" id="cupk-study">
               <div class="section-heading-row">
                 <div>
-                  <span class="tag">教学教务</span>
-                  <h2 class="section-title">教学、教务与学院入口</h2>
+                  <span class="tag blue">教务</span>
+                  <h2 class="section-title">教务管理与学习资源</h2>
                 </div>
               </div>
-              <p class="cupk-section-lead">
-                教务系统、培养方案、学籍管理、开课信息和各学院主页入口。
-              </p>
-
-              <h3 style="margin-top: 20px">教务系统</h3>
+              <p class="cupk-section-lead">学籍、培养方案、选课开课、毕业设计等教务相关入口，以及学习通等在线课程平台。</p>
               <div class="grid cols-4 cupk-mini-grid">
-                <a
-                  class="card cupk-mini-card"
-                  href="https://eams.cupk.edu.cn/student/home/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>教务系统学生端</strong
-                  ><span>课表、成绩、选课</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://eams.cupk.edu.cn/manager/home"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>教务系统管理端</strong><span>教务管理入口</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/xjgl/tzgg/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>学籍管理通知</strong><span>学籍异动、注册</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/xjgl/bslc/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>学籍办事流程</strong><span>事项流程说明</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/jxyx/kkxx/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>开课信息</strong><span>课程开设信息</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/zlgl/pyfa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>培养方案</strong><span>专业课程体系</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/sjjx/bysj/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>毕业设计</strong><span>毕设通知安排</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/sjjx/syjx/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>实验教学</strong><span>实验课程安排</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/sjjx/sxsx/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>实习实训</strong><span>实习实践信息</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/jxyj/kcjs/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>课程建设</strong><span>教学研究与改革</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jwb/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>教务部</strong><span>教务部门主页</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/jyjx/bks/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>本科生教育</strong><span>本科教育信息</span></a
-                >
-              </div>
-
-              <h3 style="margin-top: 24px">学院入口</h3>
-              <div class="grid cols-4 cupk-mini-grid">
-                <a
-                  class="card cupk-mini-card"
-                  href="http://www.cupk.edu.cn/syxy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>石油学院</strong><span>学院主页</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="http://www.cupk.edu.cn/gxy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>工学院</strong><span>学院主页</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="http://www.cupk.edu.cn/wlxy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>文理学院</strong><span>学院主页</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/smxy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>工商马院</strong><span>学院主页</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/cxcy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>创新创业学院</strong><span>大创、竞赛入口</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cup.edu.cn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>校本部</strong><span>中石大北京</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/English/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>英文网站</strong><span>CUPK English</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/Russian/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>俄文网站</strong><span>CUPK Russian</span></a
-                >
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/xjgl/tzgg/" target="_blank" rel="noopener noreferrer"><strong>学籍管理通知</strong><span>学籍异动、注册</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/xjgl/bslc/" target="_blank" rel="noopener noreferrer"><strong>学籍办事流程</strong><span>事项流程说明</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/zlgl/pyfa/" target="_blank" rel="noopener noreferrer"><strong>培养方案</strong><span>专业课程体系</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/jxyx/kkxx/" target="_blank" rel="noopener noreferrer"><strong>开课信息</strong><span>课程开设信息</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/jxyx/tzgg/" target="_blank" rel="noopener noreferrer"><strong>教学运行通知</strong><span>选课/考试安排</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/jxyx/xl/" target="_blank" rel="noopener noreferrer"><strong>校历查询</strong><span>学期与假期安排</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/sjjx/bysj/" target="_blank" rel="noopener noreferrer"><strong>毕业设计</strong><span>毕设通知安排</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/sjjx/syjx/" target="_blank" rel="noopener noreferrer"><strong>实验教学</strong><span>实验课程安排</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/sjjx/sxsx/" target="_blank" rel="noopener noreferrer"><strong>实习实训</strong><span>实习实践信息</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/jxyj/kcjs/" target="_blank" rel="noopener noreferrer"><strong>课程建设</strong><span>教学研究与改革</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/" target="_blank" rel="noopener noreferrer"><strong>教务部主页</strong><span>教务部门总入口</span></a>
+                <a class="card cupk-mini-card" href="https://cup.fy.chaoxing.com/portal" target="_blank" rel="noopener noreferrer"><strong>学习通（CUPK）</strong><span>必修课在线学习</span></a>
               </div>
             </section>
 
-            <!-- 图书馆与数据库 -->
+            <!-- ====== 3. 图书馆与数据库 ====== -->
             <section class="cupk-section" id="cupk-library">
               <div class="section-heading-row">
                 <div>
@@ -457,180 +156,86 @@
                   <h2 class="section-title">图书馆与文献数据库</h2>
                 </div>
               </div>
-              <p class="cupk-section-lead">
-                图书馆位于东北角湖滨公共区（A区），建筑面积近<strong>5万平方米</strong>，阅览座位1264个，休闲阅览座位487个，设有电子阅览室1个、自习室2个、自修间20个、阅览区7个。开放时间：周一至周日 <strong>8:30-23:00</strong>（节假日另行通知）。进出需人脸识别（提前在校园卡小程序完成认证），自习座位通过图书馆公众号预约（密码：Cupk@身份证号后六位）。馆内配备饮水机、静音背书房、朗读亭、自助文印设备。
-              </p>
-
-              <h3 style="margin-top: 20px">图书馆服务</h3>
-              <div class="grid cols-4 cupk-mini-grid">
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>图书馆主页</strong><span>服务和资源总入口</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/zwsjk/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>中文数据库</strong><span>知网、万方等</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/zyxsjk/dzzy/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>电子资源</strong><span>电子资源分类</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/zlxsjk/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>专业数据库</strong><span>按学科查找</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/fwsq/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>服务申请</strong><span>图书馆服务</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/jygz/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>借阅规则</strong><span>借阅与归还</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/tsjz/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>图书荐购</strong><span>推荐采购</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cupk.edu.cn/library/wxgjl/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>文献工具栏</strong><span>工具集合</span></a
-                >
+              <div class="notice" style="margin-bottom:20px">
+                <strong>图书馆概况：</strong>位于东北角湖滨公共区（A区），建筑面积近5万m²，座位1264个。开放时间：周一至周日 8:30-23:00。进出需人脸识别。自习座位通过公众号预约（密码：Cupk@身份证号后六位）。<a href="https://res.cupk.edu.cn/#/ic/home" target="_blank" rel="noopener noreferrer">座位预约→</a>
               </div>
 
-              <h3 style="margin-top: 24px">常用数据库直达</h3>
+              <h3>图书馆服务</h3>
               <div class="grid cols-4 cupk-mini-grid">
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.cnki.net/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>中国知网</strong><span>中文论文、期刊</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="http://g.wanfangdata.com.cn/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>万方数据</strong><span>论文、标准</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.duxiu.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>读秀</strong><span>图书知识检索</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.sciencedirect.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>ScienceDirect</strong><span>外文期刊</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.webofscience.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>Web of Science</strong><span>文献引用分析</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://onepetro.org/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>OnePetro</strong><span>石油工程文献</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://link.springer.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>SpringerLink</strong><span>外文图书期刊</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.engineeringvillage.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>Engineering Village</strong
-                  ><span>工程领域文献</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="http://calis.isayb.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>CALIS</strong><span>文献传递</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://jcr.clarivate.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>JCR</strong><span>期刊影响因子</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://www.patyee.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>Patyee</strong><span>专利检索</span></a
-                >
-                <a
-                  class="card cupk-mini-card"
-                  href="https://library.koolearn.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  ><strong>新东方多媒体库</strong><span>英语学习视频</span></a
-                >
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/" target="_blank" rel="noopener noreferrer"><strong>图书馆主页</strong><span>服务和资源总入口</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/zwsjk/" target="_blank" rel="noopener noreferrer"><strong>中文数据库</strong><span>知网、万方等</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/zyxsjk/dzzy/" target="_blank" rel="noopener noreferrer"><strong>电子资源</strong><span>电子资源分类</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/zlxsjk/" target="_blank" rel="noopener noreferrer"><strong>专业数据库</strong><span>按学科查找</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/fwsq/" target="_blank" rel="noopener noreferrer"><strong>服务申请</strong><span>图书馆服务</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/jygz/" target="_blank" rel="noopener noreferrer"><strong>借阅规则</strong><span>借阅与归还</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/tsjz/" target="_blank" rel="noopener noreferrer"><strong>图书荐购</strong><span>推荐采购</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/wxgjl/" target="_blank" rel="noopener noreferrer"><strong>文献工具栏</strong><span>工具集合</span></a>
+              </div>
+
+              <h3 style="margin-top:24px">常用数据库直达</h3>
+              <div class="grid cols-4 cupk-mini-grid">
+                <a class="card cupk-mini-card" href="https://www.cnki.net/" target="_blank" rel="noopener noreferrer"><strong>中国知网</strong><span>中文论文、期刊</span></a>
+                <a class="card cupk-mini-card" href="http://g.wanfangdata.com.cn/" target="_blank" rel="noopener noreferrer"><strong>万方数据</strong><span>论文、标准</span></a>
+                <a class="card cupk-mini-card" href="https://www.duxiu.com/" target="_blank" rel="noopener noreferrer"><strong>读秀</strong><span>图书知识检索</span></a>
+                <a class="card cupk-mini-card" href="https://www.sciencedirect.com/" target="_blank" rel="noopener noreferrer"><strong>ScienceDirect</strong><span>外文期刊</span></a>
+                <a class="card cupk-mini-card" href="https://www.webofscience.com/" target="_blank" rel="noopener noreferrer"><strong>Web of Science</strong><span>文献引用分析</span></a>
+                <a class="card cupk-mini-card" href="https://onepetro.org/" target="_blank" rel="noopener noreferrer"><strong>OnePetro</strong><span>石油工程文献</span></a>
+                <a class="card cupk-mini-card" href="https://link.springer.com/" target="_blank" rel="noopener noreferrer"><strong>SpringerLink</strong><span>外文图书期刊</span></a>
+                <a class="card cupk-mini-card" href="https://www.engineeringvillage.com/" target="_blank" rel="noopener noreferrer"><strong>Engineering Village</strong><span>工程领域文献</span></a>
+                <a class="card cupk-mini-card" href="http://calis.isayb.com/" target="_blank" rel="noopener noreferrer"><strong>CALIS</strong><span>文献传递</span></a>
+                <a class="card cupk-mini-card" href="https://jcr.clarivate.com" target="_blank" rel="noopener noreferrer"><strong>JCR</strong><span>期刊影响因子</span></a>
+                <a class="card cupk-mini-card" href="https://www.patyee.com/" target="_blank" rel="noopener noreferrer"><strong>Patyee</strong><span>专利检索</span></a>
+                <a class="card cupk-mini-card" href="https://library.koolearn.com/" target="_blank" rel="noopener noreferrer"><strong>新东方多媒体库</strong><span>英语学习视频</span></a>
               </div>
             </section>
 
-            <!-- 学生与校园服务 -->
-            <section class="cupk-section" id="cupk-student">
+            <!-- ====== 4. 学院与部门 ====== -->
+            <section class="cupk-section" id="cupk-college">
               <div class="section-heading-row">
                 <div>
-                  <span class="tag coral">校园服务</span>
-                  <h2 class="section-title">学生事务与校园生活</h2>
+                  <span class="tag">学院 &amp; 部门</span>
+                  <h2 class="section-title">学院主页与校级部门</h2>
                 </div>
               </div>
-              <p class="cupk-section-lead">
-                招生就业、校园卡、迎新等常用服务入口。招生季独立子域较多，此处集中整理。
-              </p>
+              <p class="cupk-section-lead">各学院通知公告、师资介绍和部门办事入口。学院通知常含奖学金评定、竞赛报名等重要信息。</p>
+              <h3>学院入口</h3>
+              <div class="grid cols-4 cupk-mini-grid">
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/syxy/" target="_blank" rel="noopener noreferrer"><strong>石油学院</strong><span>学院主页</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/gxy/" target="_blank" rel="noopener noreferrer"><strong>工学院</strong><span>学院主页</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/wlxy/" target="_blank" rel="noopener noreferrer"><strong>文理学院</strong><span>学院主页</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/smxy/" target="_blank" rel="noopener noreferrer"><strong>工商马院</strong><span>学院主页</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/cxcy/" target="_blank" rel="noopener noreferrer"><strong>创新创业学院</strong><span>大创·竞赛入口</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/gqt/" target="_blank" rel="noopener noreferrer"><strong>共青团</strong><span>第二课堂·社团</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/" target="_blank" rel="noopener noreferrer"><strong>科技与信息部</strong><span>网络/信息化服务</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jybx/" target="_blank" rel="noopener noreferrer"><strong>本科生教育</strong><span>本科教育信息</span></a>
+              </div>
+              <h3 style="margin-top:20px">校本部与多语言</h3>
+              <div class="grid cols-4 cupk-mini-grid">
+                <a class="card cupk-mini-card" href="https://www.cup.edu.cn/" target="_blank" rel="noopener noreferrer"><strong>校本部</strong><span>中石大北京</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/English/" target="_blank" rel="noopener noreferrer"><strong>英文网站</strong><span>CUPK English</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/Russian/" target="_blank" rel="noopener noreferrer"><strong>俄文网站</strong><span>CUPK Russian</span></a>
+              </div>
+            </section>
+
+            <!-- ====== 5. 校园服务 ====== -->
+            <section class="cupk-section" id="cupk-service">
+              <div class="section-heading-row">
+                <div>
+                  <span class="tag coral">服务</span>
+                  <h2 class="section-title">校园服务与生活工具</h2>
+                </div>
+              </div>
+              <p class="cupk-section-lead">招生就业、校园卡、正版软件、VPN、报修等服务入口，以及校区全景VR体验。</p>
+
               <div class="grid cols-3 cupk-grid">
                 <a class="card resource-card cupk-card" href="https://bkzs.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
                   <span class="tag coral">招生</span><h3>本科招生网</h3><p>分数线、招生计划、奖学金、专业介绍，面向高中生和家长。</p>
                 </a>
                 <a class="card resource-card cupk-card" href="https://career.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
-                  <span class="tag blue">就业</span><h3>就业信息网</h3><p>招聘信息、双选会、就业指导，毕业生和用人单位双向平台。含离校系统。</p>
+                  <span class="tag blue">就业</span><h3>就业信息网</h3><p>招聘信息、双选会、就业指导，含离校系统。大三起重点收藏。</p>
                 </a>
                 <a class="card resource-card cupk-card" href="https://yx.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
-                  <span class="tag">迎新</span><h3>迎新网</h3><p>新生报到专用，招生季独立启用。</p>
+                  <span class="tag">迎新</span><h3>迎新网</h3><p>新生报到专用，招生季独立启用，含入学指南和报到流程。</p>
                 </a>
                 <a class="card resource-card cupk-card" href="https://job.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
                   <span class="tag">人才招聘</span><h3>人才招聘网</h3><p>面向社会发布教职、科研、行政岗位，区别于学生就业网。</p>
@@ -639,84 +244,38 @@
                   <span class="tag blue">留学生</span><h3>留学生申请系统</h3><p>国际学生在线申请平台，支持中/英/法三语。</p>
                 </a>
                 <a class="card resource-card cupk-card" href="https://vr.justeasy.cn/view/09906640.html" target="_blank" rel="noopener noreferrer">
-                  <span class="tag">VR</span><h3>VR 全景校园</h3><p>线上全景游览校区全貌，从主站"走进校园"栏目链出。</p>
+                  <span class="tag">VR</span><h3>VR 全景校园</h3><p>线上全景游览校区全貌，适合给家长和朋友展示校园环境。</p>
                 </a>
               </div>
 
-              <h3 style="margin-top:24px">校园卡与常用服务</h3>
-              <div class="grid cols-3 cupk-grid">
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://career.cupk.edu.cn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag blue">就业</span>
-                  <h3>就业信息网</h3>
-                  <p>招聘信息、就业指导和校园招聘。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://bkzs.cupk.edu.cn"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag coral">招生</span>
-                  <h3>本科招生网</h3>
-                  <p>本科招生信息和专业介绍。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/xyk/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag">校园卡</span>
-                  <h3>校园卡服务中心</h3>
-                  <p>三餐一层进门左转 | 电话 0990-6633087 | QQ群 571471395 | 窗口：工作日13:00-14:00、19:00-20:00。微信/支付宝搜"中大克校区"领电子卡。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/zbhrj/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag">软件</span>
-                  <h3>正版化软件</h3>
-                  <p>校内正版软件服务与使用入口。</p>
-                </a>
-                <a
-                  class="card resource-card cupk-card"
-                  href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/qywx/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span class="tag">企业微信</span>
-                  <h3>企业微信服务</h3>
-                  <p>校区企业微信相关服务说明。</p>
-                </a>
+              <h3 style="margin-top:24px">日常工具与服务</h3>
+              <div class="grid cols-4 cupk-mini-grid">
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/xyk/" target="_blank" rel="noopener noreferrer"><strong>校园卡服务中心</strong><span>三餐一层·微信/支付宝领电子卡</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/zbhrj/" target="_blank" rel="noopener noreferrer"><strong>正版化软件</strong><span>Windows/Office等</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/qywx/" target="_blank" rel="noopener noreferrer"><strong>企业微信服务</strong><span>请假·校园卡服务</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/vpn-kxq/" target="_blank" rel="noopener noreferrer"><strong>克校区VPN</strong><span>校外访问校内资源</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/xyw/" target="_blank" rel="noopener noreferrer"><strong>校园网服务</strong><span>网络连接·报修说明</span></a>
+                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/" target="_blank" rel="noopener noreferrer"><strong>校区官网</strong><span>新闻/通知/概况</span></a>
+                <a class="card cupk-mini-card" href="https://res.cupk.edu.cn/#/ic/home" target="_blank" rel="noopener noreferrer"><strong>座位预约系统</strong><span>图书馆自习·研讨间</span></a>
+                <a class="card cupk-mini-card" href="https://mailh.qiye.163.com/" target="_blank" rel="noopener noreferrer"><strong>校区邮箱（网易）</strong><span>邮件网页端登录</span></a>
               </div>
-            </section>
 
-            <!-- 问题反馈渠道 -->
-            <section class="cupk-section" id="cupk-feedback">
-              <div class="section-heading-row">
-                <div>
-                  <span class="tag coral">反馈</span>
-                  <h2 class="section-title">问题反馈渠道</h2>
-                </div>
-              </div>
-              <p class="cupk-section-lead">校园生活中遇到问题，可通过以下渠道反馈。</p>
+              <h3 style="margin-top:24px">问题反馈</h3>
               <div class="grid cols-3 cupk-grid">
                 <div class="card cupk-card">
                   <span class="tag coral">报修</span>
                   <h3>网络/设施报修</h3>
-                  <p>校区官网→融合门户→e站式信息服务→管理平台→网络报修。或拨打后勤办公室 0990-6633049（周老师 13239935801）。</p>
+                  <p>校区官网→融合门户→e站式信息服务→管理平台→网络报修。后勤办公室 0990-6633049（周老师 13239935801）。</p>
                 </div>
                 <div class="card cupk-card">
                   <span class="tag">导员</span>
-                  <h3>导员 & 派出所</h3>
+                  <h3>联系导员 &amp; 派出所</h3>
                   <p>遇到问题可第一时间联系导员。治安相关问题联系大学城派出所。食堂问题可拨打相关老师电话。</p>
+                </div>
+                <div class="card cupk-card">
+                  <span class="tag blue">万能墙</span>
+                  <h3>校园万能墙</h3>
+                  <p>失物招领、二手交易、求助咨询、社团宣传等。微信号：Cupk5201314。</p>
                 </div>
               </div>
             </section>
@@ -730,34 +289,24 @@
       <div class="container footer-grid">
         <div>
           <h3>石光驿站</h3>
-          <p>CUPK 页面集中整理中石克常用入口。</p>
+          <p>中石克常用网站和服务入口一站式导航。</p>
         </div>
         <div>
-          <h4>资源</h4>
-          <a href="websites.html">学习资源库</a
-          ><a href="cupk.html">CUPK 入口</a>
+          <h4>校园导航</h4>
+          <a href="cupk.html">常用网站</a><a href="campus.html">校园生活指南</a><a href="media.html">石大光影</a>
         </div>
         <div>
-          <h4>校区</h4>
-          <a
-            href="https://www.cupk.edu.cn/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >校区官网</a
-          ><a
-            href="https://www.cupk.edu.cn/library/"
-            target="_blank"
-            rel="noopener noreferrer"
-            >图书馆</a
-          >
+          <h4>学习资源</h4>
+          <a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a>
         </div>
         <div>
           <h4>项目</h4>
-          <a href="team.html">小组介绍</a>
+          <a href="team.html">小组介绍</a><a href="index.html">返回首页</a>
         </div>
       </div>
     </footer>
     <button class="back-top" aria-label="返回顶部">↑</button>
+    <script src="javascript/data.js"></script>
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
     <script src="javascript/cupk.js"></script>
