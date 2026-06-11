@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1b18" media="(prefers-color-scheme: dark)" />
+    <!-- 字体预连接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 页面 SEO 描述 -->
+    <meta
+      name="description"
+      content="中国石油大学（北京）克拉玛依校区校园美景掠影——用镜头记录红山湖畔的四季风光。"
+    />
+    <title>校园掠影 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+  </head>
+  <body>
+    <!-- ===== 导航栏 ===== -->
+    <div id="siteHeader"></div>
+
+    <main id="main">
+      <!-- ===== Hero 区域 ===== -->
+      <section
+        class="page-hero"
+        style="
+          background-image:
+            linear-gradient(
+              135deg,
+              rgba(24, 23, 21, 0.55),
+              rgba(24, 23, 21, 0.25)
+            ),
+            url(images/hero-campus.jpg);
+        "
+      >
+        <div class="container">
+          <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="index.html">首页</a
+            ><span class="breadcrumb-sep">/</span><span>校园掠影</span>
+          </nav>
+          <span class="eyebrow">校园掠影</span>
+          <h1 class="page-title">从军都山下到红山湖畔</h1>
+          <p class="lead">
+            用镜头记录校园的每一个角落——大家一起上传你眼中的中石大美景。
+          </p>
+        </div>
+      </section>
+
+      <!-- ===== 画廊主体 ===== -->
+      <section class="section tight">
+        <div class="container">
+          <!-- 顶部工具栏 -->
+          <div class="gallery-toolbar">
+            <div class="gallery-toolbar-left">
+              <h2 style="margin: 0; font-size: 20px">📸 校园相册</h2>
+              <span class="tag coral" id="photoCount">共 0 张照片</span>
+            </div>
+            <button class="btn btn-primary" id="btnUploadToggle">
+              + 上传照片
+            </button>
+          </div>
+
+          <!-- 上传表单：标题、图片链接、描述、昵称、管理密码 -->
+          <div class="gallery-upload-form" id="uploadForm" style="display: none">
+            <h3 style="margin: 0 0 14px">分享你眼中的校园</h3>
+            <!-- 照片标题输入 -->
+            <div class="form-row">
+              <input
+                type="text"
+                id="galleryTitle"
+                placeholder="照片标题（如：红山湖畔的日落）"
+                maxlength="50"
+              />
+            </div>
+            <!-- 图片链接输入（可选，留空则随机使用现有校园照片） -->
+            <div class="form-row">
+              <input
+                type="text"
+                id="galleryUrl"
+                placeholder="图片链接（可粘贴在线图片地址，留空则随机使用现有校园照片）"
+              />
+            </div>
+            <!-- 图片描述 -->
+            <div class="form-row">
+              <textarea
+                id="galleryDesc"
+                rows="2"
+                placeholder="简短描述（可选）"
+                maxlength="200"
+              ></textarea>
+            </div>
+            <!-- 昵称 + 管理密码（删除照片时需要密码验证） -->
+            <div class="form-row" style="display: flex; gap: 12px">
+              <input
+                type="text"
+                id="galleryUploader"
+                placeholder="你的昵称"
+                maxlength="12"
+                style="flex: 1"
+              />
+              <input
+                type="password"
+                id="galleryPassword"
+                placeholder="管理密码（删除用）"
+                maxlength="20"
+                style="flex: 1"
+              />
+            </div>
+            <!-- 发布 / 取消操作按钮 -->
+            <div class="form-actions" style="display: flex; gap: 10px">
+              <button class="btn btn-primary" id="btnUploadSubmit">发布</button>
+              <button class="btn btn-outline" id="btnUploadCancel">
+                取消
+              </button>
+            </div>
+          </div>
+
+          <!-- 照片网格（由 gallery.js 动态渲染） -->
+          <div class="gallery-grid" id="galleryGrid"></div>
+
+          <!-- 空状态：还没有照片时的提示 -->
+          <div class="gallery-empty" id="galleryEmpty" style="display: none">
+            <p>还没有照片，快来上传第一张校园美景吧！ 🎉</p>
+          </div>
+        </div>
+        <!-- /container -->
+      </section>
+      <!-- /section.tight -->
+
+      <!-- ===== 背景音乐播放器 ===== -->
+      <div class="gallery-player-bar">
+        <div class="container">
+          <span class="gallery-player-label">🎵 浏览时听点音乐</span>
+          <audio id="galleryAudio" controls loop>
+            <source src="music/黄昏之时-兮沐.mp3" type="audio/mpeg" />
+            您的浏览器不支持音频播放。
+          </audio>
+        </div>
+      </div>
+      <!-- /gallery-player-bar -->
+    </main>
+    <!-- /main -->
+
+    <!-- ===== 灯箱（Lightbox） ===== -->
+    <div class="lightbox-overlay" id="lightbox" style="display: none">
+      <button class="lightbox-close" aria-label="关闭">&times;</button>
+      <div class="lightbox-content">
+        <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+        <div class="lightbox-info" id="lightboxInfo"></div>
+      </div>
+    </div>
+    <!-- /#lightbox -->
+
+    <!-- ===== 动态页脚 ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 加载 ===== -->
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <script src="javascript/effects.js"></script>
+    <!-- gallery.js：照片上传、网格渲染、灯箱查看、删除管理 -->
+    <script src="javascript/gallery.js"></script>
+    <script src="javascript/player.js"></script>
+  </body>
+  <!-- /body -->
+</html>
+<!-- /html -->

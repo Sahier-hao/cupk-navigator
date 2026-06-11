@@ -1,0 +1,896 @@
+/* ================================================================
+ * crud.css —— 失物招领 / 互助论坛 / 活动日历 共享样式
+ *
+ * 为三个 CRUD 页面提供统一的弹窗、侧边栏、卡片、表单样式。
+ * 每个页面有自己的命名空间前缀：
+ *   - lf-*：失物招领（lostfound.html）
+ *   - fm-* / forum-*：互助论坛（forum.html）
+ *   - ev-*：活动日历（events.html）
+ *
+ * 三个页面的弹窗动画共享 @keyframes modalPopIn。
+ * 暗色模式适配分散在各组件下方。
+ * ================================================================ */
+
+/* ---- 弹窗弹性入场动画 ---- */
+@keyframes modalPopIn {
+    0%   { opacity: 0; transform: scale(0.88) translateY(16px); }
+    60%  { opacity: 1; transform: scale(1.03) translateY(-2px); }
+    80%  { transform: scale(0.98) translateY(1px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ================================================================
+   通用侧边栏 + 两栏布局
+   左侧固定筛选分类，右侧展示主内容
+   ================================================================ */
+.crud-layout {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-top: 32px;
+}
+/* 侧边栏面板（sticky 跟随，含分类标题 + 按钮列表） */
+.crud-sidebar {
+    display: grid;
+    gap: 2px;
+    position: sticky;
+    top: 80px;
+    padding: 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--canvas);
+    box-shadow: 0 2px 12px rgba(31,41,51,0.03);
+}
+/* ---- 侧边栏分类标题 ---- */
+.crud-sidebar .sidebar-title {
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 8px 12px 10px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--line);
+    text-transform: uppercase;
+}
+.crud-sidebar button,
+.crud-sidebar a {
+    text-align: left;
+    padding: 10px 14px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--ink);
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    text-decoration: none;
+    position: relative;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.crud-sidebar button:hover,
+.crud-sidebar a:hover { background: var(--surface); color: var(--coral-dark); }
+.crud-sidebar button.active,
+.crud-sidebar a.active { background: var(--dark); color: var(--on-dark); font-weight: 600; }
+/* 激活态左侧珊瑚色指示条 */
+.crud-sidebar button.active::before,
+.crud-sidebar a.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 25%;
+    height: 50%;
+    width: 3px;
+    background: var(--coral);
+    border-radius: 0 3px 3px 0;
+}
+
+[data-theme="dark"] .crud-sidebar { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .crud-sidebar button.active,
+[data-theme="dark"] .crud-sidebar a.active { background: var(--coral); }
+
+@media (max-width: 700px) {
+    .crud-layout { grid-template-columns: 1fr; }
+    .crud-sidebar { position: static; display: flex; flex-wrap: wrap; gap: 4px; }
+    .crud-sidebar button,
+    .crud-sidebar a { font-size: 13px; padding: 6px 12px; }
+    .crud-sidebar .sidebar-title { display: none; }
+}
+
+/* ================================================================
+   失物招领（lostfound.html）
+   - Hero 横幅：背景图 + 渐变遮罩
+   - 操作按钮组：发布寻物 / 发布招领
+   - 筛选标签：全部 / 寻物 / 招领 / 已认领
+   - 搜索结果列表（lf-card 网格）
+   - 发布/认领弹窗（lf-modal）
+   ================================================================ */
+.lf-hero {
+    text-align: center;
+    padding: 80px 24px 48px;
+    background: linear-gradient(135deg, rgba(24,23,21,0.55), rgba(24,23,21,0.3)), url(../images/hero-lostfound.jpg) center/cover;
+    border-radius: var(--radius-xl);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.lf-hero h1 { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.3); margin: 0 0 10px; font-family: var(--font-display); font-size: 32px; }
+.lf-hero p { color: rgba(255,255,255,0.8); font-size: 15px; margin: 0 0 20px; }
+
+/* 操作按钮组：发布寻物 / 发布招领 */
+.lf-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+.lf-actions .button { min-width: 120px; }
+
+/* 筛选标签：全部 / 寻物 / 招领 / 已认领 */
+.lf-filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+.lf-filter {
+    padding: 6px 16px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.lf-filter:hover { border-color: var(--coral); color: var(--coral-dark); }
+.lf-filter.active { background: var(--coral); color: #fff; border-color: var(--coral); }
+
+/* 侧边栏内的筛选按钮：改为菜单项样式 */
+/* ---- 侧边栏内失物招领筛选按钮（菜单样式） ---- */
+.crud-sidebar .lf-filter {
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    font-size: 14px;
+}
+.crud-sidebar .lf-filter:hover { background: var(--surface); color: var(--coral-dark); border: none; }
+.crud-sidebar .lf-filter.active { background: var(--dark); color: var(--on-dark); font-weight: 600; }
+
+[data-theme="dark"] .crud-sidebar .lf-filter:hover { background: var(--surface-strong); }
+[data-theme="dark"] .crud-sidebar .lf-filter.active { background: var(--coral); }
+
+/* 侧边栏内的 filter-tab（资源库场景按钮）：改为菜单项样式 */
+/* ---- 侧边栏内 filter-tab（菜单样式） ---- */
+.crud-sidebar .filter-tab {
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+}
+.crud-sidebar .filter-tab:hover { background: var(--surface); color: var(--coral-dark); }
+.crud-sidebar .filter-tab.active { background: var(--dark); color: var(--on-dark); font-weight: 600; }
+[data-theme="dark"] .crud-sidebar .filter-tab.active { background: var(--coral); }
+
+/* 侧边栏通用按钮（share 页等使用） */
+.crud-sidebar-btn {
+    text-align: left;
+    padding: 10px 12px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--ink);
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.crud-sidebar-btn:hover { background: var(--surface); color: var(--coral-dark); }
+.crud-sidebar-btn.active { background: var(--dark); color: var(--on-dark); font-weight: 600; }
+[data-theme="dark"] .crud-sidebar-btn.active { background: var(--coral); }
+
+/* ---- 失物招领卡片列表 ---- */
+.lf-grid {
+    display: grid;
+    gap: 14px;
+}
+
+/* 卡片结构：左侧色条（4px）+ 内容区 + 认领按钮 */
+.lf-card {
+    display: grid;
+    grid-template-columns: 4px 1fr auto;
+    gap: 16px;
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.lf-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(212, 133, 106, 0.2);
+    box-shadow: 0 10px 30px rgba(31, 41, 51, 0.06);
+}
+/* 左侧色条：失物（coral 珊瑚色）/ 招领（blue 蓝色） */
+.lf-card.lost .lf-bar { background: var(--coral); border-radius: 2px; }
+.lf-card.found .lf-bar { background: var(--blue); border-radius: 2px; }
+.lf-card.claimed { opacity: 0.6; } /* 已认领淡化 */
+
+.lf-body h3 { margin: 0 0 6px; font-size: 16px; color: var(--ink); }
+.lf-body p { margin: 0 0 8px; font-size: 14px; color: var(--body); line-height: 1.6; }
+.lf-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 13px; color: var(--muted); }
+.lf-meta span { display: inline-flex; align-items: center; gap: 4px; }
+.lf-meta .tag { font-size: 12px; }
+
+/* 认领按钮（需管理密码验证） */
+.lf-claim-btn {
+    align-self: center;
+    font-size: 13px;
+    padding: 8px 16px;
+    border: 1px solid var(--coral);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--coral-dark);
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+.lf-claim-btn:hover { background: var(--coral); color: #fff; }
+
+/* ---- 发布/认领弹窗 ---- */
+.lf-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(24, 23, 21, 0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+.lf-modal-overlay.show { display: flex; }
+.lf-modal-overlay.show .lf-modal {
+    animation: modalPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+/* 弹窗卡片（居中，圆角，阴影，可滚动） */
+.lf-modal {
+    background: var(--canvas);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    width: min(480px, calc(100% - 32px));
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(24, 23, 21, 0.2);
+    border: 1px solid var(--line);
+}
+.lf-modal h3 { margin: 0 0 20px; font-size: 20px; color: var(--ink); font-family: var(--font-display); }
+.lf-modal .form-field { margin-bottom: 16px; }
+.lf-modal label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
+.lf-modal input, .lf-modal select, .lf-modal textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.lf-modal input:focus, .lf-modal select:focus, .lf-modal textarea:focus {
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px rgba(212,133,106,0.08);
+}
+.lf-modal textarea { resize: vertical; min-height: 80px; }
+.lf-modal .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+/* 空状态提示 */
+/* ---- 失物招领空状态 ---- */
+.lf-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+.lf-empty strong { display: block; font-size: 18px; margin-bottom: 8px; color: var(--ink); }
+
+/* 搜索框 */
+.lf-search { margin-bottom: 20px; margin-top: 28px; }
+.lf-sort { display: flex; align-items: center; margin-bottom: 18px; }
+.lf-search input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 15px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.lf-search input:focus {
+    border-color: var(--coral);
+    box-shadow: 0 0 0 3px rgba(212,133,106,0.1);
+}
+
+[data-theme="dark"] .lf-filter { background: var(--dark-card); border-color: var(--line); }
+[data-theme="dark"] .lf-filter.active { background: var(--coral); border-color: var(--coral); }
+[data-theme="dark"] .lf-card { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .lf-card.claimed { opacity: 0.4; }
+[data-theme="dark"] .lf-modal { background: var(--dark-card); }
+[data-theme="dark"] .lf-modal input,
+[data-theme="dark"] .lf-modal select,
+[data-theme="dark"] .lf-modal textarea { background: var(--dark-soft); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+[data-theme="dark"] .lf-search input { background: var(--dark-card); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+[data-theme="dark"] .lf-claim-btn { color: var(--coral-light); border-color: rgba(232, 160, 128, 0.3); }
+
+@media (max-width: 640px) {
+    .lf-card { grid-template-columns: 4px 1fr; }
+    .lf-claim-btn { grid-column: 1 / -1; justify-self: stretch; }
+}
+
+/* ================================================================
+   互助论坛（forum.html）
+   - Hero 横幅
+   - 左右两栏布局（分类侧边栏 + 帖子列表）
+   - 帖子卡片（标题 + 预览 + 元信息 + 回复数）
+   - 帖子详情页（标题、内容、回复列表）
+   - 发布帖子弹窗（fm-modal）
+   ================================================================ */
+.forum-hero {
+    text-align: center;
+    padding: 80px 24px 48px;
+    background: linear-gradient(135deg, rgba(24,23,21,0.55), rgba(24,23,21,0.3)), url(../images/hero-forum.jpg) center/cover;
+    border-radius: var(--radius-xl);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.forum-hero h1 { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.3); margin: 0 0 10px; font-family: var(--font-display); font-size: 32px; }
+.forum-hero p { color: rgba(255,255,255,0.8); font-size: 15px; margin: 0 0 20px; }
+.forum-hero > .button { margin-bottom: 28px; }
+
+/* 两栏布局：左侧分类侧边栏 + 右侧帖子列表 */
+.forum-layout {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    align-items: start;
+    margin-top: 32px;
+}
+
+/* 分类侧边栏（sticky 跟随） */
+.forum-sidebar {
+    display: grid;
+    gap: 4px;
+    position: sticky;
+    top: 80px;
+}
+.forum-sidebar button {
+    text-align: left;
+    padding: 10px 14px;
+    border: none;
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--ink);
+    font-size: 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.forum-sidebar button:hover { background: var(--surface); color: var(--coral-dark); }
+.forum-sidebar button.active { background: var(--dark); color: var(--on-dark); font-weight: 600; }
+
+/* ---- 论坛主内容区 ---- */
+.forum-main { min-height: 400px; }
+
+/* 搜索框 + 发布按钮行 */
+.forum-topbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.forum-topbar input {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 14px;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+.forum-topbar input:focus { border-color: var(--coral); }
+
+/* ---- 帖子列表容器 ---- */
+.forum-posts { display: grid; gap: 12px; }
+
+/* 帖子卡片：可点击，悬停上移 */
+.forum-post {
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    cursor: pointer;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.forum-post:hover {
+    transform: translateY(-3px);
+    border-color: rgba(212, 133, 106, 0.2);
+    box-shadow: 0 10px 30px rgba(31, 41, 51, 0.06);
+}
+.forum-post h3 { margin: 0 0 6px; font-size: 17px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.forum-post .post-preview {
+    font-size: 14px;
+    color: var(--body);
+    line-height: 1.6;
+    margin: 0 0 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+.forum-post .post-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+    align-items: center;
+}
+.forum-post .reply-count {
+    background: var(--coral);
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* ---- 帖子详情区 ---- */
+.forum-detail {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    margin-bottom: 20px;
+}
+.forum-detail h2 { margin: 0 0 8px; font-size: 22px; color: var(--ink); font-family: var(--font-display); }
+.forum-detail .detail-content { font-size: 15px; line-height: 1.8; color: var(--body); margin: 14px 0; white-space: pre-wrap; }
+.forum-detail .detail-meta { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+
+/* ---- 回复卡片 ---- */
+.forum-reply {
+    padding: 14px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--canvas);
+    margin-bottom: 10px;
+}
+.forum-reply .reply-content { font-size: 14px; line-height: 1.6; color: var(--body); white-space: pre-wrap; }
+.forum-reply .reply-meta { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+/* ---- 回复输入框 ---- */
+.forum-reply-box { margin-top: 20px; }
+.forum-reply-box textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    resize: vertical;
+    min-height: 80px;
+    transition: border-color 0.3s ease;
+}
+.forum-reply-box textarea:focus { border-color: var(--coral); }
+.forum-reply-box .reply-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 10px; }
+
+/* ---- 发布帖子弹窗 ---- */
+.fm-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(24, 23, 21, 0.4);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+}
+.fm-modal-overlay.show { display: flex; }
+.fm-modal-overlay.show .fm-modal {
+    animation: modalPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.fm-modal {
+    background: var(--canvas);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    width: min(520px, calc(100% - 32px));
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(24, 23, 21, 0.2);
+}
+.fm-modal h3 { margin: 0 0 20px; font-size: 20px; color: var(--ink); font-family: var(--font-display); }
+.fm-modal .form-field { margin-bottom: 16px; }
+.fm-modal label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
+.fm-modal input, .fm-modal select, .fm-modal textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.fm-modal input:focus, .fm-modal select:focus, .fm-modal textarea:focus { border-color: var(--coral); }
+.fm-modal textarea { resize: vertical; min-height: 100px; }
+.fm-modal .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+/* 空状态 + 返回按钮 */
+/* ---- 论坛空状态 ---- */
+.forum-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+.forum-empty strong { display: block; font-size: 18px; margin-bottom: 8px; color: var(--ink); }
+.forum-back { margin-bottom: 16px; }
+
+[data-theme="dark"] .forum-post { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .forum-detail { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .forum-reply { background: var(--dark-soft); border-color: rgba(255,255,255,0.05); }
+[data-theme="dark"] .forum-sidebar button.active { background: var(--coral); }
+[data-theme="dark"] .fm-modal { background: var(--dark-card); }
+[data-theme="dark"] .fm-modal input,
+[data-theme="dark"] .fm-modal select,
+[data-theme="dark"] .fm-modal textarea { background: var(--dark-soft); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+[data-theme="dark"] .forum-topbar input { background: var(--dark-card); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+[data-theme="dark"] .forum-reply-box textarea { background: var(--dark-card); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+
+@media (max-width: 640px) {
+    .forum-layout { grid-template-columns: 1fr; }
+    .forum-sidebar { position: static; display: flex; flex-wrap: wrap; gap: 4px; }
+    .forum-sidebar button { font-size: 13px; padding: 6px 12px; }
+}
+
+/* ================================================================
+   活动日历（events.html）
+   - Hero 横幅
+   - 左右两栏布局（左侧日历组件 + 右侧活动列表）
+   - 日历导航、日期格子、事件标记、选中态
+   - 活动卡片（日期 + 标题 + 元信息）
+   - 发布活动弹窗（ev-modal）
+   ================================================================ */
+.ev-hero {
+    text-align: center;
+    padding: 80px 24px 48px;
+    background: linear-gradient(135deg, rgba(24,23,21,0.55), rgba(24,23,21,0.3)), url(../images/hero-events.jpg) center/cover;
+    border-radius: var(--radius-xl);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.ev-hero h1 { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.3); margin: 0 0 10px; font-family: var(--font-display); font-size: 32px; }
+.ev-hero p { color: rgba(255,255,255,0.8); font-size: 15px; margin: 0 0 20px; }
+.ev-hero > .button { margin-bottom: 28px; }
+
+/* 两栏布局：左侧日历组件 + 右侧活动列表 */
+.ev-layout {
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 28px;
+    align-items: start;
+    margin-top: 32px;
+}
+
+/* ---- 日历组件 ---- */
+.ev-calendar {
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    position: sticky;
+    top: 80px;
+}
+/* 日历导航栏：月份 + 前后翻页按钮 */
+.ev-cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 18px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+}
+.ev-cal-header h3 { margin: 0; font-size: 16px; color: var(--ink); font-family: var(--font-display); }
+.ev-cal-header button {
+    width: 32px; height: 32px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: border-color 0.2s, background 0.2s;
+}
+.ev-cal-header button:hover { border-color: var(--coral); background: rgba(212,133,106,0.06); }
+
+/* 星期行 */
+.ev-cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 8px 0;
+    background: var(--surface);
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    font-weight: 600;
+}
+.ev-cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+/* 日期格子：正方形，hover 变色，事件标记圆点 */
+.ev-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--ink);
+    cursor: pointer;
+    border-radius: var(--radius-sm);
+    position: relative;
+    transition: background 0.15s;
+}
+.ev-day:hover { background: var(--surface); }
+.ev-day.other-month { color: var(--line); cursor: default; }
+.ev-day.today { background: var(--coral); color: #fff; font-weight: 700; border-radius: 50%; }
+.ev-day.today:hover { background: var(--coral-dark); }
+/* 底部小圆点标记有事件 */
+.ev-day.has-event::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--coral);
+}
+.ev-day.today.has-event::after { background: #fff; }
+/* 选中态：蓝色内阴影边框 */
+.ev-day.selected { box-shadow: inset 0 0 0 2px var(--blue); }
+
+/* ---- 事件列表头部 + 分类标签 ---- */
+.ev-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.ev-list-header h3 { margin: 0; font-size: 18px; color: var(--ink); font-family: var(--font-display); }
+.ev-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.ev-tag {
+    padding: 4px 12px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    background: var(--canvas);
+    font-size: 12px;
+    color: var(--ink);
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+.ev-tag:hover { border-color: var(--coral); color: var(--coral-dark); }
+.ev-tag.active { background: var(--coral); color: #fff; border-color: var(--coral); }
+
+/* ---- 活动列表容器 ---- */
+.ev-items { display: grid; gap: 10px; }
+
+/* ---- 活动卡片：左侧日期 + 右侧详情 ---- */
+.ev-card {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 16px;
+    padding: 18px 20px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+.ev-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(212, 133, 106, 0.2);
+    box-shadow: 0 10px 30px rgba(31,41,51,0.06);
+}
+/* 左侧日期块：大号日期数字 + 月份缩写 */
+.ev-card-date {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.ev-card-date .ev-d { font-size: 26px; font-weight: 700; color: var(--coral); line-height: 1; }
+.ev-card-date .ev-m { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.ev-card-body h4 { margin: 0 0 4px; font-size: 16px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+.ev-card-body p { margin: 0 0 8px; font-size: 14px; color: var(--body); line-height: 1.6; }
+.ev-card-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--muted); }
+
+/* 空状态 */
+.ev-empty { text-align: center; padding: 48px; color: var(--muted); }
+.ev-empty strong { display: block; font-size: 17px; color: var(--ink); margin-bottom: 6px; }
+
+/* ---- 发布活动弹窗 ---- */
+.ev-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(24,23,21,0.4);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+}
+.ev-modal-overlay.show { display: flex; }
+.ev-modal-overlay.show .ev-modal {
+    animation: modalPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+.ev-modal {
+    background: var(--canvas);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    width: min(460px, calc(100% - 32px));
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(24,23,21,0.2);
+}
+.ev-modal h3 { margin: 0 0 20px; font-size: 20px; color: var(--ink); font-family: var(--font-display); }
+.ev-modal .form-field { margin-bottom: 16px; }
+.ev-modal label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
+.ev-modal input, .ev-modal select, .ev-modal textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s;
+}
+.ev-modal input:focus, .ev-modal select:focus, .ev-modal textarea:focus { border-color: var(--coral); }
+.ev-modal textarea { resize: vertical; min-height: 70px; }
+.ev-modal .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+/* ===== 活动日历 暗色模式 ===== */
+[data-theme="dark"] .ev-calendar { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .ev-cal-header, [data-theme="dark"] .ev-cal-weekdays { background: var(--dark-soft); }
+[data-theme="dark"] .ev-day { color: var(--on-dark); }
+[data-theme="dark"] .ev-day.other-month { color: rgba(255,255,255,0.08); }
+[data-theme="dark"] .ev-card { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+[data-theme="dark"] .ev-tag { background: var(--dark-card); border-color: rgba(255,255,255,0.1); }
+[data-theme="dark"] .ev-modal { background: var(--dark-card); }
+[data-theme="dark"] .ev-modal input,
+[data-theme="dark"] .ev-modal select,
+[data-theme="dark"] .ev-modal textarea { background: var(--dark-soft); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+
+/* ===== 活动日历 响应式 ===== */
+@media (max-width: 780px) {
+    .ev-layout { grid-template-columns: 1fr; }
+    .ev-calendar { position: static; }
+}
+
+/* ================================================================
+ * crud.css 样式索引
+ *
+ * 共享弹窗动画
+ *   @keyframes modalPopIn — 弹性缩放入场
+ *
+ * 通用侧边栏布局
+ *   .crud-layout / .crud-sidebar — 180px 左栏 + 自适应右栏
+ *   按钮/链接项 hover/active 切换，激活态左侧红色指示条
+ *   侧边栏内筛选按钮（.lf-filter / .filter-tab）统一菜单样式
+ *   暗色模式适配 + ≤700px 响应式（转为水平 flex 排列）
+ *
+ * 失物招领（lf-*）
+ *   .lf-hero — 背景图 Hero 横幅
+ *   .lf-actions — 发布寻物/招领按钮组
+ *   .lf-filters / .lf-filter — 分类筛选标签
+ *   .lf-grid / .lf-card — 结果卡片列表
+ *   .lf-card.lost（珊瑚色条）/ .lf-card.found（蓝色条）
+ *   .lf-claim-btn — 认领按钮（需密码验证）
+ *   .lf-modal — 发布/认领弹窗
+ *   .lf-search — 关键词搜索框
+ *   暗色模式 + ≤640px 响应式
+ *
+ * 互助论坛（forum-* / fm-*）
+ *   .forum-hero — 背景图 Hero 横幅
+ *   .forum-layout — 两栏布局
+ *   .forum-sidebar — 分类侧边栏
+ *   .forum-topbar — 搜索框
+ *   .forum-post — 帖子卡片（标题 + 预览 + 回复数）
+ *   .forum-detail — 帖子详情
+ *   .forum-reply — 回复卡片
+ *   .forum-reply-box — 回复输入框
+ *   .fm-modal — 发布帖子弹窗
+ *   暗色模式 + ≤640px 响应式
+ *
+ * 活动日历（ev-*）
+ *   .ev-hero — 背景图 Hero 横幅
+ *   .ev-layout — 两栏布局（日历 + 列表）
+ *   .ev-calendar — 日历组件
+ *   .ev-cal-header — 月份导航栏
+ *   .ev-cal-weekdays — 星期行
+ *   .ev-day — 日期格子（today/has-event/selected/other-month）
+ *   .ev-tags / .ev-tag — 分类筛选标签
+ *   .ev-card — 活动卡片（日期 + 详情）
+ *   .ev-modal — 发布活动弹窗
+ *   暗色模式 + ≤780px 响应式
+ * ================================================================ */
+
+/* ===== crud.css 组件速查 =====
+ *
+ * 侧边栏
+ *   .crud-sidebar — sticky，hover 变色
+ *   .sidebar-title — 大写分类标题
+ *   button.active::before — 左侧指示条
+ *
+ * 失物招领
+ *   .lf-card.lost — 珊瑚色条（寻物）
+ *   .lf-card.found — 蓝色条（招领）
+ *   .lf-claim-btn — 认领按钮
+ *   .lf-modal — 发布弹窗
+ *
+ * 论坛
+ *   .forum-post — 帖子卡片
+ *   .forum-detail — 详情面板
+ *   .forum-reply — 回复条目
+ *   .fm-modal — 发布弹窗
+ *
+ * 日历
+ *   .ev-day.today — 今日高亮圆形
+ *   .ev-day.has-event::after — 事件小圆点
+ *   .ev-card — 活动卡片
+ *   .ev-modal — 发布弹窗
+ *
+ * 暗色模式
+ *   侧边栏深色卡片背景
+ *   筛选/侧边栏按钮激活态珊瑚色
+ *   卡片/弹窗/输入框深色背景覆盖
+ *   搜索框背景适配
+ *
+ * 响应式
+ *   侧边栏 ≤700px 转为水平 flex
+ *   论坛 ≤640px 单列布局
+ *   日历 ≤780px 单列布局
+ *
+ * 数据存储说明
+ *   失物招领：localStorage key 'shiguang_lostfound'
+ *   论坛帖子：localStorage key 'shiguang_forum'
+ *   活动日历：localStorage key 'shiguang_events'
+ *
+ * 管理密码
+ *   各条目创建时设定管理密码
+ *   删除/标记需密码验证
+ *   密码存储在条目数据中
+ *
+ * 自动过期
+ *   失物招领 30 天自动过期
+ *   论坛 / 活动各 200 条上限
+ * ================================================================ */

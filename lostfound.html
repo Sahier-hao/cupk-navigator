@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1b18" media="(prefers-color-scheme: dark)" />
+    <!-- 字体预连接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <!-- 页面 SEO 描述 -->
+    <meta name="description" content="石光驿站失物招领——中石克校园内寻物启事和失物招领信息发布平台。" />
+    <title>失物招领 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 + CRUD 组件样式 -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/crud.css" />
+  </head>
+  <body>
+    <!-- ===== 动态导航栏 ===== -->
+    <div id="siteHeader"></div>
+
+    <!-- ===== 页面主体 ===== -->
+    <main id="main" class="section tight">
+      <div class="container">
+        <!-- Hero 区域：标题 + 发布按钮 -->
+        <div class="lf-hero">
+          <h1>📦 失物招领</h1>
+          <p>捡到东西找不到失主？丢了东西着急找？在这里发布，帮彼此一把。</p>
+          <div class="lf-actions">
+            <button class="button primary" id="btnNewLost">📢 发布寻物</button>
+            <button class="button secondary" id="btnNewFound">✅ 发布招领</button>
+          </div>
+        </div>
+
+        <!-- 双栏布局：左侧筛选 + 右侧列表 -->
+        <div class="crud-layout">
+          <!-- 侧边栏：按类型（全部 / 寻物 / 招领）和分类筛选 -->
+          <aside class="crud-sidebar" id="lfSidebar">
+            <div class="sidebar-title">📦 筛选</div>
+            <button class="lf-filter active" data-lf-type="all">📋 全部</button>
+            <button class="lf-filter" data-lf-type="lost">🔴 寻物</button>
+            <button class="lf-filter" data-lf-type="found">🔵 招领</button>
+            <div class="sidebar-title" style="margin-top:4px">分类</div>
+            <button class="lf-filter" data-lf-cat="证件钱包">证件钱包</button>
+            <button class="lf-filter" data-lf-cat="电子数码">电子数码</button>
+            <button class="lf-filter" data-lf-cat="衣物饰品">衣物饰品</button>
+            <button class="lf-filter" data-lf-cat="书籍文具">书籍文具</button>
+            <button class="lf-filter" data-lf-cat="钥匙卡片">钥匙卡片</button>
+            <button class="lf-filter" data-lf-cat="其他">其他</button>
+          </aside>
+
+          <!-- 右侧主内容区 -->
+          <div id="lfContent">
+            <!-- 关键词搜索 -->
+            <div class="lf-search">
+              <input id="lfSearch" type="search" placeholder="搜索：钱包、校园卡、钥匙…" />
+            </div>
+
+            <!-- 排序切换：最新 / 最早 -->
+            <div class="lf-sort">
+              <span style="font-size:13px;color:var(--muted);margin-right:8px">排序：</span>
+              <button class="lf-filter active" data-lf-sort="newest">最新</button>
+              <button class="lf-filter" data-lf-sort="oldest">最早</button>
+            </div>
+
+            <!-- 信息卡片列表（由 lostfound.js 动态渲染） -->
+            <div class="lf-grid" id="lfList"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== 弹窗：发布寻物/招领 ===== -->
+    <div class="lf-modal-overlay" id="lfModal">
+      <div class="lf-modal">
+        <h3 id="lfModalTitle">发布信息</h3>
+        <!-- 失物类型：寻物启事 / 失物招领 -->
+        <div class="form-field">
+          <label for="lfType">类型</label>
+          <select id="lfType"><option value="lost">寻物启事</option><option value="found">失物招领</option></select>
+        </div>
+        <!-- 标题输入 -->
+        <div class="form-field">
+          <label for="lfTitle">标题 *</label>
+          <input type="text" id="lfTitle" placeholder="如：黑色钱包" maxlength="40" />
+        </div>
+        <!-- 物品分类选择 -->
+        <div class="form-field">
+          <label for="lfCat">分类</label>
+          <select id="lfCat">
+            <option value="证件钱包">证件钱包</option><option value="电子数码">电子数码</option>
+            <option value="衣物饰品">衣物饰品</option><option value="书籍文具">书籍文具</option>
+            <option value="钥匙卡片">钥匙卡片</option><option value="其他">其他</option>
+          </select>
+        </div>
+        <!-- 详细描述 -->
+        <div class="form-field">
+          <label for="lfDesc">描述 *</label>
+          <textarea id="lfDesc" placeholder="详细描述物品特征、丢失/发现地点…" maxlength="300"></textarea>
+        </div>
+        <!-- 丢失/发现地点 -->
+        <div class="form-field">
+          <label for="lfLocation">地点</label>
+          <input type="text" id="lfLocation" placeholder="如：J2教学楼三楼" maxlength="60" />
+        </div>
+        <!-- 联系方式 -->
+        <div class="form-field">
+          <label for="lfContact">联系方式 *</label>
+          <input type="text" id="lfContact" placeholder="如：微信xxx 或 手机号" maxlength="60" />
+        </div>
+        <!-- 管理密码 -->
+        <div class="form-field">
+          <label for="lfPwd">管理密码（删除或标记认领时需要）</label>
+          <input type="text" id="lfPwd" placeholder="设置一个简易密码" maxlength="20" />
+        </div>
+        <!-- 弹窗按钮 -->
+        <div class="modal-btns">
+          <button class="button secondary" id="btnLfCancel">取消</button>
+          <button class="button primary" id="btnLfSubmit">发布</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 弹窗：确认认领（需输入管理密码） ===== -->
+    <div class="lf-modal-overlay" id="lfClaimModal">
+      <div class="lf-modal">
+        <h3>确认操作</h3>
+        <p style="color:var(--muted);margin:0 0 16px">请输入发布时设置的管理密码，将此条标记为"已认领/已找到"。</p>
+        <div class="form-field">
+          <label for="lfClaimPwd">管理密码</label>
+          <input type="text" id="lfClaimPwd" placeholder="请输入管理密码" maxlength="20" />
+        </div>
+        <p id="lfClaimError" style="color:var(--coral);font-size:13px;display:none;margin:8px 0 0">密码错误，请重试。</p>
+        <div class="modal-btns">
+          <button class="button secondary" id="btnClaimCancel">取消</button>
+          <button class="button coral" id="btnClaimConfirm">确认标记</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 动态页脚 ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 加载 ===== -->
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <!-- lostfound.js：发布/编辑/删除/认领操作、分类筛选、关键词搜索 -->
+    <script src="javascript/lostfound.js"></script>
+    <script src="javascript/effects.js"></script>
+    <script src="javascript/player.js"></script>
+  </body>
+  <!-- /body -->
+</html>
+<!-- /html -->

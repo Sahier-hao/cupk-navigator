@@ -11,14 +11,17 @@ document.addEventListener("DOMContentLoaded", function () {
     var resources = (window.StudyResources || []).filter(function (item) {
         return item.category !== "internal";
     });
+    // DOM 元素缓存：资源列表容器、计数文本、搜索框、三层筛选按钮组
     var list = document.querySelector("#resourceList");
     var count = document.querySelector("#resourceCount");
     var searchInput = document.querySelector("#resourceSearch");
-    var scenarioTabs = document.querySelectorAll("[data-scenario-filter]");
-    var tabs = document.querySelectorAll("[data-resource-filter]");
-    var formatTabs = document.querySelectorAll("[data-format-filter]");
+    var scenarioTabs = document.querySelectorAll("[data-scenario-filter]");  // 使用场景筛选
+    var tabs = document.querySelectorAll("[data-resource-filter]");           // 资源类型筛选
+    var formatTabs = document.querySelectorAll("[data-format-filter]");      // 资源形式筛选
 
     // 使用场景中英文映射
+    // key 为英文标识（对应 data.js 中 scenarios 字段和 getScenarioKeys 的返回值），
+    // value 为中文标签，展示在卡片上的场景标签中
     var scenarioLabels = {
         course: "课程预习",
         final: "期末复习",
@@ -32,32 +35,37 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // 判断是否为外部链接（http/https开头）
+    // 用于决定卡片上的链接是否添加 target="_blank" 和 rel="noopener"
     function isExternal(url) {
         return /^https?:\/\//.test(url);
     }
 
     // 关键词匹配：在标题、类型、描述、使用建议、访问标签、场景标签中搜索
+    // 如果关键词为空则所有资源都匹配；否则将资源的多个文本字段合并后检索
     function matchKeyword(item, keyword) {
         if (!keyword) return true;
+        // 获取资源的访问方式标签和场景名称，用于文本匹配
         var accessLabels = getAccessLabels(item);
         var scenarioNames = getScenarioKeys(item).map(function (key) {
             return scenarioLabels[key] || key;
         });
+        // 将资源的多个字段拼接为一段文本，统一转小写后执行子串匹配
         var text = [
-            item.title,
-            item.type,
-            item.format,
-            item.platform,
-            item.description,
-            item.usage,
+            item.title,          // 资源标题
+            item.type,           // 资源类型（如 学术/编程/设计）
+            item.format,         // 资源形式（如 网站/软件/视频）
+            item.platform,       // 所属平台（如 知乎/B站/MDN）
+            item.description,    // 简短描述
+            item.usage,          // 使用建议
             accessLabels.join(" "),
             scenarioNames.join(" "),
-            (item.keywords || []).join(" ")
+            (item.keywords || []).join(" ")  // 预设关键词数组
         ].join(" ").toLowerCase();
         return text.indexOf(keyword.toLowerCase()) >= 0;
     }
 
     // 拼接资源文本用于场景自动检测
+    // 将资源的多个文本字段合并，供 getScenarioKeys 通过关键词匹配推断场景
     function getSearchText(item) {
         return [
             item.title,
@@ -70,6 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
         ].join(" ").toLowerCase();
     }
 
+    // 向场景数组中追加场景key，自动去重
+    // 如果 key 尚未存在于数组中则添加，已存在则跳过
     function addScenario(list, key) {
         if (list.indexOf(key) < 0) {
             list.push(key);
@@ -134,6 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 渲染场景标签（最多显示3个）
+    // 将资源匹配到的使用场景转换为中文标签，超出3个时截断
     function renderScenarioTags(item) {
         return getScenarioKeys(item).slice(0, 3).map(function (key) {
             return '<span class="tag scenario-tag">场景：' + (scenarioLabels[key] || key) + '</span>';
@@ -176,6 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 访问标签样式类名
+    // 根据标签文本匹配不同的 CSS 类，用于控制标签颜色（campus/login/install/network/public）
     function getAccessClass(label) {
         if (/校园网|VPN|机构/.test(label)) return "campus";
         if (/登录|账号/.test(label)) return "login";
@@ -192,6 +204,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 获取资源形式key，用于格式筛选
+    // 根据资源的 formatKey 或 format 字段返回归一化的格式标识（website/software/video/app/creator）
     function getFormatKey(item) {
         if (item.formatKey) return item.formatKey;
         if (item.format === "App") return "app";
@@ -201,17 +214,21 @@ document.addEventListener("DOMContentLoaded", function () {
         return "website";
     }
 
-    // 获取当前激活的三层筛选条件
+    // ===== 读取当前激活的三层筛选状态 =====
+    // 这三个函数分别从 DOM 中找到高亮的按钮，读取其 data-* 属性值
+    // 如果没有任何按钮被激活，则默认返回 "all"（全部显示）
     function getActiveCategory() {
         var active = document.querySelector("[data-resource-filter].active");
         return active ? active.dataset.resourceFilter : "all";
     }
 
+    // 获取当前激活的"资源形式"筛选值（如 网站/软件/视频/App）
     function getActiveFormat() {
         var active = document.querySelector("[data-format-filter].active");
         return active ? active.dataset.formatFilter : "all";
     }
 
+    // 获取当前激活的"使用场景"筛选值（如 期末复习/写论文/AI辅助）
     function getActiveScenario() {
         var active = document.querySelector("[data-scenario-filter].active");
         return active ? active.dataset.scenarioFilter : "all";
@@ -229,9 +246,14 @@ document.addEventListener("DOMContentLoaded", function () {
         var keyword = searchInput ? searchInput.value.trim() : "";
 
         // 三层筛选可叠加：场景 + 类型 + 形式，再加关键词
+        // filter() 依次检查：场景是否匹配、类型是否匹配、形式是否匹配、关键词是否命中
+        // 四项条件全部满足的资源才进入可见列表
         var visible = resources.filter(function (item) {
+            // 类型筛选：当前分类为 "all" 或者资源的 category 与选中分类一致
             var categoryMatched = !category || category === "all" || item.category === category;
+            // 形式筛选：通过 getFormatKey() 提取资源的格式 key 再比较
             var formatMatched = !format || format === "all" || getFormatKey(item) === format;
+            // 场景筛选：资源可能对应多个场景，只要命中一个就算匹配
             var scenarioMatched = !scenario || scenario === "all" || getScenarioKeys(item).indexOf(scenario) >= 0;
             return scenarioMatched && categoryMatched && formatMatched && matchKeyword(item, keyword);
         });
@@ -241,31 +263,42 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // 空状态提示
+        // 当筛选结果为空时，显示友好的提示文案，引导用户调整筛选条件
         if (!visible.length) {
             list.innerHTML = '<div class="empty-state"><strong>没有找到匹配资源</strong><p>可以换一个关键词，或切换到"全部资源"。</p></div>';
             return;
         }
 
-        // 渲染卡片：图标、类型标签、场景标签、访问标签、关键词标签、收藏按钮
+        // ===== 渲染资源卡片 =====
+        // 每张卡片包含：图标、类型标签、场景标签、访问标签、关键词标签、收藏按钮、打开链接
         list.innerHTML = visible.map(function (item) {
+            // 判断链接是否为外部地址，外部链接添加 target="_blank" 安全属性
             var target = isExternal(item.url) ? ' target="_blank" rel="noopener noreferrer"' : "";
+            // 根据收藏状态显示不同的按钮文字
             var favText = window.StudyStorage && window.StudyStorage.isFavorite(item.id) ? "已收藏" : "收藏";
+            // 资源图标路径：优先使用 item.icon，否则按 id 拼接默认路径
             var icon = item.icon || "images/icons/" + item.id + ".png";
-            var fallback = item.title.slice(0, 1); // 图标加载失败时显示首字
+            // 图标加载失败时回退显示标题首字
+            var fallback = item.title.slice(0, 1);
             var formatText = item.format || "网站";
             var platform = item.platform ? '<span class="tag">' + item.platform + '</span>' : "";
+            // 卡片头部：左侧为图标+类型标签+形式标签，右侧为收藏按钮
             return '<article class="card resource-card resource-library-card">' +
                 '<div class="resource-card-head">' +
                 '<div class="resource-title-group">' +
+                // 图标（含图片加载失败回退）、类型标签（珊瑚色）、形式标签（蓝色）
                 '<span class="resource-icon"><img src="' + icon + '" alt="" onerror="this.parentNode.textContent=\'' + fallback + '\';"></span>' +
                 '<span class="tag coral">' + item.type + '</span>' +
                 '<span class="tag blue">' + formatText + '</span>' +
                 '</div>' +
+                // 收藏按钮，通过 data-favorite 属性记录资源id
                 '<button class="favorite-btn" data-favorite="' + item.id + '">' + favText + '</button>' +
                 '</div>' +
+                // 资源标题、描述、使用建议
                 '<h3>' + item.title + '</h3>' +
                 '<p>' + item.description + '</p>' +
                 '<p class="usage-copy">' + item.usage + '</p>' +
+                // 场景标签行 + 访问方式标签行
                 '<div class="tag-row scenario-row">' + renderScenarioTags(item) + '</div>' +
                 '<div class="tag-row access-row">' + renderAccessTags(item) + '</div>' +
                 '<div class="tag-row">' + platform + (item.keywords || []).slice(0, 3).map(function (key) { return '<span class="tag">' + key + '</span>'; }).join("") + '</div>' +
@@ -276,17 +309,26 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // 绑定卡片上的收藏按钮事件
+    // 遍历所有 data-favorite 元素，为其添加点击事件：切换收藏状态 + 按钮文字 + 弹跳动画
     function bindFavoriteButtons() {
         document.querySelectorAll("[data-favorite]").forEach(function (button) {
             button.addEventListener("click", function () {
                 if (!window.StudyStorage) return;
                 var active = window.StudyStorage.toggleFavorite(button.dataset.favorite);
                 button.textContent = active ? "已收藏" : "收藏";
+                // 心形弹跳动画
+                button.classList.remove("liked");
+                void button.offsetWidth; // 强制回流以重启动画
+                button.classList.add("liked");
             });
         });
     }
 
+    // ===== 筛选按钮事件绑定 =====
+    // 三层筛选各自独立监听点击事件，点击后切换 active 类并重新渲染
+
     // 使用场景筛选按钮事件
+    // 点击某个场景标签后，将其设为 active，其他标签取消 active，然后重新渲染
     scenarioTabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             scenarioTabs.forEach(function (item) { item.classList.remove("active"); });
@@ -296,6 +338,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 资源类型筛选按钮事件
+    // 支持 resource-filter 属性（如 all/course/code/english 等），点击后重置场景和形式筛选不影响类型
     tabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             tabs.forEach(function (item) { item.classList.remove("active"); });
@@ -305,6 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // 资源形式筛选按钮事件
+    // 根据资源的 formatKey（website/software/video/app/creator）筛选展示形式
     formatTabs.forEach(function (tab) {
         tab.addEventListener("click", function () {
             formatTabs.forEach(function (item) { item.classList.remove("active"); });
@@ -320,25 +364,30 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // 重置筛选按钮
+    // ===== 重置筛选按钮 =====
+    // 点击后清空搜索关键词、清除所有筛选器的高亮状态，回到"全部"视图
     var resetBtn = document.querySelector("#resetFiltersBtn");
     if (resetBtn) {
         resetBtn.addEventListener("click", function () {
+            // 清空搜索输入框
             if (searchInput) searchInput.value = "";
+            // 移除所有三层筛选按钮的 active 高亮
             scenarioTabs.forEach(function (item) { item.classList.remove("active"); });
             tabs.forEach(function (item) { item.classList.remove("active"); });
             formatTabs.forEach(function (item) { item.classList.remove("active"); });
+            // 获取可能已自动激活的按钮（兜底查询）
             var allScenario = document.querySelector("[data-scenario-filter].active") || document.querySelector("[data-scenario-filter]");
             var allType = document.querySelector("[data-resource-filter].active") || document.querySelector("[data-resource-filter]");
             var allFormat = document.querySelector("[data-format-filter].active") || document.querySelector("[data-format-filter]");
-            // 激活"全部"按钮
+            // 将三层筛选的"全部"按钮设为高亮激活状态
             document.querySelector("[data-scenario-filter='all']").classList.add("active");
             document.querySelector("[data-resource-filter='all']").classList.add("active");
             document.querySelector("[data-format-filter='all']").classList.add("active");
+            // 重新渲染，显示所有资源
             render("all");
         });
     }
 
-    // 初始渲染全部资源
+    // 初始渲染：页面加载完成后显示全部资源列表
     render("all");
 });

@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1b18" media="(prefers-color-scheme: dark)" />
+    <!-- 字体预连接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <!-- 页面 SEO 描述 -->
+    <meta name="description" content="石光驿站共享学习资源——同学们上传的笔记、试卷、复习资料，互帮互助共同进步。" />
+    <title>共享学习资源 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 + CRUD 组件样式 -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/crud.css" />
+    <!-- 共享资源页面专属样式（Hero、卡片、弹窗、上传区等） -->
+    <style>
+      /* Hero 区域：渐变叠加背景图，居中布局，圆角底边 */
+      .share-hero {
+        text-align: center;
+        padding: 80px 24px 48px;
+        background: linear-gradient(135deg, rgba(24,23,21,0.55), rgba(24,23,21,0.3)), url(images/hero-share.jpg) center/cover;
+        border-radius: var(--radius-xl);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .share-hero h1 { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.3); margin: 0 0 10px; font-family: var(--font-display); font-size: 32px; }
+      .share-hero p { color: rgba(255,255,255,0.8); font-size: 15px; margin: 0 0 20px; }
+      .share-hero > .button { margin-bottom: 28px; }
+
+      /* 搜索框样式 */
+      .share-search { margin-bottom: 20px; }
+      .share-search input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--canvas);
+        color: var(--ink);
+        font-size: 15px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+      .share-search input:focus { border-color: var(--coral); }
+
+      /* 资源卡片网格布局：等宽列，间距 14px */
+      .share-grid { display: grid; gap: 14px; }
+
+      /* 资源卡片：三栏网格（图标 / 文本 / 下载按钮） */
+      .share-card {
+        display: grid;
+        grid-template-columns: 48px 1fr auto;
+        gap: 16px;
+        align-items: center;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface);
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+      }
+      .share-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(212, 133, 106, 0.3);
+        box-shadow: 0 6px 20px rgba(31,41,51,0.08);
+      }
+      /* 卡片左侧图标占位 */
+      .share-icon {
+        width: 48px; height: 48px;
+        display: grid; place-items: center;
+        border-radius: var(--radius-md);
+        background: var(--gradient-coral);
+        color: #fff;
+        font-size: 22px;
+        font-weight: 700;
+      }
+      /* 卡片文字内容 */
+      .share-body h3 { margin: 0 0 4px; font-size: 16px; color: var(--ink); }
+      .share-body p { margin: 0 0 6px; font-size: 13px; color: var(--body); line-height: 1.5; }
+      .share-meta { display: flex; gap: 10px; flex-wrap: wrap; font-size: 12px; color: var(--muted); align-items: center; }
+      /* 下载 / 查看按钮 */
+      .share-dl-btn {
+        font-size: 13px;
+        padding: 8px 16px;
+        border: 1px solid var(--coral);
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--coral-dark);
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+      }
+      .share-dl-btn:hover { background: var(--coral); color: #fff; }
+
+      /* 空状态提示 */
+      /* 空状态提示区域：居中显示，柔和字体颜色 */
+      .share-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+      .share-empty strong { display: block; font-size: 18px; margin-bottom: 8px; color: var(--ink); }
+      /* 统计信息栏：弹性布局，间距 16px */
+      .share-stats { display: flex; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+      .share-stat { font-size: 13px; color: var(--muted); }
+      .share-stat strong { color: var(--coral-dark); }
+
+      /* 弹窗遮罩层：固定定位 + 毛玻璃背景 */
+      .share-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(24,23,21,0.5);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+      }
+      .share-modal-overlay.show { display: flex; }
+      /* 弹窗卡片：圆角 + 阴影 + 可滚动 */
+      .share-modal {
+        background: var(--canvas);
+        border-radius: var(--radius-xl);
+        padding: 32px;
+        width: min(480px, calc(100% - 32px));
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(24,23,21,0.2);
+      }
+      .share-modal h3 { margin: 0 0 20px; font-size: 20px; color: var(--ink); font-family: var(--font-display); }
+      /* 表单字段间距 */
+      .share-modal .form-field { margin-bottom: 16px; }
+      /* 标签样式：块级显示，加粗 */
+      .share-modal label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
+      /* 弹窗输入框统一样式：边框、圆角、背景、字体 */
+      .share-modal input, .share-modal select, .share-modal textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: var(--surface);
+        color: var(--ink);
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .share-modal input:focus, .share-modal select:focus, .share-modal textarea:focus { border-color: var(--coral); }
+      .share-modal textarea { resize: vertical; min-height: 70px; }
+      /* 弹窗按钮组：右对齐排列，间距 10px */
+      .share-modal .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+      /* 弹窗输入框聚焦样式 */
+      .share-modal input:focus { border-color: var(--coral); }
+
+      /* 模拟文件上传拖拽区 */
+      .share-upload-zone {
+        padding: 20px;
+        border: 2px dashed var(--line);
+        border-radius: var(--radius-lg);
+        text-align: center;
+        cursor: pointer;
+        transition: border-color 0.2s, background 0.2s;
+      }
+      .share-upload-zone:hover { border-color: var(--coral); background: rgba(212,133,106,0.04); }
+      .share-upload-zone.has-file { border-color: var(--success); border-style: solid; }
+      .share-file-info { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+      /* 暗色模式适配 */
+      [data-theme="dark"] .share-card { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+      [data-theme="dark"] .share-modal { background: var(--dark-card); }
+      [data-theme="dark"] .share-modal input,
+      [data-theme="dark"] .share-modal select,
+      [data-theme="dark"] .share-modal textarea { background: var(--dark-soft); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+      [data-theme="dark"] .share-search input { background: var(--dark-card); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+      [data-theme="dark"] .share-dl-btn { color: var(--coral-light); border-color: rgba(232,160,128,0.3); }
+
+      /* 移动端适配：卡片单列布局 */
+      @media (max-width: 640px) {
+        .share-card { grid-template-columns: 48px 1fr; }
+        .share-dl-btn { grid-column: 1 / -1; justify-self: stretch; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== 动态导航栏 ===== -->
+    <div id="siteHeader"></div>
+
+    <!-- ===== 页面主体 ===== -->
+    <main id="main" class="section tight">
+      <div class="container">
+        <!-- Hero 区域：标题 + 描述 + 上传按钮 -->
+        <div class="share-hero">
+          <h1>📂 共享学习资源</h1>
+          <p>同学们上传的笔记、试卷、复习资料，互帮互助共同进步。</p>
+          <button class="button primary" id="btnUpload">📤 上传资料</button>
+        </div>
+
+        <!-- 双栏布局：左侧分类侧边栏 + 右侧内容区 -->
+        <div class="crud-layout">
+          <!-- 侧边栏：按资料类型筛选（笔记 / 试卷 / 课件 / 习题答案 / 实验报告 / 其他） -->
+          <aside class="crud-sidebar" id="shareSidebar">
+            <div class="sidebar-title">📂 分类</div>
+            <button class="crud-sidebar-btn active" data-share-type="all">📋 全部</button>
+            <button class="crud-sidebar-btn" data-share-type="笔记">📝 笔记</button>
+            <button class="crud-sidebar-btn" data-share-type="试卷">📄 试卷</button>
+            <button class="crud-sidebar-btn" data-share-type="课件">📊 课件</button>
+            <button class="crud-sidebar-btn" data-share-type="习题答案">📐 习题答案</button>
+            <button class="crud-sidebar-btn" data-share-type="实验报告">🔬 实验报告</button>
+            <button class="crud-sidebar-btn" data-share-type="其他">📌 其他</button>
+          </aside>
+          <!-- /shareSidebar -->
+
+          <!-- 右侧主内容区 -->
+          <div id="shareContent">
+            <!-- 搜索框：实时关键词过滤 -->
+            <div class="share-search">
+              <input id="shareSearch" type="search" placeholder="搜索：高数笔记、四六级真题、大物试卷…" />
+            </div>
+
+            <!-- 统计信息 + 资源卡片列表 -->
+            <!-- 统计信息 -->
+            <div class="share-stats" id="shareStats"></div>
+            <!-- 资源卡片列表（由 share.js 动态渲染） -->
+            <div class="share-grid" id="shareList"></div>
+          </div>
+          <!-- /shareContent -->
+        </div>
+        <!-- /crud-layout -->
+      </div>
+      <!-- /container -->
+    </main>
+    <!-- /main -->
+
+    <!-- ===== 上传弹窗 ===== -->
+    <!-- 遮罩层 + 弹窗卡片 -->
+    <div class="share-modal-overlay" id="uploadModal">
+      <div class="share-modal">
+        <h3>上传学习资料</h3>
+        <!-- 资料名称输入 -->
+        <div class="form-field">
+          <label for="shareTitle">资料名称 *</label>
+          <input type="text" id="shareTitle" placeholder="如：高等数学期末复习笔记" maxlength="50" />
+        </div>
+        <!-- 所属课程输入 -->
+        <div class="form-field">
+          <label for="shareCourse">所属课程</label>
+          <input type="text" id="shareCourse" placeholder="如：高等数学A（一）" maxlength="40" />
+        </div>
+        <!-- 资料类型选择 -->
+        <div class="form-field">
+          <label for="shareType">资料类型</label>
+          <select id="shareType">
+            <option value="笔记">笔记</option><option value="试卷">试卷</option>
+            <option value="课件">课件</option><option value="习题答案">习题答案</option>
+            <option value="实验报告">实验报告</option><option value="其他">其他</option>
+          </select>
+        </div>
+        <!-- 模拟文件选择区域 -->
+        <div class="form-field">
+          <label>选择文件（模拟）</label>
+          <div class="share-upload-zone" id="uploadZone">
+            <span id="uploadHint">📁 点击选择文件（模拟上传）</span>
+            <div class="share-file-info" id="fileInfo" style="display:none"></div>
+          </div>
+        </div>
+        <!-- 资料描述文本域 -->
+        <div class="form-field">
+          <label for="shareDesc">描述</label>
+          <textarea id="shareDesc" placeholder="简单描述资料内容和适用对象…" maxlength="200"></textarea>
+        </div>
+        <!-- 管理密码输入（删除时验证用） -->
+        <div class="form-field">
+          <label for="sharePwd">管理密码（删除时需要）</label>
+          <input type="text" id="sharePwd" placeholder="设置简易密码" maxlength="20" />
+        </div>
+        <!-- 弹窗操作按钮 -->
+        <div class="modal-btns">
+          <button class="button secondary" id="btnUploadCancel">取消</button>
+          <button class="button primary" id="btnUploadSubmit">上传</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 动态页脚（由 common.js 生成） ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 按依赖顺序加载 ===== -->
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <!-- share.js：上传、分类筛选、关键词搜索、删除管理 -->
+    <script src="javascript/share.js"></script>
+    <script src="javascript/effects.js"></script>
+    <script src="javascript/player.js"></script>
+  </body>
+  <!-- /body -->
+</html>
+<!-- /html -->

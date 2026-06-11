@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1b18" media="(prefers-color-scheme: dark)" />
+    <!-- 字体预连接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <!-- 页面 SEO 描述 -->
+    <meta name="description" content="石光驿站校园活动日历——讲座、比赛、社团活动，不错过任何一个。" />
+    <title>活动日历 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 + CRUD 组件样式 -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/crud.css" />
+  </head>
+  <body>
+    <!-- ===== 动态导航栏（由 common.js 生成） ===== -->
+    <div id="siteHeader"></div>
+
+    <!-- ===== 页面主体 ===== -->
+    <main id="main" class="section tight">
+      <div class="container">
+        <!-- Hero 区域 -->
+        <div class="ev-hero">
+          <h1>📅 活动日历</h1>
+          <p>讲座、比赛、社团活动、考试通知——校园大小事，不再错过。</p>
+          <button class="button primary" id="btnNewEvent">✏️ 发布活动</button>
+        </div>
+
+        <!-- 双栏布局：左侧日历 + 右侧活动列表 -->
+        <div class="ev-layout">
+          <!-- 左侧日历组件（由 events.js 动态渲染） -->
+          <div class="ev-calendar" id="evCalendar"></div>
+
+          <!-- 右侧活动列表 -->
+          <div class="ev-list">
+            <!-- 列表标题 + 分类标签筛选 -->
+            <div class="ev-list-header">
+              <h3 id="evListTitle">近期活动</h3>
+              <div class="ev-tags" id="evTags">
+                <button class="ev-tag active" data-ev-cat="all">全部</button>
+                <button class="ev-tag" data-ev-cat="讲座">🎓 讲座</button>
+                <button class="ev-tag" data-ev-cat="比赛">🏆 比赛</button>
+                <button class="ev-tag" data-ev-cat="社团">🎉 社团</button>
+                <button class="ev-tag" data-ev-cat="考试">📝 考试</button>
+                <button class="ev-tag" data-ev-cat="其他">📌 其他</button>
+              </div>
+            </div>
+            <!-- 活动卡片列表（由 events.js 动态渲染） -->
+            <!-- 活动卡片列表（由 events.js 动态渲染） -->
+            <div class="ev-items" id="evItems"></div>
+            <!-- 列表右侧结束 -->
+          </div>
+          <!-- /ev-layout 双栏布局结束 -->
+        </div>
+        <!-- /container 结束 -->
+      </div>
+    </main>
+
+    <!-- ===== 弹窗：发布 / 编辑活动 ===== -->
+    <div class="ev-modal-overlay" id="evModal">
+      <div class="ev-modal">
+        <h3>发布活动</h3>
+        <div class="form-field">
+          <label for="evTitle">活动名称 *</label>
+          <input type="text" id="evTitle" placeholder="如：校园十佳歌手大赛" maxlength="50" />
+        </div>
+        <div class="form-field">
+          <label for="evCat">分类</label>
+          <select id="evCat">
+            <option value="讲座">讲座</option><option value="比赛">比赛</option>
+            <option value="社团">社团活动</option><option value="考试">考试通知</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <div class="form-field" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label for="evDate">日期 *</label><input type="date" id="evDate" /></div>
+          <div><label for="evTime">时间</label><input type="time" id="evTime" value="14:00" /></div>
+        </div>
+        <div class="form-field">
+          <label for="evLocation">地点</label>
+          <input type="text" id="evLocation" placeholder="如：C4教学楼312教室" maxlength="60" />
+        </div>
+        <div class="form-field">
+          <label for="evDesc">描述</label>
+          <textarea id="evDesc" placeholder="活动简介…" maxlength="300"></textarea>
+        </div>
+        <div class="form-field">
+          <label for="evPwd">管理密码（删除时需要）</label>
+          <input type="text" id="evPwd" placeholder="设置简易密码" maxlength="20" />
+        </div>
+        <div class="modal-btns">
+          <button class="button secondary" id="btnEvCancel">取消</button>
+          <button class="button primary" id="btnEvSubmit">发布</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 动态页脚 ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 加载 ===== -->
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <!-- events.js：日历组件生成、活动 CRUD、分类标签筛选 -->
+    <script src="javascript/events.js"></script>
+    <script src="javascript/effects.js"></script>
+    <script src="javascript/player.js"></script>
+  </body>
+  <!-- /body -->
+</html>
+<!-- /html -->

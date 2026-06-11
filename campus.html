@@ -1,49 +1,85 @@
 <!doctype html>
 <html lang="zh-CN">
   <head>
+    <!-- 页面元信息 -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="theme-color"
+      content="#faf8f3"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1c1b18"
+      media="(prefers-color-scheme: dark)"
+    />
+    <!-- 字体预连接：Noto Serif SC + Noto Sans SC -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
-    <meta name="description" content="中石克克拉玛依校区校园生活指南——食堂三餐C5湖畔餐厅、宿舍洗澡电费门禁、校园卡办理、洗衣饮水打印快递、体育馆阳光长跑、交通出行。" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+    />
+    <!-- 页面 SEO 描述：覆盖食堂、宿舍、校园卡、交通等关键词 -->
+    <meta
+      name="description"
+      content="中石克克拉玛依校区校园生活指南——食堂三餐C5、宿舍洗澡电费门禁、校园卡办理、洗衣饮水打印快递、体育馆阳光长跑、交通出行。"
+    />
     <title>校园生活指南 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 -->
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/pages.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="nav-wrap">
-        <a class="brand" href="index.html"><img class="brand-mark" src="images/中国石油大学矢量标.jpg" alt="中国石油大学" />石光驿站</a>
-        <button class="nav-toggle" type="button" aria-label="打开导航">☰</button>
-        <button class="theme-toggle" type="button" aria-label="切换到暗色模式" title="切换暗色模式">☾</button>
-        <nav class="site-nav">
-          <a class="nav-link" href="index.html">首页</a>
-          <a class="nav-link" href="cupk.html">常用网站</a>
-          <a class="nav-link active" href="campus.html">校园生活</a>
-          <a class="nav-link" href="websites.html">学习资源库</a>
-          <a class="nav-link" href="tools.html">学习工具箱</a>
-          <a class="nav-link" href="media.html">石大光影</a>
-          <a class="nav-link" href="team.html">小组介绍</a>
-          <a class="nav-link" href="login.html">登录</a>
-        </nav>
-      </div>
-    </header>
+    <!-- ===== 动态导航栏 ===== -->
+    <div id="siteHeader"></div>
 
-    <main class="section tight">
+    <!-- ===== 页面主体 ===== -->
+    <main id="main" class="section tight">
       <div class="container">
-        <nav class="breadcrumb" aria-label="面包屑导航"><a href="index.html">首页</a><span class="breadcrumb-sep">/</span><span>校园生活指南</span></nav>
-        <span class="eyebrow">校园生活指南</span>
-        <h1 class="page-title">从军都山下到红山湖畔，衣食住行一站搞定。</h1>
-        <p class="lead">以下内容由石大热心学长学姐整理，覆盖食堂、宿舍、校园卡、生活设施、运动健康、交通出行及费用参考。万能墙微信：Cupk5201314</p>
+        <!-- 页面 Hero：背景图叠加渐变遮罩，含面包屑和标题 -->
+        <div
+          class="page-hero"
+          style="
+            background-image:
+              linear-gradient(
+                135deg,
+                rgba(24, 23, 21, 0.5),
+                rgba(24, 23, 21, 0.2)
+              ),
+              url(images/hero-campus.jpg);
+          "
+        >
+          <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="index.html">首页</a><span class="breadcrumb-sep">/</span
+            ><span>校园生活指南</span>
+          </nav>
+          <span class="eyebrow">校园生活指南</span>
+          <h1 class="page-title">从军都山下到红山湖畔，衣食住行一站搞定。</h1>
+          <p class="lead">
+            以下内容由石大热心学长学姐整理，覆盖食堂、宿舍、校园卡、生活设施、运动健康、交通出行及费用参考。
+          </p>
+        </div>
+        <!-- /page-hero -->
 
-        <!-- 搜索 -->
+        <!-- 全文搜索框：关键词搜索卡片内容，实时过滤 -->
         <div class="cupk-search-panel">
-          <input id="campusSearch" type="search" placeholder="搜索：洗衣机、电费、食堂、快递、校园卡…" aria-label="搜索校园生活指南" />
+          <input
+            id="campusSearch"
+            type="search"
+            placeholder="搜索：洗衣机、电费、食堂、快递、校园卡…"
+            aria-label="搜索校园生活指南"
+          />
           <span id="campusSearchSummary" class="tag coral">全部内容</span>
         </div>
+        <!-- /cupk-search-panel -->
 
+        <!-- 双栏布局：左侧目录 + 右侧内容 -->
         <div class="cupk-layout">
+          <!-- 侧边栏：页面内锚点导航，点击平滑滚动到对应章节 -->
+          <!-- 共 11 个锚点：校区速览、食堂、宿舍、校园卡、打印快递医疗、运动健康、交通、费用、纪律、校内服务、APP -->
           <aside class="cupk-sidebar" aria-label="页面目录">
             <strong>生活指南</strong>
             <a href="#zones">校区速览</a>
@@ -55,339 +91,688 @@
             <a href="#transport">交通出行</a>
             <a href="#cost">费用参考</a>
             <a href="#discipline">纪律·奖惩</a>
-            <a href="#online-services">校内线上服务</a>
             <a href="#apps">常用APP</a>
           </aside>
 
           <div class="cupk-content">
-
             <!-- ====== 校区速览 ====== -->
             <section class="cupk-section" id="zones">
               <div class="section-heading-row">
-                <div><span class="tag blue">速览</span><h2 class="section-title">校区分区速查</h2></div>
+                <div>
+                  <span class="tag blue">速览</span>
+                  <h2 class="section-title">校区分区速查</h2>
+                </div>
               </div>
+              <!-- 八个校区功能分区一览：A 区到 K 区 -->
               <div class="grid cols-4 cupk-mini-grid">
-                <div class="card cupk-mini-card"><strong>A区</strong><span>湖滨公共区</span></div>
-                <div class="card cupk-mini-card"><strong>B区</strong><span>西生活区（B13医务室）</span></div>
-                <div class="card cupk-mini-card"><strong>C区</strong><span>中央教学区（C4/C5/C8/J2）</span></div>
-                <div class="card cupk-mini-card"><strong>D区</strong><span>东生活区（三餐/D3球场）</span></div>
-                <div class="card cupk-mini-card"><strong>E/M区</strong><span>生态区</span></div>
-                <div class="card cupk-mini-card"><strong>F/G/H/N/O区</strong><span>实训区</span></div>
-                <div class="card cupk-mini-card"><strong>J区</strong><span>入口公共区</span></div>
-                <div class="card cupk-mini-card"><strong>K区</strong><span>学员公寓区</span></div>
+                <!-- A 区：湖滨公共区 -->
+                <div class="card cupk-mini-card">
+                  <strong>A区</strong><span>湖滨公共区</span>
+                </div>
+                <!-- B 区：西生活区，含医务室 -->
+                <div class="card cupk-mini-card">
+                  <strong>B区</strong><span>西生活区（B13医务室）</span>
+                </div>
+                <!-- C 区：中央教学区，主要教学楼群 -->
+                <div class="card cupk-mini-card">
+                  <strong>C区</strong><span>中央教学区（C4/C5/C8/J2）</span>
+                </div>
+                <!-- D 区：东生活区，三餐和球场 -->
+                <div class="card cupk-mini-card">
+                  <strong>D区</strong><span>东生活区（三餐/D3球场）</span>
+                </div>
+                <!-- E / M 区：生态绿化区域 -->
+                <div class="card cupk-mini-card">
+                  <strong>E/M区</strong><span>生态区</span>
+                </div>
+                <!-- F / G / H / N / O 区：实训基地 -->
+                <div class="card cupk-mini-card">
+                  <strong>F/G/H/N/O区</strong><span>实训区</span>
+                </div>
+                <!-- J 区：校园入口公共区 -->
+                <div class="card cupk-mini-card">
+                  <strong>J区</strong><span>入口公共区</span>
+                </div>
+                <!-- K 区：学员公寓 -->
+                <div class="card cupk-mini-card">
+                  <strong>K区</strong><span>学员公寓区</span>
+                </div>
               </div>
+              <!-- /grid.cols-4 -->
             </section>
+            <!-- /section#zones -->
 
             <!-- ====== 食堂 ====== -->
+            <!-- 餐饮设施介绍：三餐、C5广场、及外卖平台 -->
             <section class="cupk-section" id="canteen">
               <div class="section-heading-row">
-                <div><span class="tag coral">餐饮</span><h2 class="section-title">食堂与外卖</h2></div>
+                <div>
+                  <span class="tag coral">餐饮</span>
+                  <h2 class="section-title">食堂与外卖</h2>
+                </div>
               </div>
-              <p class="cupk-section-lead">校区饮食保障场所包括第三学生餐厅（三餐/D11）、第二学生餐厅、第一学生餐厅、C5汇利美食广场、湖畔餐厅及校园移动餐车。基本大伙最高菜品不超过6元，提供半份餐食。</p>
+              <!-- 食堂配图 -->
+              <img
+                src="images/illust-canteen.jpg"
+                alt="食堂餐饮"
+                style="
+                  width: 100%;
+                  max-height: 200px;
+                  object-fit: cover;
+                  border-radius: var(--radius-lg);
+                  margin-bottom: 14px;
+                "
+                loading="lazy"
+              />
+              <!-- 食堂概览：各餐厅分布及基本大伙价格说明 -->
+              <!-- 基本大伙最高 6 元，提供半份餐食 -->
+              <p class="cupk-section-lead">
+                校区饮食保障场所包括第三学生餐厅（三餐/D11）、第二学生餐厅、第一学生餐厅、C5汇利美食广场、校园移动餐车。基本伙最高菜品不超过6元，提供半份餐食。
+              </p>
+              <!-- 支付方式提醒：第三方支付加收 15% 费用，建议使用电子校园卡 -->
               <div class="notice">
-                <strong>支付提醒：</strong>微信/支付宝/云闪付付款码加收15%费用，建议用电子校园卡。<a href="https://www.cupk.edu.cn/c/2024-04-15/521062.shtml" target="_blank" rel="noopener noreferrer">查看通知</a>
+                <strong>支付提醒：</strong
+                >微信/支付宝/云闪付付款码加收15%费用，建议用电子校园卡。<a
+                  href="https://www.cupk.edu.cn/c/2024-04-15/521062.shtml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  >查看通知</a
+                >
               </div>
-              <div class="grid cols-3 cupk-grid" style="margin-top:16px">
+              <!-- 食堂餐饮卡组：三餐、一二餐、C5广场与详细介绍 -->
+              <div class="grid cols-3 cupk-grid" style="margin-top: 16px">
+                <!-- 第三学生餐厅：三层分布，含地下超市 -->
                 <div class="card cupk-card">
                   <span class="tag coral">D11</span>
                   <h3>第三学生餐厅</h3>
-                  <p>D区，8000㎡，2000+座位。<strong>一楼：</strong>风味（蜜雪冰城、新疆风味、麻辣烫等）。<strong>二楼：</strong>基本伙（水饺自助、免费粥汤）。<strong>地下：</strong>天猫超市、打印店、理发店。</p>
-                  <span class="tag">7:30-10:30 / 11:30-14:30 / 18:00-20:30</span>
+                  <p>
+                    D区，8000㎡，2000+座位。<strong>一楼：</strong>风味（蜜雪冰城、新疆风味、麻辣烫等）。<strong>二楼：</strong>基本伙（水饺自助、免费粥汤）。<strong>地下：</strong>超市、打印店、理发店。
+                  </p>
+                  <span class="tag"
+                    >7:30-10:30 / 11:30-14:30 / 18:00-20:30</span
+                  >
                 </div>
+                <!-- 第一、二学生餐厅：快餐为主，二餐需克职院卡（一楼是中石大卡） -->
                 <div class="card cupk-card">
                   <span class="tag blue">一餐/二餐</span>
                   <h3>第一、二学生餐厅</h3>
-                  <p><strong>一餐：</strong>快餐为主，地下八点半超市（面馆、烤串、电信营业厅）。<strong>二餐：</strong>需绑定克职院校园卡。B13旁设校内医务室。</p>
+                  <p>
+                    <strong>一餐：</strong
+                    >快餐为主，地下八点半超市（面馆、烤串、电信营业厅）。<strong>二餐：</strong>需绑定克职院校园卡。B13旁设校内医务室。
+                  </p>
                   <span class="tag">快餐</span>
                 </div>
+                <!-- C5 美食广场与：小吃种类丰富 -->
                 <div class="card cupk-card">
                   <span class="tag">小吃</span>
-                  <h3>C5广场 & 湖畔餐厅</h3>
-                  <p><strong>C5：</strong>教学楼东北角300㎡，麻辣烫、烧烤、点歌电视。<strong>湖畔：</strong>活动中心内，"花羡沐岚"小程序下单，风景好有乐队。</p>
-                  <span class="tag coral">奶茶</span>
+                  <h3>C5广场 &</h3>
+                  <p>
+                    <strong>C5：</strong
+                    >教学楼东北角300㎡，麻辣烫、烧烤、点歌电视。
+                  </p>
                 </div>
               </div>
-              <h3 style="margin-top:18px">外卖</h3>
-              <p class="cupk-section-lead"><strong>校内平台：</strong>石克服务、花生校园、快团食尚派。一般送至宿舍楼门口。<strong>校外：</strong>美团/宅急送，超配送范围将地址设"城南小区"备注"送到中石大校门口"。</p>
+              <!-- /grid.cols-3 餐厅卡组 -->
+              <!-- 外卖服务：校内平台（石克服务等）和校外平台（美团等） -->
+              <h3 style="margin-top: 18px">外卖</h3>
+              <p class="cupk-section-lead">
+                <strong>校内平台：</strong
+                >石克服务、花生校园、快团食尚派。一般送至宿舍楼门口。<strong>校外：</strong>美团/宅急送，超配送范围将地址设"城南小区"备注"送到中石大校门口"。
+              </p>
             </section>
+            <!-- /section#canteen 食堂餐饮 -->
 
             <!-- ====== 宿舍 ====== -->
+            <!-- 宿舍入住准备、日常设施（洗浴、电费、空调、饮水、洗衣等）、卫生检查标准 -->
             <section class="cupk-section" id="dorm">
               <div class="section-heading-row">
-                <div><span class="tag blue">住宿</span><h2 class="section-title">宿舍生活指南</h2></div>
+                <div>
+                  <span class="tag blue">住宿</span>
+                  <h2 class="section-title">宿舍生活指南</h2>
+                </div>
               </div>
+              <!-- 宿舍配图 -->
+              <img
+                src="images/illust-dorm.jpg"
+                alt="宿舍生活"
+                style="
+                  width: 100%;
+                  max-height: 200px;
+                  object-fit: cover;
+                  border-radius: var(--radius-lg);
+                  margin: 14px 0;
+                "
+                loading="lazy"
+              />
 
+              <!-- 入住准备：床上用品购买、校内商超购物、推荐常购清单 -->
               <h3>入住准备</h3>
               <div class="grid cols-3 cupk-grid">
-                <div class="card cupk-card"><span class="tag">床上用品</span><h3>石克服务 / D区小广场</h3><p>线上通过"石克服务"公众号购置→开学送至楼下。线下D区小广场。原则上不装床帘（防火安全）。</p></div>
-                <div class="card cupk-card"><span class="tag blue">购物</span><h3>校内商超 / 和家乐</h3><p>三餐地下天猫超市（天猫校园APP优惠）、C5小商店、一餐八点半。校外和家乐（约4km）、汇嘉。网购12号菜鸟驿站取件。</p></div>
-                <div class="card cupk-card"><span class="tag">常购清单</span><h3>衣架/置物架/花露水等</h3><p>推荐：衣架、床头置物架、垃圾桶/袋、花露水、加湿器、电脑支架。工行卡可与舍友拼车去校外办理。</p></div>
+                <!-- 床上用品购买渠道：线上石克服务或线下D区小广场 -->
+                <div class="card cupk-card">
+                  <span class="tag">床上用品</span>
+                  <h3>石克服务 / D区小广场</h3>
+                  <p>
+                    线上通过"石克服务"公众号购置→开学送至楼下。线下D区小广场。原则上不装床帘（防火安全）。
+                  </p>
+                </div>
+                <!-- 校内商超：三餐地下超市、C5小商店、一餐八点半 -->
+                <div class="card cupk-card">
+                  <span class="tag blue">购物</span>
+                  <h3>校内商超 / 和家乐</h3>
+                  <p>
+                    三餐地下超市（C5小商店、一餐八点半。校外和家乐（约4km）、汇嘉。网购菜鸟驿站取件。
+                  </p>
+                </div>
+                <!-- 新生常购物品推荐清单 -->
+                <div class="card cupk-card">
+                  <span class="tag">常购清单</span>
+                  <h3>衣架/置物架/花露水等</h3>
+                  <p>
+                    推荐：衣架、床头置物架、垃圾桶/袋、花露水、加湿器、电脑支架。工行卡可与舍友拼车去校外办理。
+                  </p>
+                </div>
               </div>
 
-              <h3 style="margin-top:20px">日常设施</h3>
+              <!-- 日常设施总览：洗浴、电费、空调、饮水、洗衣等 12 项 -->
+              <h3 style="margin-top: 20px">日常设施</h3>
               <div class="grid cols-3 cupk-mini-grid">
-                <div class="card cupk-mini-card"><strong>🚿 洗浴</strong><span>插卡按按钮出热水，不按仅冷水。洗完拔卡否则扣费。可用水码/扫码。</span></div>
-                <div class="card cupk-mini-card"><strong>⚡ 电费</strong><span>云闪付→数字校园→绑定学校→缴费，约5分钟来电。</span></div>
-                <div class="card cupk-mini-card"><strong>🔥 空调/地暖</strong><span>遥控器或手机红外控制，地暖温度较高。</span></div>
-                <div class="card cupk-mini-card"><strong>💧 饮水机</strong><span>每层2台，U净APP绑定学校购买小票后扫码取水。</span></div>
-                <div class="card cupk-mini-card"><strong>👕 洗衣机</strong><span>1楼，U净扫码，30-45分钟。自备洗衣液，禁贴身衣物袜子。</span></div>
-                <div class="card cupk-mini-card"><strong>👟 洗鞋机</strong><span>1楼，效果一般建议手洗，洗鞋店联系方式私信万能墙。</span></div>
-                <div class="card cupk-mini-card"><strong>💨 吹风机</strong><span>微信扫码，0.5元/3分钟、1元/5分钟。注意控制噪音。</span></div>
-                <div class="card cupk-mini-card"><strong>💇 剪发</strong><span>三餐地下商超入口处，或校外理发店。</span></div>
-                <div class="card cupk-mini-card"><strong>🔑 门禁</strong><span>23:45关门，7:30开门。夜不归宿通报。晚归需企业微信请假。</span></div>
-                <div class="card cupk-mini-card"><strong>⚡ 用电</strong><span>禁用电炉/电煮锅/冰箱等，违者按手册处理。禁养宠物。</span></div>
-                <div class="card cupk-mini-card"><strong>📖 自习室</strong><span>暂不开放（卫生原因），考研前可咨询宿管。</span></div>
-                <div class="card cupk-mini-card"><strong>📦 外卖</strong><span>送至宿舍楼门口右手边桌上，建议及时取走。</span></div>
+                <!-- 洗浴：插卡出水，用完需拔卡 -->
+                <div class="card cupk-mini-card">
+                  <strong>🚿 洗浴</strong
+                  ><span
+                    >插卡按按钮出热水，不按仅冷水。洗完拔卡否则扣费。可用水码/扫码。</span
+                  >
+                </div>
+                <!-- 电费缴纳：云闪付数字校园 -->
+                <div class="card cupk-mini-card">
+                  <strong>⚡ 电费</strong
+                  ><span>云闪付→数字校园→绑定学校→缴费，约5分钟来电。</span>
+                </div>
+                <!-- 空调 / 地暖控制 -->
+                <div class="card cupk-mini-card">
+                  <strong>🔥 空调/地暖</strong
+                  ><span>遥控器或手机红外控制，地暖温度较高。</span>
+                </div>
+                <!-- 饮水机：U净 APP 扫码 -->
+                <div class="card cupk-mini-card">
+                  <strong>💧 饮水机</strong
+                  ><span>每层2台，U净APP绑定学校购买小票后扫码取水。</span>
+                </div>
+                <!-- 公共洗衣机 -->
+                <div class="card cupk-mini-card">
+                  <strong>👕 洗衣机</strong
+                  ><span
+                    >1楼，U净扫码，30-45分钟。自备洗衣液，禁贴身衣物袜子。</span
+                  >
+                </div>
+                <!-- 洗鞋机 -->
+                <div class="card cupk-mini-card">
+                  <strong>👟 洗鞋机</strong><span>1楼，效果一般建议手洗。</span>
+                </div>
+                <!-- 吹风机：扫码付费 -->
+                <div class="card cupk-mini-card">
+                  <strong>💨 吹风机</strong
+                  ><span>微信扫码，0.5元/3分钟、1元/5分钟。注意控制噪音。</span>
+                </div>
+                <!-- 剪发服务点 -->
+                <div class="card cupk-mini-card">
+                  <strong>💇 剪发</strong
+                  ><span>三餐地下商超入口处，或校外理发店。</span>
+                </div>
+                <!-- 宿舍门禁时间 -->
+                <div class="card cupk-mini-card">
+                  <strong>🔑 门禁</strong
+                  ><span
+                    >23:45关门，7:30开门。夜不归宿通报。晚归需企业微信请假。</span
+                  >
+                </div>
+                <!-- 用电规定 -->
+                <div class="card cupk-mini-card">
+                  <strong>⚡ 用电</strong
+                  ><span
+                    >禁用电炉/电煮锅/冰箱等，违者按手册处理。禁养宠物。</span
+                  >
+                </div>
+                <!-- 宿舍自习室 -->
+                <div class="card cupk-mini-card">
+                  <strong>📖 自习室</strong
+                  ><span>暂不开放（卫生原因），考研前可咨询宿管。</span>
+                </div>
+                <!-- 外卖取送 -->
+                <div class="card cupk-mini-card">
+                  <strong>📦 外卖</strong
+                  ><span>送至宿舍楼门口右手边桌上，建议及时取走。</span>
+                </div>
               </div>
 
-              <h3 style="margin-top:20px">卫生·报修·检查</h3>
+              <!-- 卫生制度与设施报修 -->
+              <h3 style="margin-top: 20px">卫生·报修·检查</h3>
               <div class="grid cols-2 cupk-grid">
+                <!-- 宿舍卫生制度：单元间分配值日，定期检查 -->
                 <div class="card cupk-card">
                   <span class="tag">卫生制度</span>
                   <h3>单元间·宿舍卫生</h3>
-                  <p>单元间建群分配值日（6个厕所：5宿舍各1个+1应急，值周宿舍负责）。楼道由保洁打扫。宿舍值日表贴门后，合资购买拖布扫帚。学校定期检查 + 突击检查。</p>
+                  <p>
+                    单元间建群分配值日（6个厕所：5宿舍各1个+1应急，值周宿舍负责）。楼道由保洁打扫。宿舍值日表贴门后，合资购买拖布扫帚。学校定期检查
+                    + 突击检查。
+                  </p>
                 </div>
+                <!-- 设施报修流程：融合门户平台或电话联系 -->
                 <div class="card cupk-card">
                   <span class="tag coral">报修</span>
                   <h3>设施报修</h3>
-                  <p>校区官网→融合门户→e站式信息服务→管理平台→网络报修。后勤办公室 0990-6633049（周老师 13239935801）。也可私信万能墙。</p>
+                  <p>
+                    校区官网→融合门户→e站式信息服务→管理平台→网络报修。后勤办公室
+                    0990-6633049（周老师 13239935801）。
+                  </p>
                 </div>
               </div>
 
-              <h3 style="margin-top:20px">宿舍检查评分标准</h3>
-              <p class="cupk-section-lead">满分100分，<strong>60分合格</strong>。每学期评选约<strong>5%优秀宿舍</strong>。不合格：第一次通报→第二次警告→第三次严重警告→纳入综合测评→影响奖学金评定。</p>
+              <!-- 宿舍检查评分标准：满分 100 分，60 分合格 -->
+              <h3 style="margin-top: 20px">宿舍检查评分标准</h3>
+              <!-- 评分制度说明：满分 100 分，60 分合格 -->
+              <p class="cupk-section-lead">
+                满分100分，<strong>60分合格</strong>。每学期评选约<strong>5%优秀宿舍</strong>。不合格：第一次通报→第二次警告→第三次严重警告→纳入综合测评→影响奖学金评定。
+              </p>
+              <!-- 评分细则表：八项检查标准及对应分值 -->
               <div class="gpa-table-wrap">
                 <table class="gpa-table">
-                  <thead><tr><th>检查项</th><th>分值</th><th>检查项</th><th>分值</th></tr></thead>
+                  <!-- 表头：检查项与分值（共两列） -->
+                  <thead>
+                    <tr>
+                      <th>检查项</th>
+                      <th>分值</th>
+                      <th>检查项</th>
+                      <th>分值</th>
+                    </tr>
+                  </thead>
                   <tbody>
-                    <tr><td>地面（无垃圾/积水）</td><td>10</td><td>衣物鞋帽（不乱放）</td><td>10</td></tr>
-                    <tr><td>家具物品（摆放整齐）</td><td>10</td><td>墙面（无乱贴接线）</td><td>10</td></tr>
-                    <tr><td>门窗（无积尘）</td><td>10</td><td>违规电器（无电炉等）</td><td>10</td></tr>
-                    <tr><td>被褥（统一叠放）</td><td>10</td><td>床头物品（整齐）</td><td>5</td></tr>
-                    <tr><td>垃圾（无果皮纸屑）</td><td>15</td><td>值日安排+整体印象</td><td>5+5</td></tr>
+                    <!-- 地面清洁 + 衣物摆放 -->
+                    <tr>
+                      <td>地面（无垃圾/积水）</td>
+                      <td>10</td>
+                      <td>衣物鞋帽（不乱放）</td>
+                      <td>10</td>
+                    </tr>
+                    <!-- 家具摆放 + 墙面整洁 -->
+                    <tr>
+                      <td>家具物品（摆放整齐）</td>
+                      <td>10</td>
+                      <td>墙面（无乱贴接线）</td>
+                      <td>10</td>
+                    </tr>
+                    <!-- 门窗卫生 + 违规电器检查 -->
+                    <tr>
+                      <td>门窗（无积尘）</td>
+                      <td>10</td>
+                      <td>违规电器（无电炉等）</td>
+                      <td>10</td>
+                    </tr>
+                    <!-- 被褥叠放 + 床头物品 -->
+                    <tr>
+                      <td>被褥（统一叠放）</td>
+                      <td>10</td>
+                      <td>床头物品（整齐）</td>
+                      <td>5</td>
+                    </tr>
+                    <!-- 垃圾清理 + 值日整体印象 -->
+                    <tr>
+                      <td>垃圾（无果皮纸屑）</td>
+                      <td>15</td>
+                      <td>值日安排+整体印象</td>
+                      <td>5+5</td>
+                    </tr>
                   </tbody>
                 </table>
               </div>
             </section>
+            <!-- /section#dorm 宿舍生活 -->
 
             <!-- ====== 校园卡 ====== -->
+            <!-- 校园卡服务中心位置、电子校园卡小程序、工商银行卡绑定 -->
             <section class="cupk-section" id="card">
               <div class="section-heading-row">
-                <div><span class="tag coral">校园卡</span><h2 class="section-title">校园卡服务</h2></div>
+                <div>
+                  <span class="tag coral">校园卡</span>
+                  <h2 class="section-title">校园卡服务</h2>
+                </div>
               </div>
+              <!-- 校园卡服务：实体卡办理与电子校园卡 -->
               <div class="grid cols-2 cupk-grid">
+                <!-- 实体校园卡：三餐一层办理，自助补卡机 -->
                 <div class="card cupk-card">
                   <span class="tag coral">服务中心</span>
                   <h3>三餐一层进门左转</h3>
-                  <p>电话 0990-6633087 | QQ群 571471395 | 窗口：工作日 13:00-14:00、19:00-20:00。正式卡首次免费，补换卡10元。可自助补卡机补办，或人工窗口。</p>
+                  <p>
+                    电话 0990-6633087 | QQ群 571471395 | 窗口：工作日
+                    13:00-14:00、19:00-20:00。正式卡首次免费，补换卡10元。可自助补卡机补办，或人工窗口。
+                  </p>
                 </div>
+                <!-- 电子校园卡：微信支付宝小程序，刷脸扫码支付 -->
                 <div class="card cupk-card">
                   <span class="tag blue">电子校园卡</span>
                   <h3>"中大克校区"小程序</h3>
-                  <p>微信/支付宝搜"中大克校区"或"CUPK校园卡"，人脸认证后可在三餐、C5、活动中心、图书馆刷脸或扫码支付。开工商银行卡免密支付，余额不足自动扣款。</p>
+                  <p>
+                    微信/支付宝搜"中大克校区"或"CUPK校园卡"，人脸认证后可在三餐、C5、活动中心、图书馆刷脸或扫码支付。开工商银行卡免密支付，余额不足自动扣款。
+                  </p>
                 </div>
               </div>
-              <div class="notice" style="margin-top:14px">
-                <strong>管理规定：</strong>校园卡由学校统一管理，禁止私发身份卡；设备为学校固定资产。正式卡仅限在校教职工和在籍学生使用。
+              <!-- 校园卡管理规定 -->
+              <div class="notice" style="margin-top: 14px">
+                <strong>管理规定：</strong
+                >校园卡由学校统一管理，禁止私发身份卡；设备为学校固定资产。正式卡仅限在校教职工和在籍学生使用。
               </div>
             </section>
+            <!-- /section#card 校园卡 -->
 
             <!-- ====== 打印·快递·医疗 ====== -->
+            <!-- 校内自助打印、菜鸟驿站快递取件、医务室及校外就医 -->
             <section class="cupk-section" id="services">
               <div class="section-heading-row">
-                <div><span class="tag">设施</span><h2 class="section-title">打印·快递·医疗</h2></div>
+                <div>
+                  <span class="tag">设施</span>
+                  <h2 class="section-title">打印·快递·医疗</h2>
+                </div>
               </div>
+              <!-- 服务设施配图 -->
+              <img
+                src="images/illust-services.jpg"
+                alt="打印·快递·医疗"
+                style="
+                  width: 100%;
+                  max-height: 200px;
+                  object-fit: cover;
+                  border-radius: var(--radius-lg);
+                  margin-bottom: 14px;
+                "
+                loading="lazy"
+              />
+              <!-- 打印 / 快递 / 医疗：校园三大生活服务 -->
               <div class="grid cols-3 cupk-grid">
+                <!-- 校内自助打印点分布及价格 -->
                 <div class="card cupk-card">
                   <span class="tag">打印</span>
                   <h3>自助打印</h3>
-                  <p>C4/C5/C6/C8/C9/J2/活动中心/图书馆一楼均有设备。微信"小黄云打印"小程序。A4黑白0.19元起，彩色0.80元起。打印店：三餐地下（可打A3）。学长学姐打印约0.15元/张。</p>
+                  <p>
+                    C4/C5/C6/C8/C9/J2/活动中心/图书馆一楼均有设备。微信"小黄云打印"小程序。A4黑白0.19元起，彩色0.80元起。打印店：三餐地下（可打A3）。学长学姐打印约0.15元/张。
+                  </p>
                 </div>
+                <!-- 菜鸟驿站：取件方式与营业时间 -->
                 <div class="card cupk-card">
                   <span class="tag blue">快递</span>
-                  <h3>12号菜鸟驿站</h3>
-                  <p>地址：克拉玛依区安定路355号中石大12菜鸟驿站。冬季19:30/夏季20:00关门。下载菜鸟APP看出件码+身份码取件。60开头特殊件前台签字。多多买菜报手机尾号。</p>
+                  <h3>中石克综合服务中心</h3>
+                  <p>
+                    地址：中石克综合服务中心。冬季19:30/夏季20:00关门。下载淘宝APP看出件码+身份码取件。60开头特殊件前台签字。多多买菜报手机尾号。
+                  </p>
                 </div>
+                <!-- 校内医务室及校外就医指导 -->
                 <div class="card cupk-card">
                   <span class="tag coral">医疗</span>
                   <h3>校内医务室</h3>
-                  <p>B13（二餐旁）、田径场售货机对面临时医疗点。校外：市中心医院新院（校车/打车）。线上美团买药，线下校对面药房。温差大注意流感防护。</p>
+                  <p>
+                    B13（二餐旁）、田径场售货机对面临时医疗点。校外：市中心医院新院（校车/打车）。线上美团买药，线下校对面药房。温差大注意流感防护。
+                  </p>
                 </div>
               </div>
             </section>
+            <!-- /section#services 打印快递医疗 -->
 
             <!-- ====== 运动·健康 ====== -->
+            <!-- 体育馆、田径场、阳光长跑（步道乐跑）及健身房 -->
             <section class="cupk-section" id="sports">
               <div class="section-heading-row">
-                <div><span class="tag blue">运动</span><h2 class="section-title">运动场馆与阳光长跑</h2></div>
+                <div>
+                  <span class="tag blue">运动</span>
+                  <h2 class="section-title">运动场馆与阳光长跑</h2>
+                </div>
               </div>
+              <!-- 运动场馆配图 -->
+              <img
+                src="images/illust-sports.jpg"
+                alt="运动场馆"
+                style="
+                  width: 100%;
+                  max-height: 200px;
+                  object-fit: cover;
+                  border-radius: var(--radius-lg);
+                  margin-bottom: 14px;
+                "
+                loading="lazy"
+              />
+              <!-- 运动场馆与体育管理 -->
               <div class="grid cols-3 cupk-grid">
+                <!-- 体育馆：开放时间与入场要求 -->
                 <div class="card cupk-card">
                   <span class="tag blue">体育馆</span>
                   <h3>体育馆 9:30-23:00</h3>
-                  <p>中石大学生周一/周二/周六可进。上午11:00前任何人不得进入。需出示校园卡。预约系统使用率低，建议尽早前往，自备器材。</p>
+                  <p>
+                    中石大学生周一/周二/周六可进。上午11:00前任何人不得进入。需出示校园卡。预约系统使用率低，建议尽早前往，自备器材。
+                  </p>
                 </div>
+                <!-- 田径场与 D3 球场 -->
                 <div class="card cupk-card">
                   <span class="tag">田径场</span>
                   <h3>田径场 & D3球场</h3>
-                  <p>400米标准跑道，有自助售货机和看台。地下操场可从两侧入口进入。D3前设网球场、篮球场、小足球场。夏季注意防蚊。</p>
+                  <p>
+                    400米标准跑道，有自助售货机和看台。地下操场可从两侧入口进入。D3前设网球场、篮球场、小足球场。夏季注意防蚊。
+                  </p>
                 </div>
+                <!-- 阳光长跑（步道乐跑）及健身房 -->
                 <div class="card cupk-card">
                   <span class="tag coral">阳光长跑</span>
                   <h3>步道乐跑 APP</h3>
-                  <p>6:00-23:00，有效2.0-5.0km，配速3-10min/km，每天仅1次。途径打卡点100m内自动打卡。禁作弊（系统24h二次监测，违者封禁7天）。健身房在学生活动中心一楼。</p>
+                  <p>
+                    6:00-23:00，有效2.0-5.0km，配速3-10min/km，每天仅1次。途径打卡点100m内自动打卡。禁作弊（系统24h二次监测，违者封禁7天）。健身房在学生活动中心一楼。
+                  </p>
                 </div>
               </div>
             </section>
+            <!-- /section#sports 运动健康 -->
 
             <!-- ====== 交通 ====== -->
+            <!-- 哈啰单车、公交/打车、火车/飞机等出行方式 -->
             <section class="cupk-section" id="transport">
               <div class="section-heading-row">
-                <div><span class="tag">出行</span><h2 class="section-title">交通出行</h2></div>
+                <div>
+                  <span class="tag">出行</span>
+                  <h2 class="section-title">交通出行</h2>
+                </div>
               </div>
+              <!-- 交通出行：共享单车、公交打车、火车飞机 -->
               <div class="grid cols-3 cupk-grid">
+                <!-- 哈啰单车学生认证优惠 -->
                 <div class="card cupk-card">
                   <span class="tag blue">哈啰单车</span>
                   <h3>学生认证 7元/月</h3>
-                  <p>哈啰APP学生认证享月卡。共享电车：美团/青桔/哈啰，或微信/支付宝搜"油城骑行"。骑行须戴头盔，交警严查。</p>
+                  <p>
+                    哈啰APP学生认证享月卡。共享电车：美团/青桔/哈啰，或微信/支付宝搜"油城骑行"。骑行须戴头盔，交警严查。
+                  </p>
                 </div>
+                <!-- 公交与网约车出行 -->
                 <div class="card cupk-card">
                   <span class="tag">公交/打车</span>
                   <h3>公交8元起步/2.5km</h3>
-                  <p>"克拉玛依出行"公众号查询。滴滴网约车较多。机场/火车站警惕拼车（火车站10元/人、机场15元/人，拼4人），两人以上建议单独叫车。</p>
+                  <p>
+                    "克拉玛依出行"公众号查询。滴滴网约车较多。机场/火车站警惕拼车（火车站10元/人、机场15元/人，拼4人），两人以上建议单独叫车。
+                  </p>
                 </div>
+                <!-- 火车学生票与机票价格趋势 -->
                 <div class="card cupk-card">
                   <span class="tag">火车/飞机</span>
                   <h3>铁路12306 学生价</h3>
-                  <p>回家区间享学生价。热门景点提前抢票。机票出行前1个月及前一周易低价，节假可考虑临近城市出发。</p>
+                  <p>
+                    回家区间享学生价。热门景点提前抢票。机票出行前1个月及前一周易低价，节假可考虑临近城市出发。
+                  </p>
                 </div>
               </div>
             </section>
+            <!-- /section#transport 交通出行 -->
 
             <!-- ====== 费用 ====== -->
+            <!-- 每月生活费估算、书费、以及防超前消费提醒 -->
             <section class="cupk-section" id="cost">
               <div class="section-heading-row">
-                <div><span class="tag coral">费用</span><h2 class="section-title">生活费用参考</h2></div>
+                <div>
+                  <span class="tag coral">费用</span>
+                  <h2 class="section-title">生活费用参考</h2>
+                </div>
               </div>
+              <!-- 生活费用参考：日常开销、学习开支、消费提醒 -->
               <div class="grid cols-3 cupk-grid">
-                <div class="card cupk-card"><span class="tag blue">一般版</span><h3>约1100元/月</h3><p>三餐180元/周（早5午10晚10），改善伙食50-100元/周，牛奶水果50元/月，生活用品100元/月。1500元可完全满足。</p></div>
-                <div class="card cupk-card"><span class="tag">学习</span><h3>书费300-500元/学期</h3><p>建议买二手书。考试/比赛报名费较低。文具基础款即可。</p></div>
-                <div class="card cupk-card"><span class="tag coral">提醒</span><h3>警惕超前消费</h3><p>谨慎使用花呗/美团月付/抖音月付。谨防网络诈骗。校内勤工助学、克拉玛依家教（约100元/小时）可咨询万能墙。</p></div>
+                <!-- 一般版月生活费估算 -->
+                <div class="card cupk-card">
+                  <span class="tag blue">一般版</span>
+                  <h3>约1100元/月</h3>
+                  <p>
+                    三餐180元/周（早5午10晚10），改善伙食50-100元/周，牛奶水果50元/月，生活用品100元/月。1500元可完全满足。
+                  </p>
+                </div>
+                <!-- 学习相关费用：书费、考试报名费等 -->
+                <div class="card cupk-card">
+                  <span class="tag">学习</span>
+                  <h3>书费300-500元/学期</h3>
+                  <p>建议买二手书。考试/比赛报名费较低。文具基础款即可。</p>
+                </div>
+                <!-- 防超前消费与防诈骗提醒 -->
+                <div class="card cupk-card">
+                  <span class="tag coral">提醒</span>
+                  <h3>警惕超前消费</h3>
+                  <p>
+                    谨慎使用花呗/美团月付/抖音月付。谨防网络诈骗。校内勤工助学、克拉玛依家教（约100元/小时）。
+                  </p>
+                </div>
               </div>
             </section>
+            <!-- /section#cost 费用参考 -->
 
             <!-- ====== 纪律 ====== -->
+            <!-- 宿舍检查评分标准、五级处分制度、课堂纪律要求 -->
             <section class="cupk-section" id="discipline">
               <div class="section-heading-row">
-                <div><span class="tag coral">纪律</span><h2 class="section-title">纪律要求与奖惩</h2></div>
+                <div>
+                  <span class="tag coral">纪律</span>
+                  <h2 class="section-title">纪律要求与奖惩</h2>
+                </div>
               </div>
+              <!-- 纪律要求：宿舍检查、违纪处分、课堂管理 -->
               <div class="grid cols-3 cupk-grid">
-                <div class="card cupk-card"><span class="tag coral">宿舍检查</span><h3>5%优秀 / 60分合格</h3><p>三次不合格：严重警告。结果纳入综合测评，影响奖学金和评优。</p></div>
-                <div class="card cupk-card"><span class="tag blue">违纪处理</span><h3>五级处分制度</h3><p>警告→严重警告→记过→留校察看→开除学籍。涵盖考场作弊、宿舍违规、网络违规、非法宗教活动等。</p></div>
-                <div class="card cupk-card"><span class="tag">课堂纪律</span><h3>考勤·手机管理</h3><p>须按时参加全部课程，因病/事提前请假。部分课程统一保管手机，禁止课堂使用。考场违规按作弊处理。</p></div>
+                <!-- 宿舍检查标准与奖惩 -->
+                <div class="card cupk-card">
+                  <span class="tag coral">宿舍检查</span>
+                  <h3>5%优秀 / 60分合格</h3>
+                  <p>
+                    三次不合格：严重警告。结果纳入综合测评，影响奖学金和评优。
+                  </p>
+                </div>
+                <!-- 五级处分制度说明 -->
+                <div class="card cupk-card">
+                  <span class="tag blue">违纪处理</span>
+                  <h3>五级处分制度</h3>
+                  <p>
+                    警告→严重警告→记过→留校察看→开除学籍。涵盖考场作弊、宿舍违规、网络违规、非法宗教活动等。
+                  </p>
+                </div>
+                <!-- 课堂考勤与手机管理 -->
+                <div class="card cupk-card">
+                  <span class="tag">课堂纪律</span>
+                  <h3>考勤·手机管理</h3>
+                  <p>
+                    须按时参加全部课程，因病/事提前请假。部分课程统一保管手机，禁止课堂使用。考场违规按作弊处理。
+                  </p>
+                </div>
               </div>
-              <div class="notice" style="margin-top:14px">
-                <strong>特别提醒：</strong>校区严禁各类宗教活动和带有宗教色彩的行为；禁止传播暴力恐怖音视频；禁止宿舍使用违规电器。违反者依据相关规定严肃处理，直至开除学籍。
-              </div>
-            </section>
-
-            <!-- ====== 校内线上服务 ====== -->
-            <section class="cupk-section" id="online-services">
-              <div class="section-heading-row">
-                <div><span class="tag blue">常用网站</span><h2 class="section-title">校内线上服务</h2></div>
-              </div>
-              <p class="cupk-section-lead">以下链接均为校区官方服务入口，建议加入浏览器收藏夹。部分系统需在校园网或通过VPN访问。</p>
-              <div class="grid cols-4 cupk-mini-grid">
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
-                  <strong>校区官网</strong><span>通知公告、院系导航、校园新闻</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://cas.cupk.edu.cn/cas/login" target="_blank" rel="noopener noreferrer">
-                  <strong>统一身份认证</strong><span>融合门户入口，一站式登录</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://eams.cupk.edu.cn/student/home" target="_blank" rel="noopener noreferrer">
-                  <strong>新教务系统</strong><span>选课、查成绩、培养方案</span>
-                </a>
-                <a class="card cupk-mini-card" href="http://jw.cupk.edu.cn/jsxsd/" target="_blank" rel="noopener noreferrer">
-                  <strong>旧教务系统</strong><span>备用入口，部分功能需旧版</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://res.cupk.edu.cn/#/ic/home" target="_blank" rel="noopener noreferrer">
-                  <strong>图书馆座位预约</strong><span>自习座位/研讨间在线预约</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/library/" target="_blank" rel="noopener noreferrer">
-                  <strong>校区图书馆</strong><span>馆藏检索、数据库、借阅服务</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/jwb/jxyx/tzgg/" target="_blank" rel="noopener noreferrer">
-                  <strong>教务部通知公告</strong><span>选课/考试/补考重修安排</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://career.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
-                  <strong>就业指导中心</strong><span>招聘信息、宣讲会、职业规划</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/cxcy/" target="_blank" rel="noopener noreferrer">
-                  <strong>创新创业学院</strong><span>大创项目、竞赛目录、创新学分</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/wxgz/wxfw/vpn-kxq/" target="_blank" rel="noopener noreferrer">
-                  <strong>校区VPN</strong><span>校外访问校内资源的必备工具</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/gqt/" target="_blank" rel="noopener noreferrer">
-                  <strong>共青团（到梦空间）</strong><span>第二课堂、社团活动、志愿服务</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://yx.cupk.edu.cn/" target="_blank" rel="noopener noreferrer">
-                  <strong>迎新网</strong><span>新生报到指南和入学信息</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/syxy/xsgz/tzgg/" target="_blank" rel="noopener noreferrer">
-                  <strong>石油学院通知</strong><span>石油学院学生工作通知公告</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/smxy/xsgz/kjcx/" target="_blank" rel="noopener noreferrer">
-                  <strong>工商马院比赛通知</strong><span>商科/管理类竞赛和科创信息</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://mailh.qiye.163.com/" target="_blank" rel="noopener noreferrer">
-                  <strong>校区邮箱（网易）</strong><span>@cupk.edu.cn 学校邮箱登录</span>
-                </a>
-                <a class="card cupk-mini-card" href="https://www.cupk.edu.cn/xxglb/" target="_blank" rel="noopener noreferrer">
-                  <strong>科技与信息部</strong><span>校园网络、信息化服务指南</span>
-                </a>
+              <!-- 重要提醒：宗教、安全、用电规定 -->
+              <div class="notice" style="margin-top: 14px">
+                <strong>特别提醒：</strong
+                >校区严禁各类宗教活动和带有宗教色彩的行为；禁止传播暴力恐怖音视频；禁止宿舍使用违规电器。违反者依据相关规定严肃处理，直至开除学籍。
               </div>
             </section>
+            <!-- /section#discipline 纪律奖惩 -->
 
             <!-- ====== APP ====== -->
+            <!-- 校园常用 APP 速查：企业微信、U净、哈啰、云闪付、步道乐跑等 -->
             <section class="cupk-section" id="apps">
               <div class="section-heading-row">
-                <div><span class="tag">工具</span><h2 class="section-title">常用APP速查</h2></div>
+                <div>
+                  <span class="tag">工具</span>
+                  <h2 class="section-title">常用APP速查</h2>
+                </div>
               </div>
+              <!-- 校园常用 APP 列表 -->
               <div class="grid cols-4 cupk-mini-grid">
-                <div class="card cupk-mini-card"><strong>企业微信</strong><span>请假/校园卡服务</span></div>
-                <div class="card cupk-mini-card"><strong>U净</strong><span>洗衣机/饮水机</span></div>
-                <div class="card cupk-mini-card"><strong>哈啰</strong><span>共享单车 7元/月</span></div>
-                <div class="card cupk-mini-card"><strong>云闪付</strong><span>电费缴纳</span></div>
-                <div class="card cupk-mini-card"><strong>步道乐跑</strong><span>阳光长跑打卡</span></div>
-                <div class="card cupk-mini-card"><strong>菜鸟</strong><span>快递取件码</span></div>
-                <div class="card cupk-mini-card"><strong>知到（智慧树）</strong><span>公选课平台</span></div>
-                <div class="card cupk-mini-card"><strong>超级课程表</strong><span>教务导入课表</span></div>
-                <div class="card cupk-mini-card"><strong>雨课堂</strong><span>课堂互动</span></div>
-                <div class="card cupk-mini-card"><strong>学习通</strong><span>课程资料</span></div>
-                <div class="card cupk-mini-card"><strong>ismart / iTEST</strong><span>大英课程</span></div>
-                <div class="card cupk-mini-card"><strong>志愿汇</strong><span>志愿服务时长</span></div>
+                <!-- 企业微信：请假审批、校园卡查询 -->
+                <div class="card cupk-mini-card">
+                  <strong>企业微信</strong><span>请假/校园卡服务</span>
+                </div>
+                <!-- U净：洗衣机、饮水机扫码使用 -->
+                <div class="card cupk-mini-card">
+                  <strong>U净</strong><span>洗衣机/饮水机</span>
+                </div>
+                <!-- 哈啰单车：学生认证月卡 -->
+                <div class="card cupk-mini-card">
+                  <strong>哈啰</strong><span>共享单车 7元/月</span>
+                </div>
+                <!-- 云闪付：宿舍电费缴纳 -->
+                <div class="card cupk-mini-card">
+                  <strong>云闪付</strong><span>电费缴纳</span>
+                </div>
+                <!-- 步道乐跑：阳光长跑打卡 -->
+                <div class="card cupk-mini-card">
+                  <strong>步道乐跑</strong><span>阳光长跑打卡</span>
+                </div>
+                <!-- 菜鸟：快递取件 -->
+                <div class="card cupk-mini-card">
+                  <strong>菜鸟</strong><span>快递取件码</span>
+                </div>
+                <!-- 知到（智慧树）：公选课学习 -->
+                <div class="card cupk-mini-card">
+                  <strong>知到（智慧树）</strong><span>公选课平台</span>
+                </div>
+                <!-- 超级课程表：课表管理 -->
+                <div class="card cupk-mini-card">
+                  <strong>超级课程表</strong><span>教务导入课表</span>
+                </div>
+                <!-- 雨课堂：课堂互动 -->
+                <div class="card cupk-mini-card">
+                  <strong>雨课堂</strong><span>课堂互动</span>
+                </div>
+                <!-- 学习通：课程资料 -->
+                <div class="card cupk-mini-card">
+                  <strong>学习通</strong><span>课程资料</span>
+                </div>
+                <!-- ismart / iTEST：大学英语课程平台 -->
+                <div class="card cupk-mini-card">
+                  <strong>ismart / iTEST</strong><span>大英课程</span>
+                </div>
+                <!-- 志愿汇：志愿服务时长记录 -->
+                <div class="card cupk-mini-card">
+                  <strong>志愿汇</strong><span>志愿服务时长</span>
+                </div>
               </div>
             </section>
-
+            <!-- /section#apps 常用APP -->
           </div>
+          <!-- /cupk-content -->
         </div>
+        <!-- /cupk-layout -->
       </div>
+      <!-- /container -->
     </main>
+    <!-- /main -->
 
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div><h3>石光驿站</h3><p>中石克校园生活指南，由石大热心学长学姐整理。如有变动以学校最新通知为准。万能墙：Cupk5201314</p></div>
-        <div><h4>校园导航</h4><a href="cupk.html">常用网站</a><a href="campus.html">校园生活指南</a><a href="media.html">石大光影</a></div>
-        <div><h4>学习资源</h4><a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a></div>
-        <div><h4>项目</h4><a href="team.html">小组介绍</a><a href="index.html">返回首页</a></div>
-      </div>
-    </footer>
+    <!-- ===== 动态页脚 ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 加载 ===== -->
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
+    <script src="javascript/effects.js"></script>
+    <script src="javascript/player.js"></script>
+    <!-- 内联搜索脚本：对 .cupk-card 和 .cupk-mini-card 进行关键词过滤 -->
     <script>
-      /* 校园生活指南搜索 */
       (function () {
         var input = document.querySelector("#campusSearch");
         var summary = document.querySelector("#campusSearchSummary");
@@ -404,21 +789,31 @@
           var visibleCount = 0;
 
           cards.forEach(function (card) {
-            var matched = !keyword || normalize(card.innerText).indexOf(keyword) >= 0;
+            var matched =
+              !keyword || normalize(card.innerText).indexOf(keyword) >= 0;
             card.classList.toggle("is-hidden", !matched);
             if (matched) visibleCount++;
           });
 
           sections.forEach(function (section) {
-            var visible = section.querySelectorAll(".cupk-card:not(.is-hidden), .cupk-mini-card:not(.is-hidden)");
-            section.classList.toggle("is-hidden", keyword && visible.length === 0);
+            var visible = section.querySelectorAll(
+              ".cupk-card:not(.is-hidden), .cupk-mini-card:not(.is-hidden)",
+            );
+            section.classList.toggle(
+              "is-hidden",
+              keyword && visible.length === 0,
+            );
           });
 
           if (summary) {
-            summary.textContent = keyword ? "找到 " + visibleCount + " 项" : "全部内容";
+            summary.textContent = keyword
+              ? "找到 " + visibleCount + " 项"
+              : "全部内容";
           }
         });
       })();
     </script>
   </body>
+  <!-- /body -->
 </html>
+<!-- /html -->

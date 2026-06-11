@@ -1,56 +1,43 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
+    <!-- 页面元信息：字符编码、视口设置 -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="theme-color"
+      content="#faf8f3"
+      media="(prefers-color-scheme: light)"
+    />
+    <meta
+      name="theme-color"
+      content="#1c1b18"
+      media="(prefers-color-scheme: dark)"
+    />
+    <!-- Google Fonts 预连接，提升字体加载速度 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+    />
     <meta
       name="description"
       content="石光驿站——中石克校园一站式资源导航，涵盖CUPK校园入口、学习资源、工具和网站导航。"
     />
+    <!-- 页面标题与图标 -->
     <title>石光驿站 - 中石克校园一站式资源导航</title>
+    <link rel="icon" type="image/jpeg" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式表 + 首页专用样式 -->
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="nav-wrap">
-        <a class="brand" href="index.html">
-          <img
-            class="brand-mark"
-            src="images/中国石油大学矢量标.jpg"
-            alt="中国石油大学"
-          />石光驿站
-        </a>
-        <button class="nav-toggle" type="button" aria-label="打开导航">
-          ☰
-        </button>
-        <button
-          class="theme-toggle"
-          type="button"
-          aria-label="切换到暗色模式"
-          title="切换暗色模式"
-        >
-          ☾
-        </button>
-        <nav class="site-nav">
-          <a class="nav-link active" href="index.html">首页</a>
-          <a class="nav-link" href="cupk.html">常用网站</a>
-          <a class="nav-link" href="campus.html">校园生活</a>
-          <a class="nav-link" href="websites.html">学习资源库</a>
-          <a class="nav-link" href="tools.html">学习工具箱</a>
-          <a class="nav-link" href="media.html">石大光影</a>
-          <a class="nav-link" href="team.html">小组介绍</a>
-          <a class="nav-link" href="login.html">登录</a>
-        </nav>
-      </div>
-    </header>
+    <!-- ===== 动态导航栏（由 common.js 生成） ===== -->
+    <div id="siteHeader"></div>
 
-    <main>
-      <!-- Hero —— 背景图轮播 + 遮罩，文字固定不动 -->
-      <!-- 背景图占位：images/hero-bg-1.jpg ~ images/hero-bg-4.jpg，建议1920×1080 -->
+    <main id="main">
+      <!-- ===== HERO ===== -->
       <section class="hero" id="heroSection">
         <div class="hero-bg" id="heroBg">
           <div
@@ -65,41 +52,44 @@
             class="hero-bg-img"
             style="background-image: url(&quot;images/cupk4.jpg&quot;)"
           ></div>
-
           <div class="hero-overlay"></div>
         </div>
+        <!-- Hero 主体内容：徽章、标题、描述、行动按钮 -->
         <div class="hero-body">
           <span class="hero-badge">CUPK · 克拉玛依</span>
           <h1 class="hero-title">石光驿站</h1>
           <p class="hero-sub">中石克校园一站式资源导航</p>
           <p class="hero-desc">
-            从红山湖畔到第三餐厅，从图书馆自习到田径场夜跑——校园入口、学习资源、避坑指南，石大生活一站搞定。
+            从红山湖畔到第三餐厅，从图书馆自习到田径场夜跑——<br />校园入口、学习资源、避坑指南，石大生活一站搞定。
           </p>
           <div class="hero-actions">
-            <a class="button ghost" href="cupk.html">常用网站</a>
             <a class="button primary" href="websites.html">探索学习资源</a>
-            <a class="button ghost" href="campus.html">校园生活指南</a>
-            <a class="button ghost" href="tools.html">学习工具箱</a>
-            <a class="button ghost" href="media.html">石大光影</a>
+            <a class="button ghost" href="cupk.html">常用网站</a>
+            <a class="button ghost" href="campus.html">校园生活</a>
           </div>
         </div>
-        <!-- 左右箭头 -->
+        <!-- Hero 轮播控制：左右切换箭头 -->
         <button
           class="hero-arrow hero-arrow-left"
           id="heroPrev"
           aria-label="上一张"
         >
-          <svg class="svg-icon" width="18" height="18" aria-hidden="true"><use href="images/icons.svg#icon-chevron-left"/></svg>
+          <svg class="svg-icon" width="18" height="18" aria-hidden="true">
+            <use href="images/icons.svg#icon-chevron-left" />
+          </svg>
         </button>
         <button
           class="hero-arrow hero-arrow-right"
           id="heroNext"
           aria-label="下一张"
         >
-          <svg class="svg-icon" width="18" height="18" aria-hidden="true"><use href="images/icons.svg#icon-chevron-right"/></svg>
+          <svg class="svg-icon" width="18" height="18" aria-hidden="true">
+            <use href="images/icons.svg#icon-chevron-right" />
+          </svg>
         </button>
-        <!-- 背景轮播圆点 -->
+        <!-- 轮播底部圆点指示器（JS 动态生成） -->
         <div class="hero-dots" id="heroDots"></div>
+        <!-- 波浪分割装饰，将 Hero 与下方内容自然过渡 -->
         <div class="hero-wave">
           <svg viewBox="0 0 1440 60" preserveAspectRatio="none">
             <path
@@ -110,156 +100,124 @@
         </div>
       </section>
 
-      <!-- 数据条 -->
-      <section class="stats-strip">
-        <div class="container">
-          <div class="stats-grid">
-            <div class="stat-item">
-              <strong class="stat-num">97<span>+</span></strong>
-              <span class="stat-label">精选学习资源</span>
-            </div>
-            <div class="stat-item">
-              <strong class="stat-num">7500<span>+</span></strong>
-              <span class="stat-label">在校生规模</span>
-            </div>
-            <div class="stat-item">
-              <strong class="stat-num">24<span>个</span></strong>
-              <span class="stat-label">本科专业</span>
-            </div>
-            <div class="stat-item">
-              <strong class="stat-num">A<span>-K</span></strong>
-              <span class="stat-label">校区分区速查</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- 快捷导航 -->
-      <section class="quick-nav">
+      <!-- ===== 快捷入口 ===== -->
+      <!-- 六个导航卡片：常用网站、学习资源库、校园生活指南、学习工具箱、失物招领、互助论坛 -->
+      <section class="quick-entry">
         <div class="container">
           <div class="section-head">
             <span class="eyebrow">快捷入口</span>
             <h2 class="section-title">常用功能直达</h2>
           </div>
-          <div class="quick-grid">
-            <a class="quick-card" href="cupk.html">
-              <div class="quick-card-bg img-cupk"></div>
-              <div class="quick-card-body">
-                <span class="quick-icon"><svg class="svg-icon svg-icon--lg" aria-hidden="true"><use href="images/icons.svg#icon-school"/></svg></span>
-                <strong>CUPK 常用网站</strong>
-                <span>教务系统、图书馆、融合门户、VPN 等校园入口一站直达。</span>
-              </div>
+          <div class="entry-grid">
+            <!-- 校园导航 -->
+            <a class="entry-card" href="cupk.html" style="--accent:#5b9bd5">
+              <span class="entry-icon"><img src="images/card-cupk.jpg" alt="" loading="lazy" /></span>
+              <strong>CUPK 常用网站</strong><span>教务系统、图书馆、融合门户、VPN</span>
             </a>
-            <a class="quick-card" href="websites.html">
-              <div class="quick-card-bg"></div>
-              <div class="quick-card-body">
-                <span class="quick-icon"><svg class="svg-icon svg-icon--lg" aria-hidden="true"><use href="images/icons.svg#icon-book"/></svg></span>
-                <strong>学习资源库</strong>
-                <span>97+ 精选学习网站，按课程预习、期末复习、写论文等场景筛选。</span>
-              </div>
+            <a class="entry-card" href="campus.html" style="--accent:#4e9f7a">
+              <span class="entry-icon"><img src="images/card-campus.jpg" alt="" loading="lazy" /></span>
+              <strong>校园生活指南</strong><span>食堂、宿舍、校园卡、交通出行</span>
             </a>
-            <a class="quick-card" href="campus.html">
-              <div class="quick-card-bg"></div>
-              <div class="quick-card-body">
-                <span class="quick-icon"><svg class="svg-icon svg-icon--lg" aria-hidden="true"><use href="images/icons.svg#icon-utensils"/></svg></span>
-                <strong>校园生活指南</strong>
-                <span>食堂、宿舍、校园卡、交通出行——衣食住行一站搞定。</span>
-              </div>
+            <a class="entry-card" href="gallery.html" style="--accent:#d4856a">
+              <span class="entry-icon"><img src="images/card-gallery.jpg" alt="" loading="lazy" /></span>
+              <strong>校园掠影</strong><span>红山湖畔，用镜头记录石大美景</span>
             </a>
-            <a class="quick-card" href="tools.html">
-              <div class="quick-card-bg"></div>
-              <div class="quick-card-body">
-                <span class="quick-icon"><svg class="svg-icon svg-icon--lg" aria-hidden="true"><use href="images/icons.svg#icon-calculator"/></svg></span>
-                <strong>学习工具箱</strong>
-                <span>绩点计算器和精选学习工具推荐，随时了解学业成绩。</span>
-              </div>
+            <!-- 学习资源 -->
+            <a class="entry-card" href="websites.html" style="--accent:#3a7cc0">
+              <span class="entry-icon"><img src="images/card-study.jpg" alt="" loading="lazy" /></span>
+              <strong>学习资源库</strong><span>150+ 精选网站，按场景智能筛选</span>
             </a>
-            <a class="quick-card" href="media.html">
-              <div class="quick-card-bg"></div>
-              <div class="quick-card-body">
-                <span class="quick-icon"><svg class="svg-icon svg-icon--lg" aria-hidden="true"><use href="images/icons.svg#icon-film"/></svg></span>
-                <strong>石大光影</strong>
-                <span>校区风光视频、学习背景音和校园地标，用视听感受校园。</span>
-              </div>
+            <a class="entry-card" href="tools.html" style="--accent:#8b6bb0">
+              <span class="entry-icon"><img src="images/card-tools.jpg" alt="" loading="lazy" /></span>
+              <strong>学习工具箱</strong><span>绩点计算、番茄钟、倒计时</span>
             </a>
-            <a class="quick-card" href="team.html">
-              <div class="quick-card-bg"></div>
-              <div class="quick-card-body">
-                <span class="quick-icon"><svg class="svg-icon svg-icon--lg" aria-hidden="true"><use href="images/icons.svg#icon-users"/></svg></span>
-                <strong>小组介绍</strong>
-                <span>项目团队分工和开发时间线，清楚记录每个人的贡献。</span>
-              </div>
+            <a class="entry-card" href="share.html" style="--accent:#e8785a">
+              <span class="entry-icon"><img src="images/card-share.jpg" alt="" loading="lazy" /></span>
+              <strong>共享资源</strong><span>笔记、试卷、复习资料互帮互助</span>
+            </a>
+            <!-- 校园服务 -->
+            <a class="entry-card" href="lostfound.html" style="--accent:#e8a55a">
+              <span class="entry-icon"><img src="images/card-lostfound.jpg" alt="" loading="lazy" /></span>
+              <strong>失物招领</strong><span>寻物发布、招领匹配</span>
+            </a>
+            <a class="entry-card" href="forum.html" style="--accent:#5ba0a0">
+              <span class="entry-icon"><img src="images/card-forum.jpg" alt="" loading="lazy" /></span>
+              <strong>互助论坛</strong><span>学习求助、校园活动、吹水闲聊</span>
+            </a>
+            <a class="entry-card" href="events.html" style="--accent:#c07050">
+              <span class="entry-icon"><img src="images/card-events.jpg" alt="" loading="lazy" /></span>
+              <strong>活动日历</strong><span>讲座、比赛、社团活动不错过</span>
+            </a>
+            <a class="entry-card" href="secondhand.html" style="--accent:#5ba0a0">
+              <span class="entry-icon"><img src="images/card-secondhand.jpg" alt="" loading="lazy" /></span>
+              <strong>二手交易</strong><span>闲置买卖、物尽其用</span>
             </a>
           </div>
         </div>
+        <!-- /container -->
       </section>
+      <!-- /quick-entry -->
 
-      <!-- 搜索 + 收藏/最近 -->
-      <section class="discover">
+      <!-- ===== 校园动态 ===== -->
+      <!-- 聚合失物招领和论坛最新内容，展示校园最近发生的事 -->
+      <section class="campus-pulse">
         <div class="container">
           <div class="section-head">
-            <span class="eyebrow">发现资源</span>
-            <h2 class="section-title">搜索你需要的</h2>
+            <span class="eyebrow">校园动态</span>
+            <h2 class="section-title">石大新鲜事</h2>
           </div>
-          <div class="search-bar">
-            <span class="search-icon"><svg class="svg-icon" width="18" height="18" aria-hidden="true"><use href="images/icons.svg#icon-search"/></svg></span>
-            <input
-              id="homeSearch"
-              type="search"
-              placeholder="搜一搜：CUPK、教务、知网、MDN、AI、B站…"
-              aria-label="搜索资源"
-            />
-            <button class="button primary" id="homeSearchButton" type="button">
-              搜索
-            </button>
+          <div class="pulse-layout">
+            <!-- 左侧：最新失物招领与论坛帖子动态 -->
+            <div class="pulse-feed" id="homeLatest"></div>
+            <!-- 右侧：校园风景图片展示 -->
+            <div class="pulse-gallery" id="homeGallery"></div>
           </div>
-          <div class="search-results" id="homeSearchResult"></div>
+        </div>
+        <!-- /container -->
+      </section>
+      <!-- /campus-pulse -->
 
-          <div class="panels">
-            <div class="panel">
-              <div class="panel-head">
-                <span class="panel-icon"><svg class="svg-icon svg-icon--md" aria-hidden="true"><use href="images/icons.svg#icon-star"/></svg></span>
-                <h3>我的收藏</h3>
-              </div>
-              <div id="favoritesPanel"></div>
-            </div>
-            <div class="panel">
-              <div class="panel-head">
-                <span class="panel-icon"><svg class="svg-icon svg-icon--md" aria-hidden="true"><use href="images/icons.svg#icon-clock"/></svg></span>
-                <h3>最近访问</h3>
-              </div>
-              <div id="recentPanel"></div>
+      <!-- ===== 关于我们 ===== -->
+      <!-- 项目简介、团队背景和相关链接（论坛、活动、掠影） -->
+      <section class="about-section" id="about">
+        <div class="container">
+          <div class="about-card">
+            <h2>关于石光驿站</h2>
+            <p>
+              石光驿站由中石克学生团队开发，旨在为中国石油大学（北京）克拉玛依校区的同学们提供一个集成校园导航、
+              学习资源、生活指南和互助交流的一站式平台。项目纯前端实现，数据基于公开信息和同学经验整理。
+            </p>
+            <div class="about-links">
+              <a href="forum.html">💬 论坛交流</a>
+              <a href="events.html">📅 活动日历</a>
+              <a href="gallery.html">📸 校园掠影</a>
             </div>
           </div>
         </div>
       </section>
+      <!-- /about-section -->
     </main>
+    <!-- /main -->
 
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <h3>石光驿站</h3>
-          <p>面向中石克学生的校园入口、学习资源、工具和网站导航。</p>
-        </div>
-        <div>
-          <h4>校园导航</h4>
-          <a href="cupk.html">常用网站</a><a href="campus.html">校园生活指南</a><a href="media.html">石大光影</a>
-        </div>
-        <div>
-          <h4>学习资源</h4>
-          <a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a>
-        </div>
-        <div>
-          <h4>项目</h4>
-          <a href="team.html">小组介绍</a><a href="index.html">返回首页</a>
-        </div>
-      </div>
-    </footer>
-
+    <!-- ===== 动态页脚（由 common.js 生成） ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 按依赖顺序加载 ===== -->
+    <!-- data.js：提供 StudyResources 数据源 -->
     <script src="javascript/data.js"></script>
+    <!-- storage.js：localStorage 封装，提供收藏 / 最近访问 API -->
     <script src="javascript/storage.js"></script>
+    <!-- common.js：导航栏、页脚、主题切换、用户系统、全局工具 -->
     <script src="javascript/common.js"></script>
+    <!-- index.js：首页专属逻辑（轮播、搜索、面板渲染、动态加载） -->
     <script src="javascript/index.js"></script>
+    <!-- effects.js：滚动入场动画等视觉效果 -->
+    <script src="javascript/effects.js"></script>
+    <!-- player.js：跨页面音乐播放器，基于 localStorage 持久化 -->
+    <script src="javascript/player.js"></script>
   </body>
+  <!-- /body -->
 </html>
+<!-- /html -->

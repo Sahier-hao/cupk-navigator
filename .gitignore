@@ -1,6 +1,6 @@
 # Internal notes
 TEAM_GUIDE.md
-项目进度交接.md
+
 
 # OS / editor files
 .DS_Store
@@ -10,16 +10,16 @@ Thumbs.db
 CLAUDE.md
 
 # homework
-《Web程序设计》大作业报告模板(1).doc
-《Web程序设计》大作业要求(1).doc
-录音.md
-校园学习资源导航站_实施方案.md
-要求总结.md
+docs
 
-CUPK 新生指南.md
-tmp_manual.txt
+
 
 #claude配色
 claude
-中国石油大学（北京）克拉玛依校区学生手册（2025年）.pdf
+.claude
+
+
 .gitignore
+
+_unused
+

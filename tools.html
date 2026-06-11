@@ -3,81 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1b18" media="(prefers-color-scheme: dark)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap"
+    />
     <meta
       name="description"
       content="绩点计算器与精选学习工具——输入成绩和学分自动计算加权平均绩点，附带绩点换算参考表。"
     />
     <title>学习工具箱 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 -->
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/crud.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="nav-wrap">
-        <a class="brand" href="index.html"
-          ><img
-            class="brand-mark"
-            src="images/中国石油大学矢量标.jpg"
-            alt="中国石油大学"
-          />石光驿站</a
-        >
-        <button class="nav-toggle" type="button" aria-label="打开导航">
-          ☰
-        </button>
-        <button
-          class="theme-toggle"
-          type="button"
-          aria-label="切换到暗色模式"
-          title="切换暗色模式"
-        >
-          ☾
-        </button>
-        <nav class="site-nav">
-          <a class="nav-link" href="index.html">首页</a>
-          <a class="nav-link" href="cupk.html">常用网站</a>
-          <a class="nav-link" href="campus.html">校园生活</a>
-          <a class="nav-link" href="websites.html">学习资源库</a>
-          <a class="nav-link active" href="tools.html">学习工具箱</a>
-          <a class="nav-link" href="media.html">石大光影</a>
-          <a class="nav-link" href="team.html">小组介绍</a>
-          <a class="nav-link" href="login.html">登录</a>
-        </nav>
-      </div>
-    </header>
+    <!-- ===== 动态导航栏 ===== -->
+    <div id="siteHeader"></div>
 
-    <main class="section tight">
+    <!-- ===== 页面主体 ===== -->
+    <main id="main" class="section tight">
       <div class="container">
-        <nav class="breadcrumb" aria-label="面包屑导航"><a href="index.html">首页</a><span class="breadcrumb-sep">/</span><span>学习工具箱</span></nav>
-        <span class="eyebrow">学习工具箱</span>
+        <!-- 页面 Hero：背景图 + 标题 + 面包屑导航 -->
+        <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(24,23,21,0.5),rgba(24,23,21,0.2)),url(images/hero-tools.jpg)">
+          <nav class="breadcrumb" aria-label="面包屑导航">
+            <a href="index.html">首页</a><span class="breadcrumb-sep">/</span><span>学习工具箱</span>
+          </nav>
+          <span class="eyebrow">学习工具箱</span>
         <h1 class="page-title">绩点计算、专注计时与实用学习工具。</h1>
-        <p class="lead">
-          从日常专注到成绩管理，三个实用工具帮你提升学习效率。
-        </p>
+        <p class="lead">从日常专注到成绩管理，三个实用工具帮你提升学习效率。</p>
+        </div>
 
-        <!-- 倒计时卡片 -->
+        <!-- 双栏布局：左侧工具导航 + 右侧内容区 -->
+        <div class="crud-layout">
+          <!-- 侧边栏：工具切换导航（倒计时、番茄钟、绩点计算器、体测计算器、推荐工具） -->
+          <aside class="crud-sidebar" id="toolsSidebar">
+            <div class="sidebar-title">🧰 工具箱</div>
+            <button data-tools-nav="countdown" class="active">📅 倒计时</button>
+            <button data-tools-nav="pomodoro">🍅 番茄钟</button>
+            <button data-tools-nav="gpa">📊 绩点计算器</button>
+            <button data-tools-nav="fitness">🏃 体测计算器</button>
+            <button data-tools-nav="tools">🔧 推荐工具</button>
+          </aside>
+          <!-- /toolsSidebar -->
+
+          <!-- 右侧工具内容区 -->
+          <div id="toolsContent">
+
+        <!-- 倒计时卡片：四六级、暑假、开学倒计时（日期在 tools.js 中硬编码） -->
+        <section id="tools-countdown">
+        <!-- 三栏倒计时条 -->
         <div class="countdown-strip" id="countdownStrip">
+          <!-- 四六级笔试倒计时 -->
           <div class="countdown-item">
             <span class="countdown-label">距四六级笔试</span>
             <span class="countdown-number" id="cdCET">--</span>
             <span class="countdown-unit">天</span>
           </div>
+          <!-- 暑假开始倒计时 -->
           <div class="countdown-item">
             <span class="countdown-label">距暑假开始</span>
             <span class="countdown-number" id="cdSummer">--</span>
             <span class="countdown-unit">天</span>
           </div>
+          <!-- 开学倒计时 -->
           <div class="countdown-item">
             <span class="countdown-label">距开学（约8.31）</span>
             <span class="countdown-number" id="cdStart">--</span>
             <span class="countdown-unit">天</span>
           </div>
+          <!-- /countdown-strip -->
         </div>
 
         <!-- 番茄钟 -->
-        <section class="tools-section">
+        <!-- 基于 25/15/45 分钟可选的专注计时器，附带 SVG 圆环进度动画和浏览器通知 -->
+        <section class="tools-section" id="tools-pomodoro">
           <div class="section-heading-row">
             <div>
               <span class="tag coral">专注计时</span>
@@ -85,37 +90,87 @@
             </div>
           </div>
           <p class="tools-section-lead">
-            25分钟专注 + 5分钟休息为一轮，完成四轮后休息15分钟。保持专注，告别拖延。
+            25分钟专注 +
+            5分钟休息为一轮，完成四轮后休息15分钟。保持专注，告别拖延。
           </p>
+          <!-- 番茄钟计时器主体：SVG 圆环 + 中间时间/状态/轮次显示 -->
           <div class="pomodoro-container" id="pomodoro">
             <div class="pomodoro-timer-ring">
               <svg viewBox="0 0 200 200" class="pomodoro-svg">
-                <circle cx="100" cy="100" r="88" fill="none" stroke="var(--line)" stroke-width="6"/>
-                <circle cx="100" cy="100" r="88" fill="none" stroke="var(--coral)" stroke-width="6"
-                  stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="0" stroke-dashoffset="0"
-                  class="pomodoro-progress-ring" id="pomodoroRing"/>
+                <!-- 背景圆环 -->
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="88"
+                  fill="none"
+                  stroke="var(--line)"
+                  stroke-width="6"
+                />
+                <!-- 进度圆环（由 JS 动态控制 stroke-dasharray） -->
+                <circle
+                  cx="100"
+                  cy="100"
+                  r="88"
+                  fill="none"
+                  stroke="var(--coral)"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                  transform="rotate(-90 100 100)"
+                  stroke-dasharray="0"
+                  stroke-dashoffset="0"
+                  class="pomodoro-progress-ring"
+                  id="pomodoroRing"
+                />
               </svg>
+              <!-- 圆环中心：倒计时时间、状态文案、当前轮次 -->
               <div class="pomodoro-center">
                 <span class="pomodoro-time" id="pomodoroTime">25:00</span>
-                <span class="pomodoro-status" id="pomodoroStatus">准备开始</span>
-                <span class="pomodoro-rounds" id="pomodoroRounds">第 1 / 4 轮</span>
+                <span class="pomodoro-status" id="pomodoroStatus"
+                  >准备开始</span
+                >
+                <span class="pomodoro-rounds" id="pomodoroRounds"
+                  >第 1 / 4 轮</span
+                >
               </div>
             </div>
+            <!-- 预设时长按钮：25分钟（默认）/ 15分钟 / 45分钟 -->
             <div class="pomodoro-presets">
-              <button class="button secondary pomodoro-preset active" data-minutes="25">25 分钟</button>
-              <button class="button secondary pomodoro-preset" data-minutes="15">15 分钟</button>
-              <button class="button secondary pomodoro-preset" data-minutes="45">45 分钟</button>
+              <button
+                class="button secondary pomodoro-preset active"
+                data-minutes="25"
+              >
+                25 分钟
+              </button>
+              <button
+                class="button secondary pomodoro-preset"
+                data-minutes="15"
+              >
+                15 分钟
+              </button>
+              <button
+                class="button secondary pomodoro-preset"
+                data-minutes="45"
+              >
+                45 分钟
+              </button>
             </div>
+            <!-- 控制按钮组：开始 / 暂停 / 重置 -->
             <div class="pomodoro-controls">
-              <button class="button primary" id="pomodoroStart">开始专注</button>
-              <button class="button secondary" id="pomodoroPause" disabled>暂停</button>
+              <button class="button primary" id="pomodoroStart">
+                开始专注
+              </button>
+              <button class="button secondary" id="pomodoroPause" disabled>
+                暂停
+              </button>
               <button class="button secondary" id="pomodoroReset">重置</button>
             </div>
           </div>
         </section>
+        <!-- /tools-pomodoro 番茄钟结束 -->
 
         <!-- 绩点计算器 -->
-        <section class="tools-section">
+        <!-- 支持动态增删课程（最多 12 门），百分制转 4.0 绩点，加权平均计算 -->
+        <section class="tools-section" id="tools-gpa">
           <div class="section-heading-row">
             <div>
               <span class="tag coral">绩点计算器</span>
@@ -126,10 +181,12 @@
             添加课程后输入百分制成绩和学分，自动计算加权平均绩点。
           </p>
 
+          <!-- 计算器主体：课程列表输入区 + 操作按钮 + 结果展示 -->
           <div class="gpa-calculator">
             <div class="gpa-input-area" id="gpaCourseList">
-              <!-- JS动态生成课程行 -->
+              <!-- JS 动态生成课程行：课程名 + 成绩 + 学分 -->
             </div>
+            <!-- 操作按钮组 -->
             <div class="gpa-actions">
               <button class="button secondary" id="addCourseBtn" type="button">
                 + 添加课程
@@ -141,6 +198,7 @@
                 清空重置
               </button>
             </div>
+            <!-- 计算结果展示区 -->
             <div class="gpa-result" id="gpaResult" style="display: none">
               <div class="gpa-result-grid">
                 <div class="gpa-result-item">
@@ -160,12 +218,13 @@
             </div>
           </div>
 
-          <!-- 计算历史 -->
+          <!-- 计算历史记录（localStorage 持久化） -->
           <div class="gpa-history-panel" id="gpaHistoryPanel">
             <div class="gpa-history-title">计算历史</div>
             <div id="gpaHistoryList"></div>
           </div>
 
+          <!-- 绩点换算参考：百分制 → 4.0 绩点 → 等级对照表 -->
           <details class="gpa-reference">
             <summary>绩点换算参考表</summary>
             <div class="gpa-table-wrap">
@@ -178,31 +237,37 @@
                   </tr>
                 </thead>
                 <tbody>
+                  <!-- 95-100 分为 A 等级，对应 4.0 绩点 -->
                   <tr>
                     <td>95 - 100</td>
                     <td>4.0</td>
                     <td>A</td>
                   </tr>
+                  <!-- 85-94 分为 A- 等级，对应 3.7 绩点 -->
                   <tr>
                     <td>85 - 94</td>
                     <td>3.7</td>
                     <td>A-</td>
                   </tr>
+                  <!-- 75-84 分为 B 等级，对应 3.0 绩点 -->
                   <tr>
                     <td>75 - 84</td>
                     <td>3.0</td>
                     <td>B</td>
                   </tr>
+                  <!-- 65-74 分为 C 等级，对应 2.3 绩点 -->
                   <tr>
                     <td>65 - 74</td>
                     <td>2.3</td>
                     <td>C</td>
                   </tr>
+                  <!-- 60-64 分为 D 等级，对应 1.7 绩点 -->
                   <tr>
                     <td>60 - 64</td>
                     <td>1.7</td>
                     <td>D</td>
                   </tr>
+                  <!-- 60 分以下为 F，绩点为 0 -->
                   <tr>
                     <td>60 以下</td>
                     <td>0</td>
@@ -213,47 +278,133 @@
             </div>
           </details>
         </section>
+        <!-- /tools-gpa 绩点计算器结束 -->
 
-        <!-- 推荐工具（JS动态渲染） -->
-        <section class="tools-section">
+        <!-- 体测计算器 -->
+        <!-- 依据《国家学生体质健康标准》大学组，输入各项成绩自动计算加权总分与等级 -->
+        <section class="tools-section" id="tools-fitness">
           <div class="section-heading-row">
             <div>
-              <span class="tag blue">推荐工具</span>
-              <h2 class="section-title">精选学习工具</h2>
+              <span class="tag blue">体测</span>
+              <h2 class="section-title">体测成绩计算器</h2>
             </div>
           </div>
           <p class="tools-section-lead">
-            来自资源库中"学习工具"分类的精选推荐，更多请访问资源库。
+            输入各项体测成绩，自动计算加权总分和等级。标准依据《国家学生体质健康标准》大学组。
           </p>
-          <div class="grid cols-3" id="toolResourceList"></div>
-        </section>
-      </div>
-    </main>
 
-    <footer class="site-footer">
-      <div class="container footer-grid">
-        <div>
-          <h3>石光驿站</h3>
-          <p>绩点计算器仅作参考，正式绩点以教务系统为准。</p>
-        </div>
-        <div>
-          <h4>校园导航</h4>
-          <a href="cupk.html">常用网站</a><a href="campus.html">校园生活指南</a><a href="media.html">石大光影</a>
-        </div>
-        <div>
-          <h4>学习资源</h4>
-          <a href="websites.html">资源库</a><a href="tools.html">学习工具箱</a>
-        </div>
-        <div>
-          <h4>项目</h4>
-          <a href="team.html">小组介绍</a><a href="index.html">返回首页</a>
-        </div>
+          <div class="gpa-calculator" id="fitnessCalc">
+            <!-- 性别选择 + 年级选择 -->
+            <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px">
+              <button class="button secondary fitness-gender active" data-gender="male">👦 男生</button>
+              <button class="button secondary fitness-gender" data-gender="female">👧 女生</button>
+              <select id="fitnessGrade" style="width:auto;padding:9px 14px">
+                <option value="1">大一/大二</option>
+                <option value="3">大三/大四</option>
+              </select>
+            </div>
+
+            <!-- 体测项目输入区：身高、体重、肺活量、50米、坐位体前屈、立定跳远、引体向上/仰卧起坐、长跑 -->
+            <div class="gpa-input-area" id="fitnessFields">
+              <!-- 身高 + 体重 -->
+              <div class="gpa-course-row">
+                <div class="gpa-field"><label>身高 (cm)</label><input type="number" id="fitHeight" placeholder="175" min="100" max="250" step="0.1" /></div>
+                <div class="gpa-field"><label>体重 (kg)</label><input type="number" id="fitWeight" placeholder="65" min="30" max="200" step="0.1" /></div>
+              </div>
+              <!-- 肺活量 + 50 米跑 -->
+              <div class="gpa-course-row">
+                <div class="gpa-field"><label>肺活量 (ml)</label><input type="number" id="fitVital" placeholder="4000" min="500" max="10000" /></div>
+                <div class="gpa-field"><label>50米跑 (秒)</label><input type="number" id="fitSprint" placeholder="7.5" min="5" max="20" step="0.1" /></div>
+              </div>
+              <!-- 坐位体前屈 + 立定跳远 -->
+              <div class="gpa-course-row">
+                <div class="gpa-field"><label>坐位体前屈 (cm)</label><input type="number" id="fitReach" placeholder="15" min="-30" max="50" step="0.1" /></div>
+                <div class="gpa-field"><label>立定跳远 (cm)</label><input type="number" id="fitJump" placeholder="230" min="50" max="350" /></div>
+              </div>
+              <!-- 引体向上（男）/ 仰卧起坐（女）+ 长跑 -->
+              <div class="gpa-course-row">
+                <div class="gpa-field"><label id="fitUpperLabel">引体向上 (个)</label><input type="number" id="fitUpper" placeholder="10" min="0" max="60" /></div>
+                <div class="gpa-field"><label id="fitRunLabel">1000米 (分:秒)</label><div style="display:flex;gap:8px"><input type="number" id="fitRunMin" placeholder="4" min="0" max="20" style="flex:1" /><input type="number" id="fitRunSec" placeholder="00" min="0" max="59" style="flex:1" /></div></div>
+              </div>
+            </div>
+
+            <div class="gpa-actions">
+              <button class="button primary" id="calcFitnessBtn">计算成绩</button>
+              <button class="button secondary" id="resetFitnessBtn">清空</button>
+            </div>
+
+            <!-- 体测计算结果：各项目单项得分 + 总分 + 等级 -->
+            <div class="gpa-result" id="fitnessResult" style="display:none">
+              <div class="gpa-result-grid" id="fitnessGrid"></div>
+              <p class="gpa-result-note" id="fitnessNote"></p>
+            </div>
+          </div>
+        </section>
+        <!-- /tools-fitness -->
+
+          <!-- 工具内容区结束 -->
+          </div><!-- /toolsContent -->
+        </div><!-- /crud-layout 双栏布局结束 -->
+
       </div>
-    </footer>
+      <!-- /container -->
+    </main>
+    <!-- /main -->
+
+    <!-- ===== 动态页脚（由 common.js 生成） ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮，平滑滚动至页面顶部 -->
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 按依赖顺序加载 ===== -->
+    <!-- 注意：加载顺序不可变，每个脚本依赖前一个脚本的 API -->
+    <!-- data.js：StudyResources 数据源（推荐工具使用） -->
     <script src="javascript/data.js"></script>
     <script src="javascript/storage.js"></script>
     <script src="javascript/common.js"></script>
+    <!-- tools.js：倒计时、番茄钟、绩点计算器、体测计算器、推荐工具 -->
     <script src="javascript/tools.js"></script>
+    <script src="javascript/effects.js"></script>
+    <script src="javascript/player.js"></script>
+    <!-- 侧边栏导航脚本：点击平滑滚动 + 滚动时自动高亮当前区域 -->
+    <script>
+      (function () {
+        var btns = document.querySelectorAll("#toolsSidebar button[data-tools-nav]");
+        var sections = {};
+        btns.forEach(function (b) {
+          var id = "tools-" + b.dataset.toolsNav;
+          var el = document.getElementById(id);
+          if (el) sections[b.dataset.toolsNav] = el;
+        });
+        btns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var section = sections[btn.dataset.toolsNav];
+            if (section) {
+              section.scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+          });
+        });
+        /* 滚动时高亮当前区域 */
+        var ticking = false;
+        window.addEventListener("scroll", function () {
+          if (!ticking) {
+            requestAnimationFrame(function () {
+              var scrollY = window.scrollY + 120;
+              var active = null;
+              for (var key in sections) {
+                if (sections[key].offsetTop <= scrollY) active = key;
+              }
+              btns.forEach(function (b) {
+                b.classList.toggle("active", b.dataset.toolsNav === active);
+              });
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+      })();
+    </script>
   </body>
+  <!-- /body -->
 </html>
+<!-- /html -->

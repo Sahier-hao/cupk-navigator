@@ -324,6 +324,7 @@ p {
     font-weight: 600;
     line-height: 1.12;
     letter-spacing: -0.02em;
+    text-wrap: balance;
 }
 
 .page-title {
@@ -335,6 +336,7 @@ p {
     font-weight: 600;
     line-height: 1.08;
     letter-spacing: -0.015em;
+    text-wrap: balance;
 }
 
 .section-title {
@@ -345,6 +347,7 @@ p {
     font-weight: 600;
     line-height: 1.15;
     letter-spacing: -0.01em;
+    text-wrap: balance;
 }
 
 .lead {
@@ -940,6 +943,7 @@ textarea:focus {
    暗色模式
    ================================================================ */
 [data-theme="dark"] {
+    color-scheme: dark;
     --canvas: #1c1b18;
     --surface: #292824;
     --surface-soft: #302e2a;
@@ -1419,4 +1423,476 @@ textarea:focus {
 
 [data-theme="dark"] .video-info-card {
     background: var(--surface);
+}
+
+/* ================================================================
+   CSS hover 下拉菜单（导航栏子菜单）
+   ================================================================ */
+.nav-dropdown {
+    position: relative;
+    display: inline-flex;
+}
+.nav-dropdown-trigger {
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+/* 下拉菜单面板：默认隐藏，hover 时显示 */
+.nav-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% - 4px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 140px;
+    padding: 8px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--canvas);
+    box-shadow: 0 12px 40px rgba(31,41,51,0.1);
+    z-index: 100;
+}
+.nav-dropdown:hover .nav-dropdown-menu {
+    display: block;
+    animation: fadeIn 0.2s ease;
+}
+/* 下拉菜单中的链接项 */
+.nav-dropdown-menu a {
+    display: block;
+    padding: 8px 14px;
+    border-radius: var(--radius-md);
+    color: var(--ink);
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+.nav-dropdown-menu a:hover {
+    background: rgba(212,133,106,0.08);
+    color: var(--coral-dark);
+}
+.nav-dropdown-menu a.active {
+    background: var(--surface-strong);
+    font-weight: 600;
+}
+
+/* ---- 移动端下拉菜单适配 ---- */
+@media (max-width: 920px) {
+    .nav-dropdown { display: block; }
+    .nav-dropdown-menu {
+        position: static;
+        transform: none;
+        box-shadow: none;
+        border: 0;
+        padding: 0 0 0 16px;
+        min-width: 0;
+        background: transparent;
+    }
+    .nav-dropdown:hover .nav-dropdown-menu { display: none; }
+    .nav-dropdown.open .nav-dropdown-menu { display: block; }
+    .nav-dropdown-trigger { width: 100%; text-align: left; }
+}
+
+[data-theme="dark"] .nav-dropdown-menu {
+    background: var(--dark-card);
+    border-color: var(--line);
+}
+
+/* ================================================================
+   导航栏用户状态条
+   ================================================================ */
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+.nav-user-nick {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--coral-dark);
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.nav-user-nick:hover { color: var(--coral); }
+.nav-user-logout {
+    font-size: 12px;
+    padding: 4px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.nav-user-logout:hover {
+    border-color: var(--coral);
+    color: var(--coral-dark);
+}
+.nav-user-input {
+    width: 120px;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--canvas);
+    color: var(--ink);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+.nav-user-input:focus { border-color: var(--coral); }
+.nav-user-btn {
+    padding: 6px 14px;
+    border: 1px solid var(--coral);
+    border-radius: var(--radius-sm);
+    background: var(--coral);
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+.nav-user-btn:hover { background: var(--coral-dark); }
+
+/* ================================================================
+   个人中心面板（弹出浮层）
+   ================================================================ */
+.profile-panel {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    align-items: center;
+    justify-content: center;
+}
+.profile-panel.show { display: flex; }
+.profile-mask {
+    position: absolute;
+    inset: 0;
+    background: rgba(24,23,21,0.4);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+.profile-card {
+    position: relative;
+    width: min(520px, calc(100% - 32px));
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 28px;
+    border-radius: var(--radius-xl);
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    box-shadow: 0 24px 80px rgba(24,23,21,0.2);
+    animation: fadeInUp 0.35s ease-out;
+}
+.profile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+.profile-head h3 { margin: 0; font-size: 18px; color: var(--ink); font-family: var(--font-display); }
+.profile-close {
+    width: 32px; height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--muted);
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.profile-close:hover { border-color: var(--coral); color: var(--coral-dark); }
+.profile-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+.profile-tab {
+    padding: 8px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--canvas);
+    color: var(--muted);
+    font-size: 13px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.profile-tab:hover { border-color: var(--coral); color: var(--coral-dark); }
+.profile-tab.active { background: var(--dark); color: var(--on-dark); border-color: var(--dark); }
+.profile-body { display: grid; gap: 6px; }
+.profile-empty { text-align: center; color: var(--muted); padding: 30px 0; font-size: 14px; }
+.profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    text-decoration: none;
+    color: inherit;
+    transition: background 0.2s ease;
+}
+.profile-item:hover { background: var(--surface-strong); }
+.profile-item strong { font-size: 14px; color: var(--ink); font-weight: 500; }
+.profile-item span { font-size: 12px; color: var(--muted); }
+
+[data-theme="dark"] .profile-card { background: var(--dark-card); }
+[data-theme="dark"] .profile-item { background: var(--dark-soft); border-color: rgba(255,255,255,0.06); }
+
+/* ================================================================
+   校徽入场转场动画（仅首页）
+   ================================================================ */
+#logo-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.6s ease;
+}
+#logo-splash.splash-fade {
+    opacity: 0;
+    pointer-events: none;
+}
+.splash-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #d4856a 0%, #5b9bd5 100%);
+}
+[data-theme="dark"] .splash-bg {
+    background: linear-gradient(135deg, #b86b50 0%, #3a7cc0 100%);
+}
+.splash-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 160px;
+    z-index: 2;
+}
+.splash-logo {
+    width: 100px;
+    height: auto;
+    position: relative;
+    z-index: 2;
+    animation: splashLogoIn 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    opacity: 0;
+    transform: scale(0.6);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+.splash-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.7);
+    animation: splashRingPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes splashLogoIn {
+    0%   { opacity: 0; transform: scale(0.6) rotate(-8deg); }
+    65%  { opacity: 1; transform: scale(1.06) rotate(2deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+
+@keyframes splashRingPulse {
+    0%   { transform: scale(0.88); opacity: 0.5; }
+    50%  { transform: scale(1.12); opacity: 0.15; }
+    100% { transform: scale(0.88); opacity: 0.5; }
+}
+
+/* ================================================================
+   页面加载进度条
+   ================================================================ */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: var(--gradient-coral);
+    z-index: 9999;
+    width: 0;
+    transition: width 0.3s ease;
+    border-radius: 0 2px 2px 0;
+}
+.page-loader.done {
+    width: 100%;
+    opacity: 0;
+    transition: width 0.2s ease, opacity 0.3s ease;
+}
+
+/* ================================================================
+   滚动进度指示器
+   ================================================================ */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    background: var(--gradient-coral);
+    z-index: 9998;
+    width: 0;
+    border-radius: 0 1px 1px 0;
+}
+
+/* ================================================================
+   按钮波纹效果（Material Design 风格）
+   ================================================================ */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.3);
+    transform: scale(0);
+    animation: rippleAnim 0.6s ease-out;
+    pointer-events: none;
+}
+@keyframes rippleAnim {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* ================================================================
+   卡片光晕扫描效果
+   ================================================================ */
+.card-glossy {
+    overflow: hidden;
+}
+.card-glossy::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.06), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+.card-glossy:hover::after { opacity: 1; }
+
+/* ================================================================
+   浮动渐变 Blob 装饰（页面背景特效）
+   ================================================================ */
+.floating-blobs {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.3;
+}
+.blob-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--coral);
+    top: -100px;
+    right: -100px;
+    animation: blobFloat1 18s ease-in-out infinite;
+}
+.blob-2 {
+    width: 350px;
+    height: 350px;
+    background: var(--blue);
+    bottom: -80px;
+    left: -80px;
+    animation: blobFloat2 22s ease-in-out infinite;
+}
+@keyframes blobFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-30px, 40px) scale(1.08); }
+    50% { transform: translate(-60px, -20px) scale(0.95); }
+    75% { transform: translate(20px, -50px) scale(1.04); }
+}
+@keyframes blobFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, -30px) scale(1.06); }
+    50% { transform: translate(-20px, -60px) scale(0.92); }
+    75% { transform: translate(-50px, 20px) scale(1.05); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .blob { animation: none; }
+}
+
+/* ================================================================
+   页面 Hero Banner（内页共用深色 Hero 横幅）
+   ================================================================ */
+.page-hero {
+    padding: 64px 28px 48px;
+    background: var(--gradient-dark) center/cover;
+    border-radius: var(--radius-xl);
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+}
+.page-hero .breadcrumb a { color: rgba(255,255,255,0.6); }
+.page-hero .breadcrumb span { color: rgba(255,255,255,0.4); }
+.page-hero .breadcrumb .breadcrumb-sep { color: rgba(255,255,255,0.3); }
+.page-hero .eyebrow { color: rgba(255,255,255,0.7); }
+.page-hero .page-title { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+.page-hero .lead { color: rgba(255,255,255,0.75); }
+
+[data-theme="dark"] .page-hero { background-blend-mode: overlay; }
+
+@media (max-width: 640px) {
+    .page-hero { padding: 40px 18px 32px; border-radius: var(--radius-lg); }
+}
+
+/* ================================================================
+   无障碍跳转链接：键盘用户跳过导航直达内容
+   ================================================================ */
+.skip-link {
+    position: absolute;
+    top: -100px;
+    left: 16px;
+    z-index: 9999;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    background: var(--coral);
+    color: #fff;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    transition: top 0.2s ease;
+}
+.skip-link:focus {
+    top: 8px;
+}
+
+/* ================================================================
+   移动端交互优化：消除双击缩放延迟
+   ================================================================ */
+button, .button, .nav-link, .filter-tab, .tab,
+.cupk-sidebar a, .crud-sidebar button, .crud-sidebar a,
+input[type="submit"], input[type="button"] {
+    touch-action: manipulation;
+}
+
+/* ================================================================
+   倒计时脉冲动画：到 0 天时心跳效果
+   ================================================================ */
+@keyframes countdownPulse {
+    0%, 100% { transform: scale(1); }
+    15% { transform: scale(1.08); }
+    30% { transform: scale(1); }
+    45% { transform: scale(1.05); }
+    60% { transform: scale(1); }
+}
+.countdown-pulse {
+    animation: countdownPulse 1.8s ease-in-out infinite;
+    display: inline-block;
 }

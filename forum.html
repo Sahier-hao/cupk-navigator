@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1b18" media="(prefers-color-scheme: dark)" />
+    <!-- 字体预连接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <!-- 页面 SEO 描述 -->
+    <meta name="description" content="石光驿站校园互助论坛——中石克学生交流学习、二手交易、校园活动和求助问答的平台。" />
+    <title>互助论坛 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 + CRUD 组件样式 -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/crud.css" />
+  </head>
+  <body>
+    <!-- ===== 动态导航栏（由 common.js 生成） ===== -->
+    <div id="siteHeader"></div>
+
+    <!-- ===== 页面主体 ===== -->
+    <main id="main" class="section tight">
+      <div class="container">
+        <!-- Hero 区域 -->
+        <div class="forum-hero">
+          <h1>💬 互助论坛</h1>
+          <p>学习求助、二手交易、校园活动……石大同学互帮互助的地方。</p>
+          <button class="button primary" id="btnNewPost">✏️ 发布帖子</button>
+        </div>
+
+        <!-- 双栏布局：左侧分类 + 右侧帖子列表 -->
+        <!-- 论坛主体布局：左侧分类 + 右侧帖子列表 -->
+        <div class="forum-layout" id="forumLayout">
+          <!-- 侧边栏：按帖子分类筛选 -->
+          <aside class="forum-sidebar" id="forumSidebar">
+            <button class="active" data-fm-cat="all">📋 全部帖子</button>
+            <button data-fm-cat="学习互助">📚 学习互助</button>
+            <button data-fm-cat="二手交易">🛒 二手交易</button>
+            <button data-fm-cat="校园活动">🎉 校园活动</button>
+            <button data-fm-cat="求助问答">❓ 求助问答</button>
+            <button data-fm-cat="吹水闲聊">💬 吹水闲聊</button>
+          </aside>
+
+          <!-- 主内容区：帖子列表 + 详情（由 forum.js 动态渲染） -->
+          <div class="forum-main" id="forumMain">
+            <!-- 帖子列表和详情由 JavaScript 动态生成 -->
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ===== 弹窗：发布新帖 ===== -->
+    <div class="fm-modal-overlay" id="fmModal">
+      <div class="fm-modal">
+        <h3>发布帖子</h3>
+        <div class="form-field">
+          <label for="fmTitle">标题 *</label>
+          <input type="text" id="fmTitle" placeholder="帖子标题" maxlength="60" />
+        </div>
+        <div class="form-field">
+          <label for="fmCat">分类</label>
+          <select id="fmCat">
+            <option value="学习互助">学习互助</option><option value="二手交易">二手交易</option>
+            <option value="校园活动">校园活动</option><option value="求助问答">求助问答</option>
+            <option value="吹水闲聊">吹水闲聊</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="fmContent">内容 *</label>
+          <textarea id="fmContent" placeholder="详细描述你想说的…" maxlength="2000"></textarea>
+        </div>
+        <div class="form-field">
+          <label for="fmPwd">管理密码（删除帖子时需要）</label>
+          <input type="text" id="fmPwd" placeholder="设置一个简易密码" maxlength="20" />
+        </div>
+        <div class="modal-btns">
+          <button class="button secondary" id="btnFmCancel">取消</button>
+          <button class="button primary" id="btnFmSubmit">发布</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 弹窗：删除帖子（需输入管理密码验证） ===== -->
+    <div class="fm-modal-overlay" id="fmDeleteModal">
+      <div class="fm-modal">
+        <h3>删除帖子</h3>
+        <p style="color:var(--muted);margin:0 0 16px">请输入发布时设置的管理密码来确认删除。</p>
+        <div class="form-field">
+          <label for="fmDeletePwd">管理密码</label>
+          <input type="text" id="fmDeletePwd" placeholder="请输入管理密码" maxlength="20" />
+        </div>
+        <p id="fmDeleteError" style="color:var(--coral);font-size:13px;display:none;margin:8px 0 0">密码错误，请重试。</p>
+        <div class="modal-btns">
+          <button class="button secondary" id="btnFmDeleteCancel">取消</button>
+          <button class="button coral" id="btnFmDeleteConfirm">确认删除</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 动态页脚 ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 加载 ===== -->
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <!-- forum.js：发帖/回复/删除、分类筛选、帖子详情展示 -->
+    <script src="javascript/forum.js"></script>
+    <script src="javascript/effects.js"></script>
+    <script src="javascript/player.js"></script>
+  </body>
+  <!-- /body -->
+</html>
+<!-- /html -->

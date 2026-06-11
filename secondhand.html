@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#faf8f3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1b18" media="(prefers-color-scheme: dark)" />
+    <!-- 字体预连接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <!-- 页面 SEO 描述 -->
+    <meta name="description" content="石光驿站校园二手交易——中石克学生闲置物品买卖平台，书籍、电子产品、生活用品、运动器材，物尽其用。" />
+    <title>二手交易 - 石光驿站</title>
+    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <!-- 全局样式 + 页面通用样式 + CRUD 组件样式 -->
+    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+    <link rel="stylesheet" href="css/crud.css" />
+    <!-- 二手交易页面专属样式 -->
+    <style>
+      /* Hero 区域：背景图叠加渐变遮罩 */
+      .sh-hero {
+        text-align: center;
+        padding: 80px 24px 48px;
+        background: linear-gradient(135deg, rgba(24,23,21,0.55), rgba(24,23,21,0.3)), url(images/hero-secondhand.jpg) center/cover;
+        border-radius: var(--radius-xl);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .sh-hero h1 { color: #fff; text-shadow: 0 2px 12px rgba(0,0,0,0.3); margin: 0 0 10px; font-family: var(--font-display); font-size: 32px; }
+      .sh-hero p { color: rgba(255,255,255,0.8); font-size: 15px; margin: 0 0 20px; }
+
+      /* 搜索框 */
+      .sh-search { margin-bottom: 18px; }
+      .sh-search input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--canvas);
+        color: var(--ink);
+        font-size: 15px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s ease;
+      }
+      .sh-search input:focus { border-color: var(--coral); }
+
+      /* 统计信息栏 */
+      .sh-stats { display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+      .sh-stat { font-size: 13px; color: var(--muted); }
+      .sh-stat strong { color: var(--coral-dark); font-size: 16px; }
+
+      /* 商品卡片网格 */
+      .sh-grid { display: grid; gap: 14px; }
+
+      /* 商品卡片：图片 + 信息 + 操作 */
+      .sh-card {
+        display: grid;
+        grid-template-columns: 120px 1fr auto;
+        gap: 16px;
+        align-items: start;
+        padding: 18px 20px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-lg);
+        background: var(--surface);
+        transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+      }
+      .sh-card:hover {
+        transform: translateY(-3px);
+        border-color: rgba(212, 133, 106, 0.25);
+        box-shadow: 0 10px 30px rgba(31,41,51,0.06);
+      }
+      .sh-card.sold { opacity: 0.5; }
+
+      /* 商品图片：固定宽高比，圆角 */
+      .sh-card-img {
+        width: 120px;
+        height: 90px;
+        border-radius: var(--radius-md);
+        object-fit: cover;
+        background: var(--surface-strong);
+        cursor: pointer;
+        transition: transform 0.2s ease;
+      }
+      .sh-card-img:hover { transform: scale(1.05); }
+
+      /* 商品信息区 */
+      .sh-card-body h3 { margin: 0 0 4px; font-size: 16px; color: var(--ink); display: flex; align-items: center; gap: 8px; }
+      .sh-card-body p { margin: 0 0 8px; font-size: 13px; color: var(--body); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; line-clamp: 2; overflow: hidden; }
+      .sh-card-meta { display: flex; gap: 8px; flex-wrap: wrap; font-size: 12px; color: var(--muted); align-items: center; }
+
+      /* 价格标签 */
+      .sh-price {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--coral-dark);
+        font-family: var(--font-display);
+        white-space: nowrap;
+      }
+      .sh-price.free { color: var(--success); }
+
+      /* 状态标签 */
+      .sh-status {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .sh-status.active { background: rgba(78,159,122,0.12); color: #2f7557; }
+      .sh-status.sold { background: rgba(108,106,100,0.12); color: var(--muted); }
+
+      /* 联系卖家按钮 */
+      .sh-contact-btn {
+        align-self: center;
+        font-size: 13px;
+        padding: 8px 16px;
+        border: 1px solid var(--coral);
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--coral-dark);
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      }
+      .sh-contact-btn:hover { background: var(--coral); color: #fff; }
+      .sh-mark-sold-btn {
+        font-size: 12px;
+        padding: 5px 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      }
+      .sh-mark-sold-btn:hover { border-color: var(--success); color: var(--success); }
+
+      /* 空状态 */
+      .sh-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
+      .sh-empty strong { display: block; font-size: 18px; margin-bottom: 8px; color: var(--ink); }
+
+      /* 弹窗遮罩层 */
+      .sh-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(24,23,21,0.5);
+        z-index: 200;
+        align-items: center;
+        justify-content: center;
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+      }
+      .sh-modal-overlay.show { display: flex; }
+      .sh-modal-overlay.show .sh-modal {
+        animation: modalPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+      }
+      .sh-modal {
+        background: var(--canvas);
+        border-radius: var(--radius-xl);
+        padding: 32px;
+        width: min(520px, calc(100% - 32px));
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 60px rgba(24,23,21,0.2);
+        border: 1px solid var(--line);
+      }
+      .sh-modal h3 { margin: 0 0 20px; font-size: 20px; color: var(--ink); font-family: var(--font-display); }
+      .sh-modal .form-field { margin-bottom: 16px; }
+      .sh-modal label { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 600; color: var(--ink); }
+      .sh-modal input, .sh-modal select, .sh-modal textarea {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-md);
+        background: var(--surface);
+        color: var(--ink);
+        font-size: 14px;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+      .sh-modal input:focus, .sh-modal select:focus, .sh-modal textarea:focus { border-color: var(--coral); }
+      .sh-modal textarea { resize: vertical; min-height: 70px; }
+      .sh-modal .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px; }
+
+      /* 暗色模式 */
+      [data-theme="dark"] .sh-card { background: var(--dark-card); border-color: rgba(255,255,255,0.06); }
+      [data-theme="dark"] .sh-modal { background: var(--dark-card); }
+      [data-theme="dark"] .sh-modal input,
+      [data-theme="dark"] .sh-modal select,
+      [data-theme="dark"] .sh-modal textarea { background: var(--dark-soft); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+      [data-theme="dark"] .sh-search input { background: var(--dark-card); color: var(--on-dark); border-color: rgba(255,255,255,0.08); }
+      [data-theme="dark"] .sh-contact-btn { color: var(--coral-light); border-color: rgba(232,160,128,0.3); }
+      [data-theme="dark"] .sh-card-img { background: #111; }
+
+      /* 响应式 */
+      @media (max-width: 700px) {
+        .sh-card { grid-template-columns: 80px 1fr; }
+        .sh-card-img { width: 80px; height: 60px; }
+        .sh-contact-btn { grid-column: 1 / -1; justify-self: stretch; }
+      }
+      @media (max-width: 480px) {
+        .sh-card { grid-template-columns: 1fr; }
+        .sh-card-img { width: 100%; height: 160px; }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ===== 动态导航栏 ===== -->
+    <div id="siteHeader"></div>
+
+    <!-- ===== 页面主体 ===== -->
+    <main id="main" class="section tight">
+      <div class="container">
+        <!-- Hero 区域 -->
+        <div class="sh-hero">
+          <h1>🛒 校园二手交易</h1>
+          <p>闲置不浪费，物尽其用——在这里买卖中石大同学的二手好物。</p>
+          <button class="button primary" id="btnNewItem">✏️ 发布商品</button>
+        </div>
+
+        <!-- 双栏布局：左侧分类侧边栏 + 右侧内容区 -->
+        <div class="crud-layout">
+          <!-- 侧边栏：按商品分类筛选 -->
+          <aside class="crud-sidebar" id="shSidebar">
+            <div class="sidebar-title">📦 分类</div>
+            <button class="crud-sidebar-btn active" data-sh-category="all">📋 全部</button>
+            <button class="crud-sidebar-btn" data-sh-category="电子产品">💻 电子产品</button>
+            <button class="crud-sidebar-btn" data-sh-category="书籍教材">📚 书籍教材</button>
+            <button class="crud-sidebar-btn" data-sh-category="生活用品">🏠 生活用品</button>
+            <button class="crud-sidebar-btn" data-sh-category="运动器材">⚽ 运动器材</button>
+            <button class="crud-sidebar-btn" data-sh-category="衣物鞋帽">👗 衣物鞋帽</button>
+            <button class="crud-sidebar-btn" data-sh-category="数码配件">🎧 数码配件</button>
+            <button class="crud-sidebar-btn" data-sh-category="其他">📌 其他</button>
+            <hr style="border:none;border-top:1px solid var(--line);margin:8px 0" />
+            <button class="crud-sidebar-btn" data-sh-status="active" style="font-size:13px">🟢 在售中</button>
+            <button class="crud-sidebar-btn" data-sh-status="all">📋 全部状态</button>
+          </aside>
+
+          <!-- 右侧主内容区 -->
+          <div id="shContent">
+            <!-- 搜索框 -->
+            <div class="sh-search">
+              <input id="shSearch" type="search" placeholder="搜索：教材、耳机、台灯、篮球…" />
+            </div>
+
+            <!-- 统计信息 -->
+            <div class="sh-stats" id="shStats"></div>
+
+            <!-- 商品卡片列表（由 secondhand.js 动态渲染） -->
+            <div class="sh-grid" id="shList"></div>
+
+            <!-- 空状态 -->
+            <div class="sh-empty" id="shEmpty" style="display:none">
+              <strong>还没有商品</strong>
+              <p>快来发布第一件闲置好物吧！🎉</p>
+            </div>
+          </div>
+          <!-- /shContent -->
+        </div>
+        <!-- /crud-layout -->
+      </div>
+      <!-- /container -->
+    </main>
+    <!-- /main -->
+
+    <!-- ===== 发布商品弹窗 ===== -->
+    <div class="sh-modal-overlay" id="publishModal">
+      <div class="sh-modal">
+        <h3>发布闲置商品</h3>
+        <!-- 商品名称 -->
+        <div class="form-field">
+          <label for="shTitle">商品名称 *</label>
+          <input type="text" id="shTitle" placeholder="如：高等数学（第七版）上册" maxlength="40" />
+        </div>
+        <!-- 价格 -->
+        <div class="form-field">
+          <label for="shPrice">价格 *（元）</label>
+          <input type="number" id="shPrice" placeholder="0 表示免费赠送" min="0" step="0.01" />
+        </div>
+        <!-- 商品分类 -->
+        <div class="form-field">
+          <label for="shCategory">商品分类</label>
+          <select id="shCategory">
+            <option value="电子产品">电子产品</option>
+            <option value="书籍教材">书籍教材</option>
+            <option value="生活用品">生活用品</option>
+            <option value="运动器材">运动器材</option>
+            <option value="衣物鞋帽">衣物鞋帽</option>
+            <option value="数码配件">数码配件</option>
+            <option value="其他">其他</option>
+          </select>
+        </div>
+        <!-- 商品描述 -->
+        <div class="form-field">
+          <label for="shDesc">商品描述</label>
+          <textarea id="shDesc" placeholder="描述商品的新旧程度、使用情况、交易方式…" maxlength="300"></textarea>
+        </div>
+        <!-- 联系方式 -->
+        <div class="form-field">
+          <label for="shContact">联系方式 *</label>
+          <input type="text" id="shContact" placeholder="QQ号 / 微信号 / 手机号" maxlength="30" />
+        </div>
+        <!-- 管理密码（删除/标记售出时需要） -->
+        <div class="form-field">
+          <label for="shPwd">管理密码（删除或标记售出时需要）</label>
+          <input type="text" id="shPwd" placeholder="设置简易密码" maxlength="20" />
+        </div>
+        <!-- 弹窗操作按钮 -->
+        <div class="modal-btns">
+          <button class="button secondary" id="btnPublishCancel">取消</button>
+          <button class="button primary" id="btnPublishSubmit">发布</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 联系信息弹窗 ===== -->
+    <div class="sh-modal-overlay" id="contactModal">
+      <div class="sh-modal" style="text-align:center">
+        <h3>📞 联系卖家</h3>
+        <div id="contactInfo" style="padding: 20px 0; font-size: 16px; line-height: 2"></div>
+        <div class="modal-btns">
+          <button class="button secondary" id="btnContactClose">关闭</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== 动态页脚 ===== -->
+    <div id="siteFooter"></div>
+    <!-- 返回顶部按钮 -->
+    <button class="back-top" type="button" aria-label="返回顶部">↑</button>
+
+    <!-- ===== JavaScript 按依赖顺序加载 ===== -->
+    <script src="javascript/storage.js"></script>
+    <script src="javascript/common.js"></script>
+    <!-- secondhand.js：商品发布、分类筛选、搜索、标记售出、删除管理 -->
+    <script src="javascript/secondhand.js"></script>
+    <script src="javascript/effects.js"></script>
+    <script src="javascript/player.js"></script>
+  </body>
+</html>
