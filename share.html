@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -9,10 +9,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <link rel="preload" as="image" href="images/hero-share.jpg" />
     <!-- 页面 SEO 描述 -->
     <meta name="description" content="石光驿站共享学习资源——同学们上传的笔记、试卷、复习资料，互帮互助共同进步。" />
     <title>共享学习资源 - 石光驿站</title>
-    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" /><link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png" />
     <!-- 全局样式 + 页面通用样式 + CRUD 组件样式 -->
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/pages.css" />
@@ -291,12 +292,12 @@
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
 
     <!-- ===== JavaScript 按依赖顺序加载 ===== -->
-    <script src="javascript/storage.js"></script>
-    <script src="javascript/common.js"></script>
+    <script src="javascript/storage.js" defer></script>
+    <script src="javascript/common.js" defer></script>
     <!-- share.js：上传、分类筛选、关键词搜索、删除管理 -->
-    <script src="javascript/share.js"></script>
-    <script src="javascript/effects.js"></script>
-    <script src="javascript/player.js"></script>
+    <script src="javascript/share.js" defer></script>
+    <script src="javascript/effects.js" defer></script>
+    <script src="javascript/player.js" defer></script>
   </body>
   <!-- /body -->
 </html>

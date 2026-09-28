@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -18,9 +18,10 @@
       content="中国石油大学（北京）克拉玛依校区校园美景掠影——用镜头记录红山湖畔的四季风光。"
     />
     <title>校园掠影 - 石光驿站</title>
-    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" /><link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png" />
     <!-- 全局样式 + 页面通用样式 -->
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="preload" as="image" href="images/hero-campus.jpg" />
     <link rel="stylesheet" href="css/pages.css" />
   </head>
   <body>
@@ -165,12 +166,12 @@
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
 
     <!-- ===== JavaScript 加载 ===== -->
-    <script src="javascript/storage.js"></script>
-    <script src="javascript/common.js"></script>
-    <script src="javascript/effects.js"></script>
+    <script src="javascript/storage.js" defer></script>
+    <script src="javascript/common.js" defer></script>
+    <script src="javascript/effects.js" defer></script>
     <!-- gallery.js：照片上传、网格渲染、灯箱查看、删除管理 -->
-    <script src="javascript/gallery.js"></script>
-    <script src="javascript/player.js"></script>
+    <script src="javascript/gallery.js" defer></script>
+    <script src="javascript/player.js" defer></script>
   </body>
   <!-- /body -->
 </html>

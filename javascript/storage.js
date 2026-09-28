@@ -91,7 +91,7 @@
     }
 
     // 将内部方法挂载到 window.StudyStorage 全局对象上
-    // 供其他模块（common.js、index.js、resources.js 等）通过 window 调用
+    // 供其他模块（common.js、index.js、websites.js 等）通过 window 调用
     window.StudyStorage = {
         getFavorites: getFavorites,
         isFavorite: isFavorite,

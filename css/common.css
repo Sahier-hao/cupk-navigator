@@ -1804,11 +1804,12 @@ textarea:focus {
     animation: blobFloat1 18s ease-in-out infinite;
 }
 .blob-2 {
-    width: 350px;
-    height: 350px;
+    width: 280px;
+    height: 280px;
     background: var(--blue);
-    bottom: -80px;
-    left: -80px;
+    bottom: -120px;
+    left: -120px;
+    opacity: 0.18;
     animation: blobFloat2 22s ease-in-out infinite;
 }
 @keyframes blobFloat1 {

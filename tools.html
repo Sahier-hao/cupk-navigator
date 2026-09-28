@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -16,9 +16,10 @@
       content="绩点计算器与精选学习工具——输入成绩和学分自动计算加权平均绩点，附带绩点换算参考表。"
     />
     <title>学习工具箱 - 石光驿站</title>
-    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" /><link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png" />
     <!-- 全局样式 + 页面通用样式 -->
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="preload" as="image" href="images/hero-tools.jpg" />
     <link rel="stylesheet" href="css/pages.css" />
     <link rel="stylesheet" href="css/crud.css" />
   </head>
@@ -359,13 +360,13 @@
     <!-- ===== JavaScript 按依赖顺序加载 ===== -->
     <!-- 注意：加载顺序不可变，每个脚本依赖前一个脚本的 API -->
     <!-- data.js：StudyResources 数据源（推荐工具使用） -->
-    <script src="javascript/data.js"></script>
-    <script src="javascript/storage.js"></script>
-    <script src="javascript/common.js"></script>
+    <script src="javascript/data.js" defer></script>
+    <script src="javascript/storage.js" defer></script>
+    <script src="javascript/common.js" defer></script>
     <!-- tools.js：倒计时、番茄钟、绩点计算器、体测计算器、推荐工具 -->
-    <script src="javascript/tools.js"></script>
-    <script src="javascript/effects.js"></script>
-    <script src="javascript/player.js"></script>
+    <script src="javascript/tools.js" defer></script>
+    <script src="javascript/effects.js" defer></script>
+    <script src="javascript/player.js" defer></script>
     <!-- 侧边栏导航脚本：点击平滑滚动 + 滚动时自动高亮当前区域 -->
     <script>
       (function () {

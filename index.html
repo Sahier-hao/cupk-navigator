@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <!-- 页面元信息：字符编码、视口设置 -->
@@ -27,10 +27,15 @@
     />
     <!-- 页面标题与图标 -->
     <title>石光驿站 - 中石克校园一站式资源导航</title>
-    <link rel="icon" type="image/jpeg" href="images/中国石油大学矢量标.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" /><link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png" />
     <!-- 全局样式表 + 首页专用样式 -->
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="preload" as="image" href="images/cupk1.png" />
     <link rel="stylesheet" href="css/index.css" />
+    <!-- 预获取常用子页面，加快导航切换速度 -->
+    <link rel="prefetch" href="cupk.html" />
+    <link rel="prefetch" href="campus.html" />
+    <link rel="prefetch" href="websites.html" />
   </head>
   <body>
     <!-- ===== 动态导航栏（由 common.js 生成） ===== -->
@@ -75,7 +80,7 @@
           aria-label="上一张"
         >
           <svg class="svg-icon" width="18" height="18" aria-hidden="true">
-            <use href="images/icons.svg#icon-chevron-left" />
+            <use href="#icon-chevron-left" />
           </svg>
         </button>
         <button
@@ -84,7 +89,7 @@
           aria-label="下一张"
         >
           <svg class="svg-icon" width="18" height="18" aria-hidden="true">
-            <use href="images/icons.svg#icon-chevron-right" />
+            <use href="#icon-chevron-right" />
           </svg>
         </button>
         <!-- 轮播底部圆点指示器（JS 动态生成） -->
@@ -206,17 +211,17 @@
 
     <!-- ===== JavaScript 按依赖顺序加载 ===== -->
     <!-- data.js：提供 StudyResources 数据源 -->
-    <script src="javascript/data.js"></script>
+    <script src="javascript/data.js" defer></script>
     <!-- storage.js：localStorage 封装，提供收藏 / 最近访问 API -->
-    <script src="javascript/storage.js"></script>
+    <script src="javascript/storage.js" defer></script>
     <!-- common.js：导航栏、页脚、主题切换、用户系统、全局工具 -->
-    <script src="javascript/common.js"></script>
+    <script src="javascript/common.js" defer></script>
     <!-- index.js：首页专属逻辑（轮播、搜索、面板渲染、动态加载） -->
-    <script src="javascript/index.js"></script>
+    <script src="javascript/index.js" defer></script>
     <!-- effects.js：滚动入场动画等视觉效果 -->
-    <script src="javascript/effects.js"></script>
+    <script src="javascript/effects.js" defer></script>
     <!-- player.js：跨页面音乐播放器，基于 localStorage 持久化 -->
-    <script src="javascript/player.js"></script>
+    <script src="javascript/player.js" defer></script>
   </body>
   <!-- /body -->
 </html>

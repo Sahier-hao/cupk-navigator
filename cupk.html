@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -18,9 +18,10 @@
       content="中石克（CUPK）常用网站和服务入口一站式导航——校区官网、教务系统、图书馆、学院专题、校园服务。"
     />
     <title>常用网站 - 石光驿站</title>
-    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" /><link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png" />
     <!-- 全局样式 + 页面通用样式 -->
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="preload" as="image" href="images/hero-cupk.jpg" />
     <link rel="stylesheet" href="css/pages.css" />
   </head>
   <body>
@@ -716,13 +717,13 @@
     <button class="back-top" aria-label="返回顶部">↑</button>
 
     <!-- ===== JavaScript 加载 ===== -->
-    <script src="javascript/data.js"></script>
-    <script src="javascript/storage.js"></script>
-    <script src="javascript/common.js"></script>
+    <script src="javascript/data.js" defer></script>
+    <script src="javascript/storage.js" defer></script>
+    <script src="javascript/common.js" defer></script>
     <!-- cupk.js：搜索过滤、类别切换等 CUPK 页面专属逻辑 -->
-    <script src="javascript/cupk.js"></script>
-    <script src="javascript/effects.js"></script>
-    <script src="javascript/player.js"></script>
+    <script src="javascript/cupk.js" defer></script>
+    <script src="javascript/effects.js" defer></script>
+    <script src="javascript/player.js" defer></script>
   </body>
   <!-- /body -->
 </html>

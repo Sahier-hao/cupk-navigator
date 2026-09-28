@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <!-- 页面元信息 -->
@@ -27,9 +27,10 @@
       content="中石克克拉玛依校区校园生活指南——食堂三餐C5、宿舍洗澡电费门禁、校园卡办理、洗衣饮水打印快递、体育馆阳光长跑、交通出行。"
     />
     <title>校园生活指南 - 石光驿站</title>
-    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" /><link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png" />
     <!-- 全局样式 + 页面通用样式 -->
     <link rel="stylesheet" href="css/common.css" />
+    <link rel="preload" as="image" href="images/hero-campus.jpg" />
     <link rel="stylesheet" href="css/pages.css" />
   </head>
   <body>
@@ -767,10 +768,10 @@
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
 
     <!-- ===== JavaScript 加载 ===== -->
-    <script src="javascript/storage.js"></script>
-    <script src="javascript/common.js"></script>
-    <script src="javascript/effects.js"></script>
-    <script src="javascript/player.js"></script>
+    <script src="javascript/storage.js" defer></script>
+    <script src="javascript/common.js" defer></script>
+    <script src="javascript/effects.js" defer></script>
+    <script src="javascript/player.js" defer></script>
     <!-- 内联搜索脚本：对 .cupk-card 和 .cupk-mini-card 进行关键词过滤 -->
     <script>
       (function () {

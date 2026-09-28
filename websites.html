@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -9,13 +9,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" />
+    <link rel="preload" as="image" href="images/hero-websites.jpg" />
     <!-- 页面 SEO 描述 -->
     <meta
       name="description"
       content="石光驿站学习资源库——97个精选学习网站和工具，涵盖在线课程、论文检索、编程文档、AI工具、素材设计，按学习场景智能筛选。"
     />
     <title>学习资源库 - 石光驿站</title>
-    <link rel="icon" type="image/png" href="images/中国石油大学矢量标.jpg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" /><link rel="icon" type="image/png" sizes="64x64" href="images/favicon-64.png" />
     <!-- 全局样式 + 页面通用样式 -->
     <link rel="stylesheet" href="css/common.css" />
     <link rel="stylesheet" href="css/pages.css" />
@@ -68,7 +69,7 @@
             <div class="library-toolbar">
               <input id="resourceSearch" type="search" placeholder="搜索：期末复习、写课程论文、Web大作业、Kimi…" aria-label="搜索资源" />
               <button type="button" class="button secondary" id="resetFiltersBtn" title="重置所有筛选条件">
-                <svg class="svg-icon" width="16" height="16" aria-hidden="true"><use href="images/icons.svg#icon-rotate-ccw"/></svg> 重置
+                <svg class="svg-icon" width="16" height="16" aria-hidden="true"><use href="#icon-rotate-ccw"/></svg> 重置
               </button>
               <span id="resourceCount" class="tag coral">加载中</span>
             </div>
@@ -156,13 +157,13 @@
     <button class="back-top" type="button" aria-label="返回顶部">↑</button>
 
     <!-- ===== JavaScript 按依赖顺序加载 ===== -->
-    <script src="javascript/data.js"></script>
-    <script src="javascript/storage.js"></script>
-    <script src="javascript/common.js"></script>
+    <script src="javascript/data.js" defer></script>
+    <script src="javascript/storage.js" defer></script>
+    <script src="javascript/common.js" defer></script>
     <!-- websites.js：三层筛选逻辑 + 资源卡片渲染 + 关键词搜索 -->
-    <script src="javascript/websites.js"></script>
-    <script src="javascript/effects.js"></script>
-    <script src="javascript/player.js"></script>
+    <script src="javascript/websites.js" defer></script>
+    <script src="javascript/effects.js" defer></script>
+    <script src="javascript/player.js" defer></script>
   <!-- /body 结束 -->
   </body>
   <!-- /body -->
