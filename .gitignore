@@ -12,14 +12,18 @@ CLAUDE.md
 # homework
 docs
 
+# npm（仅用于生成 docs 报告的临时依赖；项目本身纯静态、无运行时依赖）
+node_modules
+package.json
+package-lock.json
 
+# 一次性临时脚本（.doc 提取）
+_extract_doc.py
+_doc_output.txt
 
 #claude配色
 claude
 .claude
-
-
-.gitignore
 
 _unused
 
