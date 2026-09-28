@@ -2,7 +2,7 @@
  * tools.js —— 学习工具箱页面脚本
  *
  * 主要功能模块：
- *   1. 绩点计算器 —— 动态增删课程行（上限12门），百分制转4.0绩点，
+ *   1. 绩点计算器 —— 动态增删课程行（上限12门），百分制转5.0绩点，
  *      加权平均计算，历史记录持久化（保留最近20条）
  *   2. 推荐工具卡片 —— 从 data.js 筛选前6个工具类资源渲染
  *   3. 倒计时 —— 四六级笔试、暑假开始、秋季开学三个关键节点
@@ -25,21 +25,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     /**
      * 百分制成绩转绩点的换算函数
-     * 采用标准 4.0 绩点算法，将百分制成绩映射为 0~4.0 绩点
-     * 95分及以上为满绩 4.0，60分以下为 0 绩点
+     * 采用 5.0 绩点算法（绩点 = (百分制成绩 - 50) / 10）
+     * 100分对应满绩 5.0，60分对应 1.0，60分以下为 0 绩点
      * @param {number|string} score - 百分制成绩（0~100）
      * @returns {number} 对应的绩点值，无效输入返回 -1
      */
     function scoreToGpa(score) {
         var s = parseFloat(score);
         if (isNaN(s)) return -1;
-        if (s >= 95) return 4.0;
-        if (s >= 85) return 3.7;
-        if (s >= 75) return 3.0;
-        if (s >= 65) return 2.3;
-        if (s >= 60) return 1.7;
-        if (s >= 0) return 0;
-        return -1;
+        if (s < 0) return -1;
+        if (s < 60) return 0;
+        var gpa = (s - 50) / 10;
+        return Math.min(gpa, 5.0);
     }
 
     /**
@@ -187,13 +184,13 @@ document.addEventListener("DOMContentLoaded", function () {
             courseCount.textContent = validCount;
 
             /* 根据绩点值分档给出不同的鼓励或提醒文案 */
-            if (avgGpa >= 3.7) {
+            if (avgGpa >= 4.5) {
                 gpaNote.textContent = "绩点很优秀！继续保持当前的学习状态。";
                 gpaNote.style.color = "var(--success)";
-            } else if (avgGpa >= 3.0) {
+            } else if (avgGpa >= 3.5) {
                 gpaNote.textContent = "绩点良好，还有提升空间，加油！";
                 gpaNote.style.color = "var(--blue)";
-            } else if (avgGpa >= 2.0) {
+            } else if (avgGpa >= 2.5) {
                 gpaNote.textContent = "绩点一般，建议重点复习低分课程，争取下次提高。";
                 gpaNote.style.color = "var(--warning)";
             } else {
