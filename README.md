@@ -104,7 +104,7 @@ python -m http.server 8000
 │   ├── storage.js          localStorage 封装
 │   ├── common.js           导航/页脚生成、主题切换、校徽转场、时钟、用户系统、个人中心
 │   ├── index.js            首页轮播、搜索、收藏面板、最新动态、Hero 视差
-│   ├── resources.js        资源库三层筛选与渲染
+│   ├── websites.js         资源库三层筛选与渲染
 │   ├── cupk.js             CUPK 页面搜索过滤与侧边栏高亮
 │   ├── tools.js            绩点计算器、番茄钟、倒计时脉冲、体测计算器
 │   ├── lostfound.js        失物招领发布/筛选/认领
